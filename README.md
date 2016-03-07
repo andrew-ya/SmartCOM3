@@ -9,7 +9,6 @@ Ubuntu 12/14 Debian 7/8 (32/64) + Winelib 1.6-1.8 (gcc 4.8-5.0)
 ##Test output
 ```
 IStClient::InitializeApartments()
-
 IStClient::InitializeApartments() OK
 
 IStClient::IStClient()
