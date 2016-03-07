@@ -452,31 +452,31 @@ namespace SmartCOM3
 
 	void IStClient::ListenQuotes(std::string symbol) {
 		HRESULT hr = m_IStServer->raw_ListenQuotes(s2ws(symbol.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("ListenQuotes(): COM error!");
 	}
 	void IStClient::CancelQuotes(std::string symbol) {
 		HRESULT hr = m_IStServer->raw_CancelQuotes(s2ws(symbol.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("CancelQuotes(): COM error!");
 	}
 	void IStClient::ListenBidAsks(std::string symbol) {
 		HRESULT hr = m_IStServer->raw_ListenBidAsks(s2ws(symbol.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("ListenBidAsks(): COM error!");
 	}
 	void IStClient::CancelBidAsks(std::string symbol) {
 		HRESULT hr = m_IStServer->raw_CancelBidAsks(s2ws(symbol.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("CancelBidAsks(): COM error!");
 	}
 	void IStClient::ListenTicks(std::string symbol) {
 		HRESULT hr = m_IStServer->raw_ListenTicks(s2ws(symbol.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("ListenTicks(): COM error!");
 	}
 	void IStClient::CancelTicks(std::string symbol) {
 		HRESULT hr = m_IStServer->raw_CancelTicks(s2ws(symbol.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("CancelTicks(): COM error!");
 	}
 	void IStClient::GetBars(std::string symbol, BarInterval interval, time_t since, long count) {
 		HRESULT hr = m_IStServer->raw_GetBars(s2ws(symbol.c_str()).c_str(), interval, time2double(since), count);
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetBars(): COM error!");
 	}
 	void IStClient::ListenPortfolio(std::string portfolio) {
 		HRESULT hr = m_IStServer->raw_ListenPortfolio(s2ws(portfolio.c_str()).c_str());
@@ -484,71 +484,71 @@ namespace SmartCOM3
 	}
 	void IStClient::CancelPortfolio(std::string portfolio) {
 		HRESULT hr = m_IStServer->raw_CancelPortfolio(s2ws(portfolio.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("CancelPortfolio(): COM error!");
 	}
 	void IStClient::PlaceOrder(std::string portfolio, std::string symbol, OrderAction action, OrderType type, OrderValidity validity, double price, double amount, double stop, long cookie) {
 		HRESULT hr = m_IStServer->raw_PlaceOrder(s2ws(portfolio.c_str()).c_str(), s2ws(symbol.c_str()).c_str(), action, type, validity, price, amount, stop, cookie);
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("PlaceOrder(): COM error!");
 	}
 	void IStClient::CancelOrder(std::string portfolio, std::string symbol, std::string orderid) {
 		HRESULT hr = m_IStServer->raw_CancelOrder(s2ws(portfolio.c_str()).c_str(), s2ws(symbol.c_str()).c_str(), s2ws(orderid.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("CancelOrder(): COM error!");
 	}
 	void IStClient::MoveOrder(std::string portfolio, std::string orderid, double targetPrice) {
 		HRESULT hr = m_IStServer->raw_MoveOrder(s2ws(portfolio.c_str()).c_str(), s2ws(orderid.c_str()).c_str(), targetPrice);
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("MoveOrder(): COM error!");
 	}
 	void IStClient::GetSymbols() {
 		HRESULT hr = m_IStServer->raw_GetSymbols();
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetSymbols(): COM error!");
 	}
 	bool IStClient::IsConnected() {
 		VARIANT_BOOL result = 0;
 		HRESULT hr = m_IStServer->raw_IsConnected(&result);
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("IsConnected(): COM error!");
 		if (result == 0) return false;
 		else return true;
 	}
 	void IStClient::Connect(std::string ip, unsigned short port, std::string login, std::string password) {
 		HRESULT hr = m_IStServer->raw_connect(s2ws(ip.c_str()).c_str(), port, s2ws(login.c_str()).c_str(), s2ws(password.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("Connect(): COM error!");
 	}
 	void IStClient::Disconnect() {
 		HRESULT hr = m_IStServer->raw_disconnect();
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("Disconnect(): COM error!");
 	}
 	void IStClient::GetPrortfolioList() {
 		HRESULT hr = m_IStServer->raw_GetPrortfolioList();
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetPrortfolioList(): COM error!");
 	}
 	void IStClient::GetMyOrders(long onlyActive, std::string portfolio) {
 		HRESULT hr = m_IStServer->raw_GetMyOrders(onlyActive, s2ws(portfolio.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetMyOrders(): COM error!");
 	}
 	void IStClient::GetMyTrades(std::string portfolio) {
 		HRESULT hr = m_IStServer->raw_GetMyTrades(s2ws(portfolio.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetMyTrades(): COM error!");
 	}
 	void IStClient::GetMyClosePos(std::string portfolio) {
 		HRESULT hr = m_IStServer->raw_GetMyClosePos(s2ws(portfolio.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetMyClosePos(): COM error!");
 	}
 	void IStClient::GetTrades(std::string symbol, time_t from, long count) {
 		HRESULT hr = m_IStServer->raw_GetTrades(s2ws(symbol.c_str()).c_str(), time2double(from), count);
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetTrades(): COM error!");
 	}
 	void IStClient::ConfigureClient(std::string paramsSet) {
 		HRESULT hr = m_IStServer->raw_ConfigureClient(s2ws(paramsSet.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("ConfigureClient(): COM error!");
 	}
 	void IStClient::ConfigureServer(std::string paramsSet) {
 		HRESULT hr = m_IStServer->raw_ConfigureServer(s2ws(paramsSet.c_str()).c_str());
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("ConfigureServer(): COM error!");
 	}
 	std::string IStClient::GetMoneyAccount(std::string portfolioID) {
 		const wchar_t *result = 0;
 		HRESULT hr = m_IStServer->raw_GetMoneyAccount(s2ws(portfolioID.c_str()).c_str(), &result);
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetMoneyAccount(): COM error!");
 		return ws2s(result);
 	}
 
@@ -557,22 +557,22 @@ namespace SmartCOM3
 	std::string IStClient::GetServerVersionString() {
 		BSTR result = 0;
 		HRESULT hr = m_ISmartComVersion->raw_GetServerVersionString(&result);
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetServerVersionString(): COM error!");
 		return ws2s(result);
 	}
 	void IStClient::GetServerVersion(long *major, long *minor, long *build, long *rev) {
 		HRESULT hr = m_ISmartComVersion->raw_GetServerVersion(major, minor, build, rev);
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetServerVersion(): COM error!");
 	}
 	std::string IStClient::GetClientVersionString() {
 		BSTR result = 0;
 		HRESULT hr = m_ISmartComVersion->raw_GetStClientVersionString(&result);
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetClientVersionString(): COM error!");
 		return ws2s(result);
 	}
 	void IStClient::GetClientVersion(long *major, long *minor, long *build, long *rev) {
 		HRESULT hr = m_ISmartComVersion->raw_GetStClientVersion(major, minor, build, rev);
-		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
+		if (FAILED(hr)) throw std::runtime_error("GetClientVersion(): COM error!");
 	}
 }
 
