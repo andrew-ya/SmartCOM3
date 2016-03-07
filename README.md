@@ -4,7 +4,7 @@ ITInvest SmartCOM3 API C++ binding (Windows/Linux)
 ##Tested platforms
 Windows 7/8 (32/64) + Visual Studio 2012/2013 (MSVC 11.0/12.0)
 
-Ubuntu 12/14 Debian 7/8 (32/64) + Winelib 1.6-1.8 (gcc 4.8-5.0)
+Ubuntu 12/14 & Debian 7/8 (32/64) + Winelib 1.6-1.8 (gcc 4.8-5.0)
 
 # Installation & building
 ##Windows
