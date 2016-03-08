@@ -13,19 +13,16 @@ namespace SmartCOM3
 
 	STDMETHODIMP_(ULONG) IStClient::AddRef(void)
 	{
-		//printf("AddRef\n");
 		return InterlockedIncrement(&m_cRef);
 	}
 	STDMETHODIMP_(ULONG) IStClient::Release(void)
 	{
-		//printf("Release\n");
 		LONG cRef = InterlockedDecrement(&m_cRef);
 		if (cRef == 0) delete this;
 		return cRef;
 	}
 	STDMETHODIMP IStClient::QueryInterface(REFIID iid, void ** ppv)
 	{
-		//printf("QueryInterface\n");
 		*ppv = nullptr;
 		HRESULT hr = E_NOINTERFACE;
 
@@ -43,14 +40,12 @@ namespace SmartCOM3
 
 	STDMETHODIMP IStClient::GetTypeInfoCount(UINT *pctinfo)
 	{
-		//printf("GetTypeInfoCount\n");
 		if (pctinfo == NULL) return E_NOTIMPL;
 		*pctinfo = 1;
 		return NOERROR;
 	}
 	STDMETHODIMP IStClient::GetTypeInfo(UINT itinfo, LCID lcid, ITypeInfo ** pptinfo)
 	{
-		//printf("GetTypeInfo\n");
 		if (pptinfo == NULL) return E_INVALIDARG;
 		if (itinfo != 0) return DISP_E_BADINDEX;
 		*pptinfo = NULL;
@@ -60,12 +55,10 @@ namespace SmartCOM3
 	}
 	STDMETHODIMP IStClient::GetIDsOfNames(REFIID riid, OLECHAR ** rgszNames, UINT cNames, LCID lcid, DISPID * rgdispid)
 	{
-		//printf("GetIDsOfNames\n");
 		return m_ptinfo->GetIDsOfNames(rgszNames, cNames, rgdispid);
 	}
 	STDMETHODIMP IStClient::Invoke(DISPID dispidMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS * pdispparams, VARIANT * pvarResult, EXCEPINFO * pexcepinfo, UINT * puArgErr)
 	{
-		//printf("Invoke\n");
 		if (pvarResult) VariantInit(pvarResult);
 
 		InvokeDispatch(dispidMember, pdispparams);
