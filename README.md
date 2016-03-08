@@ -44,16 +44,27 @@ IStClient::InitializeApartments() OK
 IStClient::IStClient()
 IStClient::IStClient() OK
 SmartCOM3 version: 3,0,162,5805
+
 Connecting...
 Press ENTER to disconnect
 TestRobot::Connected()
-TestRobot::AddSymbol(6A.CME.H2015)
-TestRobot::AddSymbol(6A.CME.M2015)
-........
-TestRobot::AddSymbol(AAPL-T0:SPB)
-TestRobot::AddSymbol(AAPL-T0T1neg:SPB)
+TestRobot::AddSymbol(6A.CME.H2015) 1 of 21304
+TestRobot::AddSymbol(6A.CME.M2015) 2 of 21304
+TestRobot::AddSymbol(6A.CME.U2014) 3 of 21304
+TestRobot::AddSymbol(6A.CME.Z2014) 4 of 21304
+TestRobot::AddSymbol(6B.CME.H2015) 5 of 21304
+TestRobot::AddSymbol(6B.CME.H2016) 6 of 21304
+TestRobot::AddSymbol(6B.CME.H2017) 7 of 21304
+TestRobot::AddSymbol(6B.CME.H2018) 8 of 21304
+TestRobot::AddSymbol(6B.CME.M2015) 9 of 21304
+TestRobot::AddSymbol(6B.CME.M2016) 10 of 21304
+.....
+TestRobot::AddSymbol() added 21304 of 21304
+
+Disconnecting...
 TestRobot::Disconnected(Disconnected by user)
 Press ENTER to exit
+
 IStClient::~IStClient()
 IStClient::~IStClient() OK
 IStClient::UninitializeApartments()
