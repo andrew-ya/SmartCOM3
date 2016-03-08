@@ -112,8 +112,8 @@ IStClient::UninitializeApartments() OK
 2016-Mar-08 17:14:49.980986 [TID=9] - TRACE : StServer::disconnect method 
 2016-Mar-08 17:14:50.957624 [TID=9] - INFO : Disconnected by user.. 
 ```
-#Production     
-##THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
-##Before production deployment TEST ALL FUNCTIONALITY YOU ARE USING
+#Before production     
+##THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND    
+##TEST ALL FUNCTIONALITY YOU ARE USING  
 #Contact
 Feel free for contact with me on moex@anton.red russian or english
