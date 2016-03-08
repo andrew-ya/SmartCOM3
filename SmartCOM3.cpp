@@ -53,11 +53,13 @@ namespace SmartCOM3
 		*pptinfo = m_ptinfo;
 		return NOERROR;
 	}
-	STDMETHODIMP IStClient::GetIDsOfNames(REFIID riid, OLECHAR **rgszNames, UINT cNames, LCID lcid, DISPID *rgdispid)
+	STDMETHODIMP IStClient::GetIDsOfNames(REFIID riid, OLECHAR **rgszNames, UINT cNames,
+		LCID lcid, DISPID *rgdispid)
 	{
 		return m_ptinfo->GetIDsOfNames(rgszNames, cNames, rgdispid);
 	}
-	STDMETHODIMP IStClient::Invoke(DISPID dispidMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pdispparams, VARIANT *pvarResult, EXCEPINFO *pexcepinfo, UINT *puArgErr)
+	STDMETHODIMP IStClient::Invoke(DISPID dispidMember, REFIID riid, LCID lcid, WORD wFlags,
+		DISPPARAMS *pdispparams, VARIANT *pvarResult, EXCEPINFO *pexcepinfo, UINT *puArgErr)
 	{
 		if (pvarResult) VariantInit(pvarResult);
 
@@ -366,7 +368,11 @@ namespace SmartCOM3
 		printf("IStClient::InitializeApartments()\n");
 		s_ApartmentsInitializationMutex.lock();
 		if (s_ApartmentsInitializationFlag == false) {
-			if (S_OK != CoInitializeEx(NULL, COINIT_MULTITHREADED)) { printf("IStClient::InitializeApartments() CoInitializeEx(NULL, COINIT_MULTITHREADED) FAIL\n"); exit(1); }
+			if (S_OK != CoInitializeEx(NULL, COINIT_MULTITHREADED)) {
+				printf("IStClient::InitializeApartments() "
+						"CoInitializeEx(NULL, COINIT_MULTITHREADED) FAIL\n");
+				exit(1);
+			}
 			s_ApartmentsInitializationFlag = true;
 			printf("IStClient::InitializeApartments() OK\n");
 		} else {
@@ -416,13 +422,32 @@ namespace SmartCOM3
 		printf("IStClient::IStClient()\n");
 
 		LPTYPELIB pTypeLib;
-		if (S_OK != LoadRegTypeLib(LIBID_SmartCOM3Lib, 1, 0, LOCALE_SYSTEM_DEFAULT, &pTypeLib)) { printf("IStClient::IStClient() LoadRegTypeLib FAIL\n"); exit(1); }
-		if (S_OK != pTypeLib->GetTypeInfoOfGuid(DIID_IStClient, &m_ptinfo)) { printf("IStClient::IStClient() GetTypeInfoOfGuid FAIL\n"); exit(1); }
+		if (S_OK != LoadRegTypeLib(LIBID_SmartCOM3Lib, 1, 0, LOCALE_SYSTEM_DEFAULT, &pTypeLib)) {
+			printf("IStClient::IStClient() LoadRegTypeLib FAIL\n");
+			exit(1);
+		}
+		if (S_OK != pTypeLib->GetTypeInfoOfGuid(DIID_IStClient, &m_ptinfo)) {
+			printf("IStClient::IStClient() GetTypeInfoOfGuid FAIL\n");
+			exit(1);
+		}
 		pTypeLib->Release();
 
-		if (S_OK != CoCreateInstance(CLSID_StServer, NULL, CLSCTX_INPROC_SERVER, IID_IStServer, reinterpret_cast<void**>(&m_IStServer)))  { printf("IStClient::IStClient() CoCreateInstance(Server) FAIL\n"); exit(1); }
-		if (S_OK != Advise()) { printf("IStClient::IStClient() COM Advise FAIL\n"); exit(1); }
-		if (S_OK != CoCreateInstance(CLSID_StServer, NULL, CLSCTX_INPROC_SERVER, IID_ISmartComVersion, reinterpret_cast<void**>(&m_ISmartComVersion)))  { printf("IStClient::IStClient() CoCreateInstance(Version) FAIL\n"); exit(1); }
+		if (S_OK != CoCreateInstance(CLSID_StServer, NULL, CLSCTX_INPROC_SERVER, IID_IStServer,
+				reinterpret_cast<void**>(&m_IStServer)))
+		{
+			printf("IStClient::IStClient() CoCreateInstance(Server) FAIL\n");
+			exit(1);
+		}
+		if (S_OK != Advise()) {
+			printf("IStClient::IStClient() COM Advise FAIL\n");
+			exit(1);
+		}
+		if (S_OK != CoCreateInstance(CLSID_StServer, NULL, CLSCTX_INPROC_SERVER,
+				IID_ISmartComVersion, reinterpret_cast<void**>(&m_ISmartComVersion)))
+		{
+			printf("IStClient::IStClient() CoCreateInstance(Version) FAIL\n");
+			exit(1);
+		}
 		
 		printf("IStClient::IStClient() OK\n");
 	}
@@ -432,7 +457,8 @@ namespace SmartCOM3
 		if (IsConnected()) {
 			Disconnect();
 			int timeout = 100;
-			while (timeout-- && IsConnected()) std::this_thread::sleep_for(std::chrono::milliseconds(10));
+			while (timeout-- && IsConnected())
+				std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		}
 		UnAdvise();
 		m_IStServer->Release();
@@ -468,7 +494,8 @@ namespace SmartCOM3
 		if (FAILED(hr)) throw std::runtime_error("CancelTicks(): COM error!");
 	}
 	void IStClient::GetBars(std::string symbol, BarInterval interval, time_t since, long count) {
-		HRESULT hr = m_IStServer->raw_GetBars(s2ws(symbol.c_str()).c_str(), interval, time2double(since), count);
+		HRESULT hr = m_IStServer->raw_GetBars(s2ws(symbol.c_str()).c_str(), interval,
+			time2double(since), count);
 		if (FAILED(hr)) throw std::runtime_error("GetBars(): COM error!");
 	}
 	void IStClient::ListenPortfolio(std::string portfolio) {
@@ -479,16 +506,22 @@ namespace SmartCOM3
 		HRESULT hr = m_IStServer->raw_CancelPortfolio(s2ws(portfolio.c_str()).c_str());
 		if (FAILED(hr)) throw std::runtime_error("CancelPortfolio(): COM error!");
 	}
-	void IStClient::PlaceOrder(std::string portfolio, std::string symbol, OrderAction action, OrderType type, OrderValidity validity, double price, double amount, double stop, long cookie) {
-		HRESULT hr = m_IStServer->raw_PlaceOrder(s2ws(portfolio.c_str()).c_str(), s2ws(symbol.c_str()).c_str(), action, type, validity, price, amount, stop, cookie);
+	void IStClient::PlaceOrder(std::string portfolio, std::string symbol,
+		OrderAction action, OrderType type, OrderValidity validity,
+		double price, double amount, double stop, long cookie)
+	{
+		HRESULT hr = m_IStServer->raw_PlaceOrder(s2ws(portfolio.c_str()).c_str(),
+			s2ws(symbol.c_str()).c_str(), action, type, validity, price, amount, stop, cookie);
 		if (FAILED(hr)) throw std::runtime_error("PlaceOrder(): COM error!");
 	}
 	void IStClient::CancelOrder(std::string portfolio, std::string symbol, std::string orderid) {
-		HRESULT hr = m_IStServer->raw_CancelOrder(s2ws(portfolio.c_str()).c_str(), s2ws(symbol.c_str()).c_str(), s2ws(orderid.c_str()).c_str());
+		HRESULT hr = m_IStServer->raw_CancelOrder(s2ws(portfolio.c_str()).c_str(),
+				s2ws(symbol.c_str()).c_str(), s2ws(orderid.c_str()).c_str());
 		if (FAILED(hr)) throw std::runtime_error("CancelOrder(): COM error!");
 	}
 	void IStClient::MoveOrder(std::string portfolio, std::string orderid, double targetPrice) {
-		HRESULT hr = m_IStServer->raw_MoveOrder(s2ws(portfolio.c_str()).c_str(), s2ws(orderid.c_str()).c_str(), targetPrice);
+		HRESULT hr = m_IStServer->raw_MoveOrder(s2ws(portfolio.c_str()).c_str(),
+				s2ws(orderid.c_str()).c_str(), targetPrice);
 		if (FAILED(hr)) throw std::runtime_error("MoveOrder(): COM error!");
 	}
 	void IStClient::GetSymbols() {
@@ -502,8 +535,11 @@ namespace SmartCOM3
 		if (result == 0) return false;
 		else return true;
 	}
-	void IStClient::Connect(std::string ip, unsigned short port, std::string login, std::string password) {
-		HRESULT hr = m_IStServer->raw_connect(s2ws(ip.c_str()).c_str(), port, s2ws(login.c_str()).c_str(), s2ws(password.c_str()).c_str());
+	void IStClient::Connect(std::string ip, unsigned short port,
+		std::string login, std::string password)
+	{
+		HRESULT hr = m_IStServer->raw_connect(s2ws(ip.c_str()).c_str(), port,
+			s2ws(login.c_str()).c_str(), s2ws(password.c_str()).c_str());
 		if (FAILED(hr)) throw std::runtime_error("Connect(): COM error!");
 	}
 	void IStClient::Disconnect() {
@@ -527,7 +563,8 @@ namespace SmartCOM3
 		if (FAILED(hr)) throw std::runtime_error("GetMyClosePos(): COM error!");
 	}
 	void IStClient::GetTrades(std::string symbol, time_t from, long count) {
-		HRESULT hr = m_IStServer->raw_GetTrades(s2ws(symbol.c_str()).c_str(), time2double(from), count);
+		HRESULT hr = m_IStServer->raw_GetTrades(s2ws(symbol.c_str()).c_str(),
+			time2double(from), count);
 		if (FAILED(hr)) throw std::runtime_error("GetTrades(): COM error!");
 	}
 	void IStClient::ConfigureClient(std::string paramsSet) {
@@ -639,7 +676,8 @@ namespace SmartCOM3
 		localtm.tm_isdst = 0;
 		utctm.tm_isdst = 0;
 
-		if ((timeTLocal = mktime(&localtm)) == (time_t)-1 || (timeTUtc = mktime(&utctm)) == (time_t)-1)
+		if ((timeTLocal = mktime(&localtm)) == (time_t)-1 ||
+			(timeTUtc = mktime(&utctm)) == (time_t)-1)
 			return VARIANT_TIMET_DAY0;
 
 		timeT += timeTLocal - timeTUtc;
