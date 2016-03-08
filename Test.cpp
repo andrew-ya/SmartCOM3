@@ -124,6 +124,7 @@ void TestRobot::AddSymbol(
 	double strike)
 {
 	if (row < 10) printf("TestRobot::AddSymbol(%s)\n", symbol.c_str());
+	else if (row == nrows - 1) printf("TestRobot::AddSymbol() all symbols added\n");
 }
 void TestRobot::OrderSucceeded(long cookie, std::string orderid){}
 void TestRobot::OrderFailed(long cookie, std::string orderid, std::string reason){}
@@ -193,7 +194,12 @@ int main(int argc, char **argv)
 	printf("Press ENTER to disconnect\n");
 	getchar();
 
-	robot->Disconnect();
+	if (robot->IsConnected()) {
+		printf("Disconnecting...\n");
+		robot->Disconnect();
+	} else {
+		printf("Not connected\n");
+	}
 
 	printf("Press ENTER to exit\n");
 	getchar();
