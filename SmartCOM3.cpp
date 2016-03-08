@@ -582,7 +582,7 @@ namespace SmartCOM3
 
 	inline std::string ws2s(const wchar_t *wstr)
 	{
-		if (wstr == NULL) return std::string("NULL");
+		if (wstr == NULL) return std::string("NULL_POINTER");
 		int wsize = 0;
 		while (wstr[wsize++] != L'\0');
 		if (wsize == 0) return std::string("ZERO_LENGTH");
@@ -594,10 +594,10 @@ namespace SmartCOM3
 	}
 	inline std::wstring s2ws(const char *str)
 	{
-		if (str == NULL) return std::wstring(L"NULL");
+		if (str == NULL) return std::wstring(L"NULL_POINTER");
 		int size = 0;
 		while (str[size++] != '\0');
-		if (size == 0) return std::wstring(L"0LENGTH");
+		if (size == 0) return std::wstring(L"ZERO_LENGTH");
 
 		int size_needed = MultiByteToWideChar(CP_UTF8, 0, str, size, NULL, 0);
 		std::wstring wstrTo(size_needed, 0);
