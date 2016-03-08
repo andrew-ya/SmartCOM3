@@ -21,7 +21,7 @@ namespace SmartCOM3
 		if (cRef == 0) delete this;
 		return cRef;
 	}
-	STDMETHODIMP IStClient::QueryInterface(REFIID iid, void ** ppv)
+	STDMETHODIMP IStClient::QueryInterface(REFIID iid, void **ppv)
 	{
 		*ppv = nullptr;
 		HRESULT hr = E_NOINTERFACE;
@@ -44,7 +44,7 @@ namespace SmartCOM3
 		*pctinfo = 1;
 		return NOERROR;
 	}
-	STDMETHODIMP IStClient::GetTypeInfo(UINT itinfo, LCID lcid, ITypeInfo ** pptinfo)
+	STDMETHODIMP IStClient::GetTypeInfo(UINT itinfo, LCID lcid, ITypeInfo **pptinfo)
 	{
 		if (pptinfo == NULL) return E_INVALIDARG;
 		if (itinfo != 0) return DISP_E_BADINDEX;
@@ -53,11 +53,11 @@ namespace SmartCOM3
 		*pptinfo = m_ptinfo;
 		return NOERROR;
 	}
-	STDMETHODIMP IStClient::GetIDsOfNames(REFIID riid, OLECHAR ** rgszNames, UINT cNames, LCID lcid, DISPID * rgdispid)
+	STDMETHODIMP IStClient::GetIDsOfNames(REFIID riid, OLECHAR **rgszNames, UINT cNames, LCID lcid, DISPID *rgdispid)
 	{
 		return m_ptinfo->GetIDsOfNames(rgszNames, cNames, rgdispid);
 	}
-	STDMETHODIMP IStClient::Invoke(DISPID dispidMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS * pdispparams, VARIANT * pvarResult, EXCEPINFO * pexcepinfo, UINT * puArgErr)
+	STDMETHODIMP IStClient::Invoke(DISPID dispidMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pdispparams, VARIANT *pvarResult, EXCEPINFO *pexcepinfo, UINT *puArgErr)
 	{
 		if (pvarResult) VariantInit(pvarResult);
 
@@ -359,39 +359,39 @@ namespace SmartCOM3
 
 	/* COM HELPERS */
 
-	std::mutex apartmentsInitializationMutex;
-	bool apartmentsInitializationFlag = false;
+	std::mutex s_ApartmentsInitializationMutex;
+	bool s_ApartmentsInitializationFlag = false;
 	void IStClient::InitializeApartments()
 	{
 		printf("IStClient::InitializeApartments()\n");
-		apartmentsInitializationMutex.lock();
-		if (apartmentsInitializationFlag == false) {
+		s_ApartmentsInitializationMutex.lock();
+		if (s_ApartmentsInitializationFlag == false) {
 			if (S_OK != CoInitializeEx(NULL, COINIT_MULTITHREADED)) { printf("IStClient::InitializeApartments() CoInitializeEx(NULL, COINIT_MULTITHREADED) FAIL\n"); exit(1); }
-			apartmentsInitializationFlag = true;
+			s_ApartmentsInitializationFlag = true;
 			printf("IStClient::InitializeApartments() OK\n");
 		} else {
 			printf("IStClient::InitializeApartments() already initialized\n");
 		}
-		apartmentsInitializationMutex.unlock();
+		s_ApartmentsInitializationMutex.unlock();
 	}
 	void IStClient::UninitializeApartments()
 	{
 		printf("IStClient::UninitializeApartments()\n");
-		apartmentsInitializationMutex.lock();
-		if (apartmentsInitializationFlag == true) {
+		s_ApartmentsInitializationMutex.lock();
+		if (s_ApartmentsInitializationFlag == true) {
 			CoUninitialize();
-			apartmentsInitializationFlag = false;
+			s_ApartmentsInitializationFlag = false;
 			printf("IStClient::UninitializeApartments() OK\n");
 		} else {
 			printf("IStClient::UninitializeApartments() not initialized\n");
 		}
-		apartmentsInitializationMutex.unlock();
+		s_ApartmentsInitializationMutex.unlock();
 	}
 	HRESULT IStClient::Advise()
 	{
 		HRESULT hr = S_FALSE;
 		IConnectionPointContainer* cpc;
-		if (S_OK == m_IStServer->QueryInterface(IID_IConnectionPointContainer, (void **)&cpc))
+		if (S_OK == m_IStServer->QueryInterface(IID_IConnectionPointContainer, (void**)&cpc))
 		{
 			if (S_OK == cpc->FindConnectionPoint(DIID_IStClient, &m_pIConnectionPoint))
 			{
