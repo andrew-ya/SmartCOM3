@@ -1,5 +1,7 @@
 
 #include "Test.h"
+#include <stdlib.h>
+#include <assert.h>
 
 void TestRobot::Connected()
 {
@@ -183,14 +185,37 @@ void TestRobot::OrderMoveFailed(const char *orderid){}
 
 int main(int argc, char **argv)
 {
+	if (argc != 5) {
+		printf("Usage: SmartCOM3.exe <server> <port> <login> <password>\n");
+		printf("E.g.: SmartCOM3.exe mxdemo.ittrade.ru 8443 LOGIN PASSWORD\n");
+		return 0;
+	}
+
+	const char *server = argv[1];
+	unsigned int port = atoi(argv[2]);
+	assert(port > 0 && port <= 65535);
+	const char *login = argv[3];
+	const char *password = argv[4];
+
 	TestRobot::InitializeApartments();
 
 	TestRobot *robot = new TestRobot();
 
 	printf("SmartCOM3 version: %s\n\n", robot->GetClientVersionString().c_str());
 
-	printf("Connecting...\n");
-	robot->Connect("mxdemo.ittrade.ru", 8443, "LOGIN", "PASSWORD");
+	robot->ConfigureClient(
+		"CalcPlannedPos=no;"
+		"asyncSocketConnectionMode=yes;"
+		"logLevel=5;"
+		"logFilePath=C:\\;");
+
+	robot->ConfigureServer(
+		"pingTimeout=2;"
+		"logLevel=5;"
+		"logFilePath=C:\\");
+
+	printf("Connecting to %s:%d with login %s\n", server, port, login);
+	robot->Connect(server, port, login, password);
 
 	printf("Press ENTER to disconnect\n");
 	getchar();
