@@ -116,4 +116,4 @@ IStClient::UninitializeApartments() OK
 ##THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND    
 ##TEST ALL FUNCTIONALITY YOU ARE USING  
 #Contact
-Feel free for contact with me on moex@anton.red russian or english
+Feel free for contact me on moex@anton.red russian or english
