@@ -123,8 +123,9 @@ void TestRobot::AddSymbol(
 	double days_before_expiry,
 	double strike)
 {
-	if (row < 10) printf("TestRobot::AddSymbol(%s)\n", symbol.c_str());
-	else if (row == nrows - 1) printf("TestRobot::AddSymbol() all symbols added\n");
+	if (row < 10) printf("TestRobot::AddSymbol(%s) %d of %d\n", symbol.c_str(), row + 1, nrows);
+	else if (row == 10) printf(".....\n");
+	else if (row == nrows - 1) printf("TestRobot::AddSymbol() added %d of %d\n", row + 1, nrows);
 }
 void TestRobot::OrderSucceeded(long cookie, std::string orderid){}
 void TestRobot::OrderFailed(long cookie, std::string orderid, std::string reason){}
@@ -186,7 +187,7 @@ int main(int argc, char **argv)
 
 	TestRobot *robot = new TestRobot();
 
-	printf("SmartCOM3 version: %s\n", robot->GetClientVersionString().c_str());
+	printf("SmartCOM3 version: %s\n\n", robot->GetClientVersionString().c_str());
 
 	printf("Connecting...\n");
 	robot->Connect("mxdemo.ittrade.ru", 8443, "LOGIN", "PASSWORD");
