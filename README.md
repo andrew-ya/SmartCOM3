@@ -114,6 +114,6 @@ IStClient::UninitializeApartments() OK
 ```
 #Production     
 ##THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
-##Before production deployment TEST ALL FUNCTION YOU ARE USING
+##Before production deployment TEST ALL FUNCTIONALITY YOU ARE USING
 #Contact
 Feel free for contact with me on moex@anton.red russian or english
