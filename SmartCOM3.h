@@ -52,9 +52,9 @@ namespace SmartCOM3
 
 		virtual void Connected() = 0;
 		virtual void Disconnected(
-			std::string reason) = 0;
+			const char *reason) = 0;
 		virtual void UpdateQuote(
-			std::string symbol,
+			const char *symbol,
 			time_t datetime,
 			double open,
 			double high,
@@ -78,7 +78,7 @@ namespace SmartCOM3
 			double volat,
 			double theor_price) = 0;
 		virtual void UpdateBidAsk(
-			std::string symbol,
+			const char *symbol,
 			long row,
 			long nrows,
 			double bid,
@@ -86,16 +86,16 @@ namespace SmartCOM3
 			double ask,
 			double asksize) = 0;
 		virtual void AddTick(
-			std::string symbol,
+			const char *symbol,
 			time_t datetime,
 			double price,
 			double volume,
-			std::string tradeno,
+			const char *tradeno,
 			OrderAction action) = 0;
 		virtual void AddBar(
 			long row,
 			long nrows,
-			std::string symbol,
+			const char *symbol,
 			BarInterval interval,
 			time_t datetime,
 			double open,
@@ -105,22 +105,22 @@ namespace SmartCOM3
 			double volume,
 			double open_int) = 0;
 		virtual void SetPortfolio(
-			std::string portfolio,
+			const char *portfolio,
 			double cash,
 			double leverage,
 			double comission,
 			double saldo) = 0;
 		virtual void AddTrade(
-			std::string portfolio,
-			std::string symbol,
-			std::string orderid,
+			const char *portfolio,
+			const char *symbol,
+			const char *orderid,
 			double price,
 			double amount,
 			time_t datetime,
-			std::string tradeno) = 0;
+			const char *tradeno) = 0;
 		virtual void UpdateOrder(
-			std::string portfolio,
-			std::string symbol,
+			const char *portfolio,
+			const char *symbol,
 			OrderState state,
 			OrderAction action,
 			OrderType type,
@@ -130,72 +130,72 @@ namespace SmartCOM3
 			double stop,
 			double filled,
 			time_t datetime,
-			std::string orderid,
-			std::string orderno,
+			const char *orderid,
+			const char *orderno,
 			long status_mask,
 			long cookie) = 0;
 		virtual void UpdatePosition(
-			std::string portfolio,
-			std::string symbol,
+			const char *portfolio,
+			const char *symbol,
 			double avprice,
 			double amount,
 			double planned) = 0;
 		virtual void AddTickHistory(
 			long row,
 			long nrows,
-			std::string symbol,
+			const char *symbol,
 			time_t datetime,
 			double price,
 			double volume,
-			std::string tradeno,
+			const char *tradeno,
 			OrderAction action) = 0;
 		virtual void AddSymbol(
 			long row,
 			long nrows,
-			std::string symbol,
-			std::string short_name,
-			std::string int_name,
-			std::string type,
+			const char *symbol,
+			const char *short_name,
+			const char *int_name,
+			const char *type,
 			long decimals,
 			long lot_size,
 			double punkt,
 			double step,
-			std::string sec_ext_id,
-			std::string sec_exch_name,
+			const char *sec_ext_id,
+			const char *sec_exch_name,
 			time_t expiry_date,
 			double days_before_expiry,
 			double strike) = 0;
 		virtual void OrderSucceeded(
 			long cookie,
-			std::string orderid) = 0;
+			const char *orderid) = 0;
 		virtual void OrderFailed(
 			long cookie,
-			std::string orderid,
-			std::string reason) = 0;
+			const char *orderid,
+			const char *reason) = 0;
 		virtual void AddPortfolio(
 			long row,
 			long nrows,
-			std::string portfolioName,
-			std::string portfolioExch,
+			const char *portfolioName,
+			const char *portfolioExch,
 			PortfolioStatus portfolioStatus) = 0;
 		virtual void SetSubscribtionCheckReult(
 			long result) = 0;
 		virtual void SetMyTrade(
 			long row,
 			long nrows,
-			std::string portfolio,
-			std::string symbol,
+			const char *portfolio,
+			const char *symbol,
 			time_t datetime,
 			double price,
 			double volume,
-			std::string tradeno,
+			const char *tradeno,
 			OrderAction buysell,
-			std::string orderno) = 0;
+			const char *orderno) = 0;
 		virtual void SetMyOrder(
 			long row,
 			long nrows,
-			std::string portfolio,
-			std::string symbol,
+			const char *portfolio,
+			const char *symbol,
 			OrderState state,
 			OrderAction action,
 			OrderType type,
@@ -205,55 +205,55 @@ namespace SmartCOM3
 			double stop,
 			double filled,
 			time_t datetime,
-			std::string id,
-			std::string no,
+			const char *id,
+			const char *no,
 			long cookie) = 0;
 		virtual void SetMyClosePos(
 			long row,
 			long nrows,
-			std::string portfolio,
-			std::string symbol,
+			const char *portfolio,
+			const char *symbol,
 			double amount,
 			double price_buy,
 			double price_sell,
 			time_t postime,
-			std::string order_open,
-			std::string order_close) = 0;
+			const char *order_open,
+			const char *order_close) = 0;
 		virtual void OrderCancelSucceeded(
-			std::string orderid) = 0;
+			const char *orderid) = 0;
 		virtual void OrderCancelFailed(
-			std::string orderid) = 0;
+			const char *orderid) = 0;
 		virtual void OrderMoveSucceeded(
-			std::string orderid) = 0;
+			const char *orderid) = 0;
 		virtual void OrderMoveFailed(
-			std::string orderid) = 0;
+			const char *orderid) = 0;
 
 		/* SmartCOM3 METHODS */
 
 		void ListenQuotes(
-			std::string symbol);
+			const char *symbol);
 		void CancelQuotes(
-			std::string symbol);
+			const char *symbol);
 		void ListenBidAsks(
-			std::string symbol);
+			const char *symbol);
 		void CancelBidAsks(
-			std::string symbol);
+			const char *symbol);
 		void ListenTicks(
-			std::string symbol);
+			const char *symbol);
 		void CancelTicks(
-			std::string symbol);
+			const char *symbol);
 		void GetBars(
-			std::string symbol,
+			const char *symbol,
 			BarInterval interval,
 			time_t since,
 			long count);
 		void ListenPortfolio(
-			std::string portfolio);
+			const char *portfolio);
 		void CancelPortfolio(
-			std::string portfolio);
+			const char *portfolio);
 		void PlaceOrder(
-			std::string portfolio,
-			std::string symbol,
+			const char *portfolio,
+			const char *symbol,
 			OrderAction action,
 			OrderType type,
 			OrderValidity validity,
@@ -262,39 +262,39 @@ namespace SmartCOM3
 			double stop,
 			long cookie);
 		void CancelOrder(
-			std::string portfolio,
-			std::string symbol,
-			std::string orderid);
+			const char *portfolio,
+			const char *symbol,
+			const char *orderid);
 		void MoveOrder(
-			std::string portfolio,
-			std::string orderid,
+			const char *portfolio,
+			const char *orderid,
 			double targetPrice);
 		void GetSymbols();
 		bool IsConnected();
 		void Connect(
-			std::string ip,
+			const char *ip,
 			unsigned short port,
-			std::string login,
-			std::string password);
+			const char *login,
+			const char *password);
 		void Disconnect();
 		void GetPrortfolioList();
 		void GetMyOrders(
 			long onlyActive,
-			std::string portfolio);
+			const char *portfolio);
 		void GetMyTrades(
-			std::string portfolio);
+			const char *portfolio);
 		void GetMyClosePos(
-			std::string portfolio);
+			const char *portfolio);
 		void GetTrades(
-			std::string symbol,
+			const char *symbol,
 			time_t from,
 			long count);
 		void ConfigureClient(
-			std::string paramsSet);
+			const char *paramsSet);
 		void ConfigureServer(
-			std::string paramsSet);
+			const char *paramsSet);
 		std::string GetMoneyAccount(
-			std::string portfolioID);
+			const char *portfolioID);
 
 		/* SmartCOM3 VERSION METHODS */
 

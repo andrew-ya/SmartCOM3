@@ -10,9 +10,9 @@ class TestRobot : public SmartCOM3::IStClient
 {
 public:
 	void Connected();
-	void Disconnected(std::string reason);
+	void Disconnected(const char *reason);
 	void UpdateQuote(
-		std::string symbol,
+		const char *symbol,
 		time_t datetime,
 		double open,
 		double high,
@@ -36,7 +36,7 @@ public:
 		double volat,
 		double theor_price);
 	void UpdateBidAsk(
-		std::string symbol,
+		const char *symbol,
 		long row,
 		long nrows,
 		double bid,
@@ -44,16 +44,16 @@ public:
 		double ask,
 		double asksize);
 	void AddTick(
-		std::string symbol,
+		const char *symbol,
 		time_t datetime,
 		double price,
 		double volume,
-		std::string tradeno,
+		const char *tradeno,
 		OrderAction action);
 	void AddBar(
 		long row,
 		long nrows,
-		std::string symbol,
+		const char *symbol,
 		BarInterval interval,
 		time_t datetime,
 		double open,
@@ -63,22 +63,22 @@ public:
 		double volume,
 		double open_int);
 	void SetPortfolio(
-		std::string portfolio,
+		const char *portfolio,
 		double cash,
 		double leverage,
 		double comission,
 		double saldo);
 	void AddTrade(
-		std::string portfolio,
-		std::string symbol,
-		std::string orderid,
+		const char *portfolio,
+		const char *symbol,
+		const char *orderid,
 		double price,
 		double amount,
 		time_t datetime,
-		std::string tradeno);
+		const char *tradeno);
 	void UpdateOrder(
-		std::string portfolio,
-		std::string symbol,
+		const char *portfolio,
+		const char *symbol,
 		OrderState state,
 		OrderAction action,
 		OrderType type,
@@ -88,71 +88,71 @@ public:
 		double stop,
 		double filled,
 		time_t datetime,
-		std::string orderid,
-		std::string orderno,
+		const char *orderid,
+		const char *orderno,
 		long status_mask,
 		long cookie);
 	void UpdatePosition(
-		std::string portfolio,
-		std::string symbol,
+		const char *portfolio,
+		const char *symbol,
 		double avprice,
 		double amount,
 		double planned);
 	void AddTickHistory(
 		long row,
 		long nrows,
-		std::string symbol,
+		const char *symbol,
 		time_t datetime,
 		double price,
 		double volume,
-		std::string tradeno,
+		const char *tradeno,
 		OrderAction action);
 	void AddSymbol(
 		long row,
 		long nrows,
-		std::string symbol,
-		std::string short_name,
-		std::string int_name,
-		std::string type,
+		const char *symbol,
+		const char *short_name,
+		const char *int_name,
+		const char *type,
 		long decimals,
 		long lot_size,
 		double punkt,
 		double step,
-		std::string sec_ext_id,
-		std::string sec_exch_name,
+		const char *sec_ext_id,
+		const char *sec_exch_name,
 		time_t expiry_date,
 		double days_before_expiry,
 		double strike);
 	void OrderSucceeded(
 		long cookie,
-		std::string orderid);
+		const char *orderid);
 	void OrderFailed(
 		long cookie,
-		std::string orderid,
-		std::string reason);
+		const char *orderid,
+		const char *reason);
 	void AddPortfolio(
 		long row,
 		long nrows,
-		std::string portfolioName,
-		std::string portfolioExch,
+		const char *portfolioName,
+		const char *portfolioExch,
 		PortfolioStatus portfolioStatus);
 	void SetSubscribtionCheckReult(long result);
 	void SetMyTrade(
 		long row,
 		long nrows,
-		std::string portfolio,
-		std::string symbol,
+		const char *portfolio,
+		const char *symbol,
 		time_t datetime,
 		double price,
 		double volume,
-		std::string tradeno,
+		const char *tradeno,
 		OrderAction buysell,
-		std::string orderno);
+		const char *orderno);
 	void SetMyOrder(
 		long row,
 		long nrows,
-		std::string portfolio,
-		std::string symbol,
+		const char *portfolio,
+		const char *symbol,
 		OrderState state,
 		OrderAction action,
 		OrderType type,
@@ -162,24 +162,24 @@ public:
 		double stop,
 		double filled,
 		time_t datetime,
-		std::string id,
-		std::string no,
+		const char *id,
+		const char *no,
 		long cookie);
 	void SetMyClosePos(
 		long row,
 		long nrows,
-		std::string portfolio,
-		std::string symbol,
+		const char *portfolio,
+		const char *symbol,
 		double amount,
 		double price_buy,
 		double price_sell,
 		time_t postime,
-		std::string order_open,
-		std::string order_close);
-	void OrderCancelSucceeded(std::string orderid);
-	void OrderCancelFailed(std::string orderid);
-	void OrderMoveSucceeded(std::string orderid);
-	void OrderMoveFailed(std::string orderid);
+		const char *order_open,
+		const char *order_close);
+	void OrderCancelSucceeded(const char *orderid);
+	void OrderCancelFailed(const char *orderid);
+	void OrderMoveSucceeded(const char *orderid);
+	void OrderMoveFailed(const char *orderid);
 };
 
 #endif

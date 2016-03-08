@@ -77,13 +77,13 @@ namespace SmartCOM3
 		}
 		case 0x02: {
 		   Disconnected(
-			   ws2s(pdispparams->rgvarg[0].bstrVal) // std::string reason
+			   ws2s(pdispparams->rgvarg[0].bstrVal).c_str() // std::string reason
 		   );
 		   break;
 		}
 		case 0x03: {
 		   UpdateQuote(
-			   ws2s(pdispparams->rgvarg[22].bstrVal), // std::string symbol
+			   ws2s(pdispparams->rgvarg[22].bstrVal).c_str(), // std::string symbol
 			   double2time(pdispparams->rgvarg[21].dblVal), // time_t datetime
 			   (double)pdispparams->rgvarg[20].dblVal, // double open
 			   (double)pdispparams->rgvarg[19].dblVal, // double high
@@ -111,7 +111,7 @@ namespace SmartCOM3
 		}
 		case 0x04: {
 		   UpdateBidAsk(
-			   ws2s(pdispparams->rgvarg[6].bstrVal), // std::string symbol
+			   ws2s(pdispparams->rgvarg[6].bstrVal).c_str(), // std::string symbol
 			   (long)pdispparams->rgvarg[5].lVal, // long row
 			   (long)pdispparams->rgvarg[4].lVal, // long nrows
 			   (double)pdispparams->rgvarg[3].dblVal, // double bid
@@ -123,11 +123,11 @@ namespace SmartCOM3
 		}
 		case 0x05: {
 		   AddTick(
-			   ws2s(pdispparams->rgvarg[5].bstrVal), // std::string symbol
+			   ws2s(pdispparams->rgvarg[5].bstrVal).c_str(), // std::string symbol
 			   double2time(pdispparams->rgvarg[4].dblVal), // time_t datetime
 			   (double)pdispparams->rgvarg[3].dblVal, // double price
 			   (double)pdispparams->rgvarg[2].dblVal, // double volume
-			   ws2s(pdispparams->rgvarg[1].bstrVal), // std::string tradeno
+			   ws2s(pdispparams->rgvarg[1].bstrVal).c_str(), // std::string tradeno
 			   (OrderAction)
 			   pdispparams->rgvarg[0].bVal // OrderAction action
 		   );
@@ -137,7 +137,7 @@ namespace SmartCOM3
 		   AddBar(
 			   (long)pdispparams->rgvarg[10].lVal, // long row
 			   (long)pdispparams->rgvarg[9].lVal, // long nrows
-			   ws2s(pdispparams->rgvarg[8].bstrVal), // std::string symbol
+			   ws2s(pdispparams->rgvarg[8].bstrVal).c_str(), // std::string symbol
 			   (BarInterval)
 			   pdispparams->rgvarg[7].bVal, // BarInterval interval
 			   double2time(pdispparams->rgvarg[6].dblVal), // time_t datetime
@@ -152,7 +152,7 @@ namespace SmartCOM3
 		}
 		case 0x07: {
 		   SetPortfolio(
-			   ws2s(pdispparams->rgvarg[4].bstrVal), // std::string portfolio
+			   ws2s(pdispparams->rgvarg[4].bstrVal).c_str(), // std::string portfolio
 			   (double)pdispparams->rgvarg[3].dblVal, // double cash
 			   (double)pdispparams->rgvarg[2].dblVal, // double leverage
 			   (double)pdispparams->rgvarg[1].dblVal, // double comission
@@ -162,20 +162,20 @@ namespace SmartCOM3
 		}
 		case 0x08: {
 		   AddTrade(
-			   ws2s(pdispparams->rgvarg[6].bstrVal), // std::string portfolio
-			   ws2s(pdispparams->rgvarg[5].bstrVal), // std::string symbol
-			   ws2s(pdispparams->rgvarg[4].bstrVal), // std::string orderid
+			   ws2s(pdispparams->rgvarg[6].bstrVal).c_str(), // std::string portfolio
+			   ws2s(pdispparams->rgvarg[5].bstrVal).c_str(), // std::string symbol
+			   ws2s(pdispparams->rgvarg[4].bstrVal).c_str(), // std::string orderid
 			   (double)pdispparams->rgvarg[3].dblVal, // double price
 			   (double)pdispparams->rgvarg[2].dblVal, // double amount
 			   double2time(pdispparams->rgvarg[1].dblVal), // time_t datetime
-			   ws2s(pdispparams->rgvarg[0].bstrVal) // std::string tradeno
+			   ws2s(pdispparams->rgvarg[0].bstrVal).c_str() // std::string tradeno
 		   );
 		   break;
 		}
 		case 0x09: {
 		   UpdateOrder(
-			   ws2s(pdispparams->rgvarg[14].bstrVal), // std::string portfolio
-			   ws2s(pdispparams->rgvarg[13].bstrVal), // std::string symbol
+			   ws2s(pdispparams->rgvarg[14].bstrVal).c_str(), // std::string portfolio
+			   ws2s(pdispparams->rgvarg[13].bstrVal).c_str(), // std::string symbol
 			   (OrderState)
 			   pdispparams->rgvarg[12].bVal, // OrderState state
 			   (OrderAction)
@@ -189,8 +189,8 @@ namespace SmartCOM3
 			   (double)pdispparams->rgvarg[6].dblVal, // double stop
 			   (double)pdispparams->rgvarg[5].dblVal, // double filled
 			   double2time(pdispparams->rgvarg[4].dblVal), // time_t datetime
-			   ws2s(pdispparams->rgvarg[3].bstrVal), // std::string orderid
-			   ws2s(pdispparams->rgvarg[2].bstrVal), // std::string orderno
+			   ws2s(pdispparams->rgvarg[3].bstrVal).c_str(), // std::string orderid
+			   ws2s(pdispparams->rgvarg[2].bstrVal).c_str(), // std::string orderno
 			   (long)pdispparams->rgvarg[1].lVal, // long status_mask
 			   (long)pdispparams->rgvarg[0].lVal // long cookie
 		   );
@@ -198,8 +198,8 @@ namespace SmartCOM3
 		}
 		case 0x0a: {
 		   UpdatePosition(
-			   ws2s(pdispparams->rgvarg[4].bstrVal), // std::string portfolio
-			   ws2s(pdispparams->rgvarg[3].bstrVal), // std::string symbol
+			   ws2s(pdispparams->rgvarg[4].bstrVal).c_str(), // std::string portfolio
+			   ws2s(pdispparams->rgvarg[3].bstrVal).c_str(), // std::string symbol
 			   (double)pdispparams->rgvarg[2].dblVal, // double avprice
 			   (double)pdispparams->rgvarg[1].dblVal, // double amount
 			   (double)pdispparams->rgvarg[0].dblVal // double planned
@@ -210,11 +210,11 @@ namespace SmartCOM3
 		   AddTickHistory(
 			   (long)pdispparams->rgvarg[7].lVal, // long row
 			   (long)pdispparams->rgvarg[6].lVal, // long nrows
-			   ws2s(pdispparams->rgvarg[5].bstrVal), // std::string symbol
+			   ws2s(pdispparams->rgvarg[5].bstrVal).c_str(), // std::string symbol
 			   double2time(pdispparams->rgvarg[4].dblVal), // time_t datetime
 			   (double)pdispparams->rgvarg[3].dblVal, // double price
 			   (double)pdispparams->rgvarg[2].dblVal, // double volume
-			   ws2s(pdispparams->rgvarg[1].bstrVal), // std::string tradeno
+			   ws2s(pdispparams->rgvarg[1].bstrVal).c_str(), // std::string tradeno
 			   (OrderAction)
 			   pdispparams->rgvarg[0].bVal // OrderAction action
 		   );
@@ -224,16 +224,16 @@ namespace SmartCOM3
 		   AddSymbol(
 			   (long)pdispparams->rgvarg[14].lVal, // long row
 			   (long)pdispparams->rgvarg[13].lVal, // long nrows
-			   ws2s(pdispparams->rgvarg[12].bstrVal), // std::string symbol
-			   ws2s(pdispparams->rgvarg[11].bstrVal), // std::string short_name
-			   ws2s(pdispparams->rgvarg[10].bstrVal), // std::string int_name
-			   ws2s(pdispparams->rgvarg[9].bstrVal), // std::string type
+			   ws2s(pdispparams->rgvarg[12].bstrVal).c_str(), // std::string symbol
+			   ws2s(pdispparams->rgvarg[11].bstrVal).c_str(), // std::string short_name
+			   ws2s(pdispparams->rgvarg[10].bstrVal).c_str(), // std::string int_name
+			   ws2s(pdispparams->rgvarg[9].bstrVal).c_str(), // std::string type
 			   (long)pdispparams->rgvarg[8].lVal, // long decimals
 			   (long)pdispparams->rgvarg[7].lVal, // long lot_size
 			   (double)pdispparams->rgvarg[6].dblVal, // double punkt
 			   (double)pdispparams->rgvarg[5].dblVal, // double step
-			   ws2s(pdispparams->rgvarg[4].bstrVal), // std::string sec_ext_id
-			   ws2s(pdispparams->rgvarg[3].bstrVal), // std::string sec_exch_name
+			   ws2s(pdispparams->rgvarg[4].bstrVal).c_str(), // std::string sec_ext_id
+			   ws2s(pdispparams->rgvarg[3].bstrVal).c_str(), // std::string sec_exch_name
 			   double2time(pdispparams->rgvarg[2].dblVal), // time_t expiry_date
 			   (double)pdispparams->rgvarg[1].dblVal, // double days_before_expiry
 			   (double)pdispparams->rgvarg[0].dblVal // double strike
@@ -243,15 +243,15 @@ namespace SmartCOM3
 		case 0x1e: {
 		   OrderSucceeded(
 			   (long)pdispparams->rgvarg[1].lVal, // long cookie
-			   ws2s(pdispparams->rgvarg[0].bstrVal) // std::string orderid
+			   ws2s(pdispparams->rgvarg[0].bstrVal).c_str() // std::string orderid
 		   );
 		   break;
 		}
 		case 0x1f: {
 		   OrderFailed(
 			   (long)pdispparams->rgvarg[2].lVal, // long cookie
-			   ws2s(pdispparams->rgvarg[1].bstrVal), // std::string orderid
-			   ws2s(pdispparams->rgvarg[0].bstrVal) // std::string reason
+			   ws2s(pdispparams->rgvarg[1].bstrVal).c_str(), // std::string orderid
+			   ws2s(pdispparams->rgvarg[0].bstrVal).c_str() // std::string reason
 		   );
 		   break;
 		}
@@ -259,8 +259,8 @@ namespace SmartCOM3
 		   AddPortfolio(
 			   (long)pdispparams->rgvarg[4].lVal, // long row
 			   (long)pdispparams->rgvarg[3].lVal, // long nrows
-			   ws2s(pdispparams->rgvarg[2].bstrVal), // std::string portfolioName
-			   ws2s(pdispparams->rgvarg[1].bstrVal), // std::string portfolioExch
+			   ws2s(pdispparams->rgvarg[2].bstrVal).c_str(), // std::string portfolioName
+			   ws2s(pdispparams->rgvarg[1].bstrVal).c_str(), // std::string portfolioExch
 			   (PortfolioStatus)
 			   pdispparams->rgvarg[0].bVal // PortfolioStatus portfolioStatus
 		   );
@@ -276,15 +276,15 @@ namespace SmartCOM3
 		   SetMyTrade(
 			   (long)pdispparams->rgvarg[9].lVal, // long row
 			   (long)pdispparams->rgvarg[8].lVal, // long nrows
-			   ws2s(pdispparams->rgvarg[7].bstrVal), // std::string portfolio
-			   ws2s(pdispparams->rgvarg[6].bstrVal), // std::string symbol
+			   ws2s(pdispparams->rgvarg[7].bstrVal).c_str(), // std::string portfolio
+			   ws2s(pdispparams->rgvarg[6].bstrVal).c_str(), // std::string symbol
 			   double2time(pdispparams->rgvarg[5].dblVal), // time_t datetime
 			   (double)pdispparams->rgvarg[4].dblVal, // double price
 			   (double)pdispparams->rgvarg[3].dblVal, // double volume
-			   ws2s(pdispparams->rgvarg[2].bstrVal), // std::string tradeno
+			   ws2s(pdispparams->rgvarg[2].bstrVal).c_str(), // std::string tradeno
 			   (OrderAction)
 			   pdispparams->rgvarg[1].bVal, // OrderAction buysell
-			   ws2s(pdispparams->rgvarg[0].bstrVal) // std::string orderno
+			   ws2s(pdispparams->rgvarg[0].bstrVal).c_str() // std::string orderno
 		   );
 		   break;
 		}
@@ -292,8 +292,8 @@ namespace SmartCOM3
 		   SetMyOrder(
 			   (long)pdispparams->rgvarg[15].lVal, // long row
 			   (long)pdispparams->rgvarg[14].lVal, // long nrows
-			   ws2s(pdispparams->rgvarg[13].bstrVal), // std::string portfolio
-			   ws2s(pdispparams->rgvarg[12].bstrVal), // std::string symbol
+			   ws2s(pdispparams->rgvarg[13].bstrVal).c_str(), // std::string portfolio
+			   ws2s(pdispparams->rgvarg[12].bstrVal).c_str(), // std::string symbol
 			   (OrderState)
 			   pdispparams->rgvarg[11].bVal, // OrderState state
 			   (OrderAction)
@@ -307,8 +307,8 @@ namespace SmartCOM3
 			   (double)pdispparams->rgvarg[5].dblVal, // double stop
 			   (double)pdispparams->rgvarg[4].dblVal, // double filled
 			   double2time(pdispparams->rgvarg[3].dblVal), // time_t datetime
-			   ws2s(pdispparams->rgvarg[2].bstrVal), // std::string id
-			   ws2s(pdispparams->rgvarg[1].bstrVal), // std::string no
+			   ws2s(pdispparams->rgvarg[2].bstrVal).c_str(), // std::string id
+			   ws2s(pdispparams->rgvarg[1].bstrVal).c_str(), // std::string no
 			   (long)pdispparams->rgvarg[0].lVal // long cookie
 		   );
 		   break;
@@ -317,38 +317,38 @@ namespace SmartCOM3
 		   SetMyClosePos(
 			   (long)pdispparams->rgvarg[9].lVal, // long row
 			   (long)pdispparams->rgvarg[8].lVal, // long nrows
-			   ws2s(pdispparams->rgvarg[7].bstrVal), // std::string portfolio
-			   ws2s(pdispparams->rgvarg[6].bstrVal), // std::string symbol
+			   ws2s(pdispparams->rgvarg[7].bstrVal).c_str(), // std::string portfolio
+			   ws2s(pdispparams->rgvarg[6].bstrVal).c_str(), // std::string symbol
 			   (double)pdispparams->rgvarg[5].dblVal, // double amount
 			   (double)pdispparams->rgvarg[4].dblVal, // double price_buy
 			   (double)pdispparams->rgvarg[3].dblVal, // double price_sell
 			   double2time(pdispparams->rgvarg[2].dblVal), // time_t postime
-			   ws2s(pdispparams->rgvarg[1].bstrVal), // std::string order_open
-			   ws2s(pdispparams->rgvarg[0].bstrVal) // std::string order_close
+			   ws2s(pdispparams->rgvarg[1].bstrVal).c_str(), // std::string order_open
+			   ws2s(pdispparams->rgvarg[0].bstrVal).c_str() // std::string order_close
 		   );
 		   break;
 		}
 		case 0x26: {
 		   OrderCancelSucceeded(
-			   ws2s(pdispparams->rgvarg[0].bstrVal) // std::string orderid
+			   ws2s(pdispparams->rgvarg[0].bstrVal).c_str() // std::string orderid
 		   );
 		   break;
 		}
 		case 0x27: {
 		   OrderCancelFailed(
-			   ws2s(pdispparams->rgvarg[0].bstrVal) // std::string orderid
+			   ws2s(pdispparams->rgvarg[0].bstrVal).c_str() // std::string orderid
 		   );
 		   break;
 		}
 		case 0x28: {
 		   OrderMoveSucceeded(
-			   ws2s(pdispparams->rgvarg[0].bstrVal) // std::string orderid
+			   ws2s(pdispparams->rgvarg[0].bstrVal).c_str() // std::string orderid
 		   );
 		   break;
 		}
 		case 0x29: {
 		   OrderMoveFailed(
-			   ws2s(pdispparams->rgvarg[0].bstrVal) // std::string orderid
+			   ws2s(pdispparams->rgvarg[0].bstrVal).c_str() // std::string orderid
 		   );
 		   break;
 		}
@@ -469,59 +469,59 @@ namespace SmartCOM3
 
 	/* SmartCOM3 METHODS */
 
-	void IStClient::ListenQuotes(std::string symbol) {
-		HRESULT hr = m_IStServer->raw_ListenQuotes(s2ws(symbol.c_str()).c_str());
+	void IStClient::ListenQuotes(const char *symbol) {
+		HRESULT hr = m_IStServer->raw_ListenQuotes(s2ws(symbol).c_str());
 		if (FAILED(hr)) throw std::runtime_error("ListenQuotes(): COM error!");
 	}
-	void IStClient::CancelQuotes(std::string symbol) {
-		HRESULT hr = m_IStServer->raw_CancelQuotes(s2ws(symbol.c_str()).c_str());
+	void IStClient::CancelQuotes(const char *symbol) {
+		HRESULT hr = m_IStServer->raw_CancelQuotes(s2ws(symbol).c_str());
 		if (FAILED(hr)) throw std::runtime_error("CancelQuotes(): COM error!");
 	}
-	void IStClient::ListenBidAsks(std::string symbol) {
-		HRESULT hr = m_IStServer->raw_ListenBidAsks(s2ws(symbol.c_str()).c_str());
+	void IStClient::ListenBidAsks(const char *symbol) {
+		HRESULT hr = m_IStServer->raw_ListenBidAsks(s2ws(symbol).c_str());
 		if (FAILED(hr)) throw std::runtime_error("ListenBidAsks(): COM error!");
 	}
-	void IStClient::CancelBidAsks(std::string symbol) {
-		HRESULT hr = m_IStServer->raw_CancelBidAsks(s2ws(symbol.c_str()).c_str());
+	void IStClient::CancelBidAsks(const char *symbol) {
+		HRESULT hr = m_IStServer->raw_CancelBidAsks(s2ws(symbol).c_str());
 		if (FAILED(hr)) throw std::runtime_error("CancelBidAsks(): COM error!");
 	}
-	void IStClient::ListenTicks(std::string symbol) {
-		HRESULT hr = m_IStServer->raw_ListenTicks(s2ws(symbol.c_str()).c_str());
+	void IStClient::ListenTicks(const char *symbol) {
+		HRESULT hr = m_IStServer->raw_ListenTicks(s2ws(symbol).c_str());
 		if (FAILED(hr)) throw std::runtime_error("ListenTicks(): COM error!");
 	}
-	void IStClient::CancelTicks(std::string symbol) {
-		HRESULT hr = m_IStServer->raw_CancelTicks(s2ws(symbol.c_str()).c_str());
+	void IStClient::CancelTicks(const char *symbol) {
+		HRESULT hr = m_IStServer->raw_CancelTicks(s2ws(symbol).c_str());
 		if (FAILED(hr)) throw std::runtime_error("CancelTicks(): COM error!");
 	}
-	void IStClient::GetBars(std::string symbol, BarInterval interval, time_t since, long count) {
-		HRESULT hr = m_IStServer->raw_GetBars(s2ws(symbol.c_str()).c_str(), interval,
+	void IStClient::GetBars(const char *symbol, BarInterval interval, time_t since, long count) {
+		HRESULT hr = m_IStServer->raw_GetBars(s2ws(symbol).c_str(), interval,
 			time2double(since), count);
 		if (FAILED(hr)) throw std::runtime_error("GetBars(): COM error!");
 	}
-	void IStClient::ListenPortfolio(std::string portfolio) {
-		HRESULT hr = m_IStServer->raw_ListenPortfolio(s2ws(portfolio.c_str()).c_str());
+	void IStClient::ListenPortfolio(const char *portfolio) {
+		HRESULT hr = m_IStServer->raw_ListenPortfolio(s2ws(portfolio).c_str());
 		if (FAILED(hr)) throw std::runtime_error("ListenPortfolio(): COM error!");
 	}
-	void IStClient::CancelPortfolio(std::string portfolio) {
-		HRESULT hr = m_IStServer->raw_CancelPortfolio(s2ws(portfolio.c_str()).c_str());
+	void IStClient::CancelPortfolio(const char *portfolio) {
+		HRESULT hr = m_IStServer->raw_CancelPortfolio(s2ws(portfolio).c_str());
 		if (FAILED(hr)) throw std::runtime_error("CancelPortfolio(): COM error!");
 	}
-	void IStClient::PlaceOrder(std::string portfolio, std::string symbol,
+	void IStClient::PlaceOrder(const char *portfolio, const char *symbol,
 		OrderAction action, OrderType type, OrderValidity validity,
 		double price, double amount, double stop, long cookie)
 	{
-		HRESULT hr = m_IStServer->raw_PlaceOrder(s2ws(portfolio.c_str()).c_str(),
-			s2ws(symbol.c_str()).c_str(), action, type, validity, price, amount, stop, cookie);
+		HRESULT hr = m_IStServer->raw_PlaceOrder(s2ws(portfolio).c_str(),
+			s2ws(symbol).c_str(), action, type, validity, price, amount, stop, cookie);
 		if (FAILED(hr)) throw std::runtime_error("PlaceOrder(): COM error!");
 	}
-	void IStClient::CancelOrder(std::string portfolio, std::string symbol, std::string orderid) {
-		HRESULT hr = m_IStServer->raw_CancelOrder(s2ws(portfolio.c_str()).c_str(),
-				s2ws(symbol.c_str()).c_str(), s2ws(orderid.c_str()).c_str());
+	void IStClient::CancelOrder(const char *portfolio, const char *symbol, const char *orderid) {
+		HRESULT hr = m_IStServer->raw_CancelOrder(s2ws(portfolio).c_str(),
+				s2ws(symbol).c_str(), s2ws(orderid).c_str());
 		if (FAILED(hr)) throw std::runtime_error("CancelOrder(): COM error!");
 	}
-	void IStClient::MoveOrder(std::string portfolio, std::string orderid, double targetPrice) {
-		HRESULT hr = m_IStServer->raw_MoveOrder(s2ws(portfolio.c_str()).c_str(),
-				s2ws(orderid.c_str()).c_str(), targetPrice);
+	void IStClient::MoveOrder(const char *portfolio, const char *orderid, double targetPrice) {
+		HRESULT hr = m_IStServer->raw_MoveOrder(s2ws(portfolio).c_str(),
+				s2ws(orderid).c_str(), targetPrice);
 		if (FAILED(hr)) throw std::runtime_error("MoveOrder(): COM error!");
 	}
 	void IStClient::GetSymbols() {
@@ -535,11 +535,11 @@ namespace SmartCOM3
 		if (result == 0) return false;
 		else return true;
 	}
-	void IStClient::Connect(std::string ip, unsigned short port,
-		std::string login, std::string password)
+	void IStClient::Connect(const char *ip, unsigned short port,
+		const char *login, const char *password)
 	{
-		HRESULT hr = m_IStServer->raw_connect(s2ws(ip.c_str()).c_str(), port,
-			s2ws(login.c_str()).c_str(), s2ws(password.c_str()).c_str());
+		HRESULT hr = m_IStServer->raw_connect(s2ws(ip).c_str(), port,
+			s2ws(login).c_str(), s2ws(password).c_str());
 		if (FAILED(hr)) throw std::runtime_error("Connect(): COM error!");
 	}
 	void IStClient::Disconnect() {
@@ -550,34 +550,34 @@ namespace SmartCOM3
 		HRESULT hr = m_IStServer->raw_GetPrortfolioList();
 		if (FAILED(hr)) throw std::runtime_error("GetPrortfolioList(): COM error!");
 	}
-	void IStClient::GetMyOrders(long onlyActive, std::string portfolio) {
-		HRESULT hr = m_IStServer->raw_GetMyOrders(onlyActive, s2ws(portfolio.c_str()).c_str());
+	void IStClient::GetMyOrders(long onlyActive, const char *portfolio) {
+		HRESULT hr = m_IStServer->raw_GetMyOrders(onlyActive, s2ws(portfolio).c_str());
 		if (FAILED(hr)) throw std::runtime_error("GetMyOrders(): COM error!");
 	}
-	void IStClient::GetMyTrades(std::string portfolio) {
-		HRESULT hr = m_IStServer->raw_GetMyTrades(s2ws(portfolio.c_str()).c_str());
+	void IStClient::GetMyTrades(const char *portfolio) {
+		HRESULT hr = m_IStServer->raw_GetMyTrades(s2ws(portfolio).c_str());
 		if (FAILED(hr)) throw std::runtime_error("GetMyTrades(): COM error!");
 	}
-	void IStClient::GetMyClosePos(std::string portfolio) {
-		HRESULT hr = m_IStServer->raw_GetMyClosePos(s2ws(portfolio.c_str()).c_str());
+	void IStClient::GetMyClosePos(const char *portfolio) {
+		HRESULT hr = m_IStServer->raw_GetMyClosePos(s2ws(portfolio).c_str());
 		if (FAILED(hr)) throw std::runtime_error("GetMyClosePos(): COM error!");
 	}
-	void IStClient::GetTrades(std::string symbol, time_t from, long count) {
-		HRESULT hr = m_IStServer->raw_GetTrades(s2ws(symbol.c_str()).c_str(),
+	void IStClient::GetTrades(const char *symbol, time_t from, long count) {
+		HRESULT hr = m_IStServer->raw_GetTrades(s2ws(symbol).c_str(),
 			time2double(from), count);
 		if (FAILED(hr)) throw std::runtime_error("GetTrades(): COM error!");
 	}
-	void IStClient::ConfigureClient(std::string paramsSet) {
-		HRESULT hr = m_IStServer->raw_ConfigureClient(s2ws(paramsSet.c_str()).c_str());
+	void IStClient::ConfigureClient(const char *paramsSet) {
+		HRESULT hr = m_IStServer->raw_ConfigureClient(s2ws(paramsSet).c_str());
 		if (FAILED(hr)) throw std::runtime_error("ConfigureClient(): COM error!");
 	}
-	void IStClient::ConfigureServer(std::string paramsSet) {
-		HRESULT hr = m_IStServer->raw_ConfigureServer(s2ws(paramsSet.c_str()).c_str());
+	void IStClient::ConfigureServer(const char *paramsSet) {
+		HRESULT hr = m_IStServer->raw_ConfigureServer(s2ws(paramsSet).c_str());
 		if (FAILED(hr)) throw std::runtime_error("ConfigureServer(): COM error!");
 	}
-	std::string IStClient::GetMoneyAccount(std::string portfolioID) {
+	std::string IStClient::GetMoneyAccount(const char *portfolioID) {
 		const wchar_t *result = 0;
-		HRESULT hr = m_IStServer->raw_GetMoneyAccount(s2ws(portfolioID.c_str()).c_str(), &result);
+		HRESULT hr = m_IStServer->raw_GetMoneyAccount(s2ws(portfolioID).c_str(), &result);
 		if (FAILED(hr)) throw std::runtime_error("GetMoneyAccount(): COM error!");
 		return ws2s(result);
 	}
