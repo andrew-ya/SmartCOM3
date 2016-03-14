@@ -54,7 +54,7 @@ IStClient::IStClient()
 IStClient::IStClient() OK
 SmartCOM3 version: 3,0,162,5805
 
-Connecting to mxdemo.ittrade.ru:8443 with login X5Q7RHI5U
+Connecting to mxdemo.ittrade.ru:8443 with login XXXXXX
 Press ENTER to disconnect
 TestRobot::Connected()
 TestRobot::AddSymbol(6A.CME.H2015) 1 of 21304
@@ -85,7 +85,7 @@ IStClient::UninitializeApartments() OK
 2016-Mar-08 17:14:42.904203 [TID=9] - INFO : Logging level is set to 5 value. 
 2016-Mar-08 17:14:42.904219 [TID=9] - INFO : Using maximum 7 worker threads to process data. 
 2016-Mar-08 17:14:42.904227 [TID=9] - INFO : Store logs in C:\\ 
-2016-Mar-08 17:14:43.026583 [TID=9] - INFO : Trying to authenticate in mxdemo.ittrade.ru:8443 using SSL connection (login X5Q7RHI5U) 
+2016-Mar-08 17:14:43.026583 [TID=9] - INFO : Trying to authenticate in mxdemo.ittrade.ru:8443 using SSL connection (login XXXXXX) 
 2016-Mar-08 17:14:43.068353 [TID=9] - jelly:  : Trying connect to 213.247.232.236:8443 
 2016-Mar-08 17:14:43.081546 [TID=9] - jelly:  : Http channel 0x2719E0 socket connected OK.. (136) 
 2016-Mar-08 17:14:43.112965 [TID=9] - jelly:  : SSL handshake for channel 0x2719E0 OK, encrypted method is DHE-RSA-AES256-SHA 
