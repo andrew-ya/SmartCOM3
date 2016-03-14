@@ -421,6 +421,8 @@ namespace SmartCOM3
 	{
 		printf("IStClient::IStClient()\n");
 
+		InitializeApartments();
+
 		LPTYPELIB pTypeLib;
 		if (S_OK != LoadRegTypeLib(LIBID_SmartCOM3Lib, 1, 0, LOCALE_SYSTEM_DEFAULT, &pTypeLib)) {
 			printf("IStClient::IStClient() LoadRegTypeLib FAIL\n");
@@ -612,80 +614,72 @@ namespace SmartCOM3
 
 	inline std::string ws2s(const wchar_t *wstr)
 	{
-		if (wstr == NULL) return std::string("NULL_POINTER");
-		int wsize = 0;
-		while (wstr[wsize++] != L'\0');
-		if (wsize == 0) return std::string("ZERO_LENGTH");
+		if (wstr == NULL) return "NULL_POINTER";
+		size_t wsize = wcslen(wstr) + 2;
+		if (wsize == 0) return "ZERO_LENGTH";
 
-		int size_needed = WideCharToMultiByte(CP_UTF8, 0, wstr, wsize, NULL, 0, NULL, NULL);
-		std::string strTo(size_needed, 0);
-		WideCharToMultiByte(CP_UTF8, 0, wstr, wsize, &strTo[0], size_needed, NULL, NULL);
+		size_t size_needed = WideCharToMultiByte(CP_UTF8, 0, wstr, wsize, NULL, 0, NULL, NULL);
+
+		char strTo[size_needed + 1];
+		int result = WideCharToMultiByte(CP_UTF8, 0, wstr, wsize, strTo, size_needed, NULL, NULL);
+		assert(result != 0);
+		strTo[size_needed] = '\0';
+
 		return strTo;
 	}
 	inline std::wstring s2ws(const char *str)
 	{
-		if (str == NULL) return std::wstring(L"NULL_POINTER");
-		int size = 0;
-		while (str[size++] != '\0');
-		if (size == 0) return std::wstring(L"ZERO_LENGTH");
+		if (str == NULL) return L"NULL_POINTER";
+		size_t size = strlen(str);
+		if (size == 0) return L"ZERO_LENGTH";
 
-		int size_needed = MultiByteToWideChar(CP_UTF8, 0, str, size, NULL, 0);
-		std::wstring wstrTo(size_needed, 0);
-		MultiByteToWideChar(CP_UTF8, 0, str, size, &wstrTo[0], size_needed);
+		size_t size_needed = MultiByteToWideChar(CP_UTF8, 0, str, size, NULL, 0);
+
+		wchar_t wstrTo[size_needed + 1];
+		int result = MultiByteToWideChar(CP_UTF8, 0, str, size, wstrTo, size_needed);
+		assert(result != 0);
+		wstrTo[size_needed] = '\0';
+
 		return wstrTo;
 	}
 
 	/* OLE DATE <-> POSIX */
 
-	const DATE VARIANT_TIMET_DAY0 = 25569;
-	const LONG TIMET_ONE_DAY = 86400;
-	static const time_t TIMET_VARIANT_OVERFLOW = 253402300800;
-	inline time_t double2time(double date)
+	inline time_t double2time(DATE date)
 	{
-		time_t pTimeT;
+	    SYSTEMTIME sysTime;
+	    int status = ::VariantTimeToSystemTime(date, &sysTime);
+	    assert(status != 0);
 
-		if (date < VARIANT_TIMET_DAY0) date = VARIANT_TIMET_DAY0;
-		pTimeT = time_t(((date - VARIANT_TIMET_DAY0) * TIMET_ONE_DAY) + 0.5);
+	    struct tm atm;
+	    atm.tm_sec = sysTime.wSecond;
+	    atm.tm_min = sysTime.wMinute;
+	    atm.tm_hour = sysTime.wHour;
+	    atm.tm_mday = sysTime.wDay;
+	    atm.tm_mon = sysTime.wMonth - 1;        // tm_mon is 0 based
+	    atm.tm_year = sysTime.wYear - 1900;     // tm_year is 1900 based
+	    atm.tm_isdst = -1;
 
-		return pTimeT;
+	    return mktime(&atm);
 	}
-	inline double time2double(time_t timeT)
+	inline DATE time2double(time_t ut)
 	{
-		double pDate;
-		struct tm localtm, utctm, *ptm = NULL;
-		time_t timeTLocal, timeTUtc;
+	    struct tm localtm = *localtime(&ut);
 
-		#if defined (__WINE__)
-		ptm = localtime(&timeT);
-		#else
-		localtime_s(ptm, &timeT);
-		#endif
+	    SYSTEMTIME sysTime;
+	    sysTime.wYear = static_cast<WORD>(1900 + localtm.tm_year);
+	    sysTime.wMonth = static_cast<WORD>(localtm.tm_mon + 1);
+	    sysTime.wDayOfWeek = 0;
+	    sysTime.wDay = static_cast<WORD>(localtm.tm_mday);
+	    sysTime.wHour = static_cast<WORD>(localtm.tm_hour);
+	    sysTime.wMinute = static_cast<WORD>(localtm.tm_min);
+	    sysTime.wSecond = static_cast<WORD>(localtm.tm_sec);
+	    sysTime.wMilliseconds = 0;
 
-		if (ptm == NULL) return VARIANT_TIMET_DAY0;
-		localtm = *ptm;
+	    DATE date;
+	    int status = ::SystemTimeToVariantTime(&sysTime, &date);
+	    assert(status != 0);
 
-		#if defined (__WINE__)
-		ptm = gmtime(&timeT);
-		#else
-		gmtime_s(ptm, &timeT);
-		#endif
-
-		if (ptm == NULL) return VARIANT_TIMET_DAY0;
-		utctm = *ptm;
-
-		localtm.tm_isdst = 0;
-		utctm.tm_isdst = 0;
-
-		if ((timeTLocal = mktime(&localtm)) == (time_t)-1 ||
-			(timeTUtc = mktime(&utctm)) == (time_t)-1)
-			return VARIANT_TIMET_DAY0;
-
-		timeT += timeTLocal - timeTUtc;
-
-		if (timeT >= TIMET_VARIANT_OVERFLOW) return VARIANT_TIMET_DAY0;
-
-		pDate = (DATE)(timeT / (double)TIMET_ONE_DAY) + VARIANT_TIMET_DAY0;
-
-		return pDate;
+	    return date;
 	}
 }
