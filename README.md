@@ -32,9 +32,9 @@ Notes:
 ```
 mkdir build
 cd build
-wineg++ -std=c++11 -c -D_FORCENAMELESSUNION -MMD -MP -MF"SmartCOM3.d" -MT"SmartCOM3.d" -o "SmartCOM3.o" "../SmartCOM3.cpp"
-wineg++ -std=c++11 -c -D_FORCENAMELESSUNION -MMD -MP -MF"SmartCOM3enums.d" -MT"SmartCOM3enums.d" -o "SmartCOM3enums.o" "../SmartCOM3enums.cpp"
-wineg++ -std=c++11 -c -D_FORCENAMELESSUNION -MMD -MP -MF"Test.d" -MT"Test.d" -o "Test.o" "../Test.cpp"
+wineg++ -std=c++1y -c -D_FORCENAMELESSUNION -MMD -MP -MF"SmartCOM3.d" -MT"SmartCOM3.d" -o "SmartCOM3.o" "../SmartCOM3.cpp"
+wineg++ -std=c++1y -c -D_FORCENAMELESSUNION -MMD -MP -MF"SmartCOM3enums.d" -MT"SmartCOM3enums.d" -o "SmartCOM3enums.o" "../SmartCOM3enums.cpp"
+wineg++ -std=c++1y -c -D_FORCENAMELESSUNION -MMD -MP -MF"Test.d" -MT"Test.d" -o "Test.o" "../Test.cpp"
 wineg++ -o "SmartCOM3" ./SmartCOM3.o ./SmartCOM3enums.o ./Test.o -lole32 -loleaut32 -luuid
 ```
 ###Launching
