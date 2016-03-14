@@ -4,7 +4,7 @@
 
 namespace SmartCOM3
 {
-	enum OrderState
+	typedef enum
 	{
 		OrderState_ContragentReject = -1,
 		OrderState_Submited = 0,
@@ -17,31 +17,32 @@ namespace SmartCOM3
 		OrderState_ContragentCancel = 7,
 		OrderState_SystemReject = 8,
 		OrderState_SystemCancel = 9
-	};
+	} OrderState;
 	const char *GetOrderStateString(OrderState code);
-	enum OrderAction
+	typedef enum
 	{
+		OrderAction_NoAction = 0,
 		OrderAction_Buy = 1,
 		OrderAction_Sell = 2,
 		OrderAction_Short = 3,
 		OrderAction_Cover = 4
-	};
+	} OrderAction;
 	const char *GetOrderActionString(OrderAction code);
-	enum OrderType
+	typedef enum
 	{
 		OrderType_Market = 1,
 		OrderType_Limit = 2,
 		OrderType_Stop = 3,
 		OrderType_StopLimit = 4
-	};
+	} OrderType;
 	const char *GetOrderTypeString(OrderType code);
-	enum OrderValidity
+	typedef enum
 	{
 		OrderValidity_Day = 1,
 		OrderValidity_Gtc = 2
-	};
+	} OrderValidity;
 	const char *GetOrderValidityString(OrderValidity code);
-	enum BarInterval
+	typedef enum
 	{
 		BarInterval_Tick = 0,
 		BarInterval_1Min = 1,
@@ -57,9 +58,9 @@ namespace SmartCOM3
 		BarInterval_Month = 11,
 		BarInterval_Quarter = 12,
 		BarInterval_Year = 13
-	};
+	} BarInterval;
 	const char *GetBarIntervalString(BarInterval code);
-	enum PortfolioStatus
+	typedef enum
 	{
 		PortfolioStatus_Broker = 0,
 		PortfolioStatus_TrustedManagement = 1,
@@ -68,9 +69,9 @@ namespace SmartCOM3
 		PortfolioStatus_Restricted = 4,
 		PortfolioStatus_AutoRestricted = 5,
 		PortfolioStatus_OrderNotSigned = 6
-	};
+	} PortfolioStatus;
 	const char *GetPortfolioStatusString(PortfolioStatus code);
-	enum ErrorCode
+	typedef enum
 	{
 		ErrorCode_SecurityNotFound = -1610612735,
 		ErrorCode_PortfolioNotFound = -1610612734,
@@ -78,7 +79,7 @@ namespace SmartCOM3
 		ErrorCode_BadParameters = -1610612732,
 		ErrorCode_InternalError = -1610612731,
 		ErrorCode_ExchangeNotAccessible = -1610612730
-	};
+	} ErrorCode;
 	const char *GetErrorCodeString(ErrorCode code);
 }
 
