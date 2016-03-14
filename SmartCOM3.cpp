@@ -645,26 +645,26 @@ namespace SmartCOM3
 
 	/* OLE DATE <-> POSIX */
 
-	inline time_t double2time(DATE date)
+	inline time_t double2time(DATE vt_date)
 	{
 	    SYSTEMTIME sysTime;
-	    int status = ::VariantTimeToSystemTime(date, &sysTime);
+	    int status = ::VariantTimeToSystemTime(vt_date, &sysTime);
 	    assert(status != 0);
 
-	    struct tm atm;
-	    atm.tm_sec = sysTime.wSecond;
-	    atm.tm_min = sysTime.wMinute;
-	    atm.tm_hour = sysTime.wHour;
-	    atm.tm_mday = sysTime.wDay;
-	    atm.tm_mon = sysTime.wMonth - 1;        // tm_mon is 0 based
-	    atm.tm_year = sysTime.wYear - 1900;     // tm_year is 1900 based
-	    atm.tm_isdst = -1;
+	    struct tm localtm;
+	    localtm.tm_sec = sysTime.wSecond;
+	    localtm.tm_min = sysTime.wMinute;
+	    localtm.tm_hour = sysTime.wHour;
+	    localtm.tm_mday = sysTime.wDay;
+	    localtm.tm_mon = sysTime.wMonth - 1;        // tm_mon is 0 based
+	    localtm.tm_year = sysTime.wYear - 1900;     // tm_year is 1900 based
+	    localtm.tm_isdst = -1;
 
-	    return mktime(&atm);
+	    return mktime(&localtm);
 	}
-	inline DATE time2double(time_t ut)
+	inline DATE time2double(time_t timet)
 	{
-	    struct tm localtm = *localtime(&ut);
+	    struct tm localtm = *localtime(&timet);
 
 	    SYSTEMTIME sysTime;
 	    sysTime.wYear = static_cast<WORD>(1900 + localtm.tm_year);
@@ -676,10 +676,10 @@ namespace SmartCOM3
 	    sysTime.wSecond = static_cast<WORD>(localtm.tm_sec);
 	    sysTime.wMilliseconds = 0;
 
-	    DATE date;
-	    int status = ::SystemTimeToVariantTime(&sysTime, &date);
+	    DATE vt_date;
+	    int status = ::SystemTimeToVariantTime(&sysTime, &vt_date);
 	    assert(status != 0);
 
-	    return date;
+	    return vt_date;
 	}
 }

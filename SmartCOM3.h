@@ -13,7 +13,7 @@ namespace SmartCOM3
 	struct ISmartComVersion;
 
 	/* SmartCOM3 API */
-	struct IStClient : IDispatch
+	class IStClient : IDispatch
 	{
 		/* IUnknown */
 
@@ -35,19 +35,20 @@ namespace SmartCOM3
 		void InvokeDispatch(DISPID dispidMember, DISPPARAMS *pdispparams);
 
 		/* COM HELPERS */
-
+public:
+		static void InitializeApartments();
+		static void UninitializeApartments();
+private:
 		IStServer *m_IStServer;
 		IConnectionPoint *m_pIConnectionPoint;
 		DWORD m_dwCookie;
 		ISmartComVersion *m_ISmartComVersion;
-		static void InitializeApartments();
-		static void UninitializeApartments();
 		HRESULT Advise();
 		void UnAdvise();
-
+public:
 		IStClient();
 		virtual ~IStClient();
-
+public:
 		/* SmartCOM3 EVENTS */
 
 		virtual void Connected() = 0;
