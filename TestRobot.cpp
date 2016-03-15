@@ -237,7 +237,7 @@ int main(int argc, char **argv)
 	robot->ConfigureServer(
 		"pingTimeout=2;"
 		"logLevel=5;"
-		"logFilePath=C:\\");
+		"logFilePath=C:\\;");
 
 	printf("Connecting to %s:%d with login %s\n", server, port, login);
 	robot->Connect(server, port, login, password);
