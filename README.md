@@ -32,19 +32,20 @@ Notes:
 ```
 mkdir build
 cd build
-wineg++ -std=c++1y -c -D_FORCENAMELESSUNION -MMD -MP -MF"SmartCOM3.d" -MT"SmartCOM3.d" -o "SmartCOM3.o" "../SmartCOM3.cpp"
-wineg++ -std=c++1y -c -D_FORCENAMELESSUNION -MMD -MP -MF"SmartCOM3enums.d" -MT"SmartCOM3enums.d" -o "SmartCOM3enums.o" "../SmartCOM3enums.cpp"
-wineg++ -std=c++1y -c -D_FORCENAMELESSUNION -MMD -MP -MF"Test.d" -MT"Test.d" -o "Test.o" "../Test.cpp"
-wineg++ -o "SmartCOM3" ./SmartCOM3.o ./SmartCOM3enums.o ./Test.o -lole32 -loleaut32 -luuid
+wineg++ -std=c++1y -c -D_FORCENAMELESSUNION ../SmartCOM3.cpp ../TestRobot.cpp
+wineg++ -o "SmartCOM3"  ./SmartCOM3.o ./TestRobot.o    -lole32 -loleaut32 -luuid
 ```
 ###Launching
 Notes about error "wrong binary format"      
 1. Check that you link all libs above and they are exist on LD path         
 2. Wine prefix and downloaded SmartCOM3 version must be the same architecture (32 or 64 bit)       
 ```
-env LANG=ru_RU.utf8 ./SmartCOM3.exe    
+./SmartCOM3.exe    
 or directly without launcher script
-env LANG=ru_RU.utf8 wine SmartCOM3.exe.so
+wine SmartCOM3.exe.so
+
+for russian support, custom WINEPREFIX & no Wine's debug messages:
+LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./SmartCOM3.exe
 ```
 #Test program output
 ```
