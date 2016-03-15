@@ -30,10 +30,12 @@ Notes:
 2. Link with libole32, liboleaut32 and libuuid      
 3. If you building shared library, add position independent flag to compiler "-fPIC"     
 ```
-mkdir build
-cd build
-wineg++ -std=c++1y -c -D_FORCENAMELESSUNION ../SmartCOM3.cpp ../TestRobot.cpp
-wineg++ -o "SmartCOM3"  ./SmartCOM3.o ./TestRobot.o    -lole32 -loleaut32 -luuid
+$ mkdir build
+$ cd build
+$ wineg++ -Wall -std=c++1y -c -D_FORCENAMELESSUNION ../SmartCOM3.cpp ../TestRobot.cpp
+$ wineg++ -o "SmartCOM3"  ./SmartCOM3.o ./TestRobot.o    -lole32 -loleaut32 -luuid
+$ ls
+$ SmartCOM3.exe  SmartCOM3.exe.so  SmartCOM3.o  TestRobot.o
 ```
 ###Launching
 Notes about error "wrong binary format"      
