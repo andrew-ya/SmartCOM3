@@ -42,12 +42,12 @@ Notes about error "wrong binary format"
 1. Check that you link all libs above and they are exist on LD path         
 2. Wine prefix and downloaded SmartCOM3 version must be the same architecture (32 or 64 bit)       
 ```
-./SmartCOM3.exe    
-or directly without launcher script
-wine SmartCOM3.exe.so
+$ ./SmartCOM3.exe    
+or without that launcher script
+$ wine SmartCOM3.exe.so
 
 for russian support, custom WINEPREFIX & no Wine's debug messages:
-LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./SmartCOM3.exe
+$ LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./SmartCOM3.exe
 ```
 #Test program output
 ```
