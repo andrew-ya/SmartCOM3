@@ -52,7 +52,7 @@ IStClient::IStClient()
 IStClient::InitializeApartments()
 IStClient::InitializeApartments() OK
 IStClient::IStClient() OK
-SmartCOM3 version: 3,0,162,5805
+SmartCOM3 lib version: 3,0,162,5805
 
 Connecting to mxdemo.ittrade.ru:8443 with login XXXXXX
 Press ENTER to disconnect
