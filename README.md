@@ -54,21 +54,14 @@ IStClient::InitializeApartments() OK
 IStClient::IStClient() OK
 SmartCOM3 lib version: 3,0,162,5805
 
-Connecting to mxdemo.ittrade.ru:8443 with login XXXXXX
+Connecting to mxdemo.ittrade.ru:8443 with login X6Q7HI5U
 Press ENTER to disconnect
 TestRobot::Connected()
-TestRobot::AddSymbol(6A.CME.H2015) 1 of 21450
-TestRobot::AddSymbol(6A.CME.M2015) 2 of 21450
-TestRobot::AddSymbol(6A.CME.U2014) 3 of 21450
-TestRobot::AddSymbol(6A.CME.Z2014) 4 of 21450
-TestRobot::AddSymbol(6B.CME.H2015) 5 of 21450
-TestRobot::AddSymbol(6B.CME.H2016) 6 of 21450
-TestRobot::AddSymbol(6B.CME.H2017) 7 of 21450
-TestRobot::AddSymbol(6B.CME.H2018) 8 of 21450
-TestRobot::AddSymbol(6B.CME.M2015) 9 of 21450
-TestRobot::AddSymbol(6B.CME.M2016) 10 of 21450
-.....
-TestRobot::AddSymbol() added 21450 of 21450
+TestRobot::AddSymbol() received all of 21450 symbols
+TestRobot::AddSymbol() added symbol 'GAZP' with short_name 'ГАЗПРОМ ао'
+TestRobot::AddSymbol() added symbol 'ROSN' with short_name 'Роснефть'
+TestRobot::AddSymbol() added symbol 'SBER' with short_name 'Сбербанк'
+TestRobot::AddSymbol() added symbol 'VTBR' with short_name 'ВТБ ао'
 
 Disconnecting...
 TestRobot::Disconnected(Disconnected by user)
