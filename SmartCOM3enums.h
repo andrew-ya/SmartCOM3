@@ -18,7 +18,9 @@ namespace SmartCOM3
 		OrderState_SystemReject = 8,
 		OrderState_SystemCancel = 9
 	} OrderState;
-	const char *GetOrderStateString(OrderState code);
+
+	inline const char *GetOrderStateString(OrderState code);
+
 	typedef enum
 	{
 		OrderAction_NoAction = 0,
@@ -27,7 +29,9 @@ namespace SmartCOM3
 		OrderAction_Short = 3,
 		OrderAction_Cover = 4
 	} OrderAction;
-	const char *GetOrderActionString(OrderAction code);
+
+	inline const char *GetOrderActionString(OrderAction code);
+
 	typedef enum
 	{
 		OrderType_Market = 1,
@@ -35,13 +39,17 @@ namespace SmartCOM3
 		OrderType_Stop = 3,
 		OrderType_StopLimit = 4
 	} OrderType;
-	const char *GetOrderTypeString(OrderType code);
+
+	inline const char *GetOrderTypeString(OrderType code);
+
 	typedef enum
 	{
 		OrderValidity_Day = 1,
 		OrderValidity_Gtc = 2
 	} OrderValidity;
-	const char *GetOrderValidityString(OrderValidity code);
+
+	inline const char *GetOrderValidityString(OrderValidity code);
+
 	typedef enum
 	{
 		BarInterval_Tick = 0,
@@ -59,7 +67,9 @@ namespace SmartCOM3
 		BarInterval_Quarter = 12,
 		BarInterval_Year = 13
 	} BarInterval;
-	const char *GetBarIntervalString(BarInterval code);
+
+	inline const char *GetBarIntervalString(BarInterval code);
+
 	typedef enum
 	{
 		PortfolioStatus_Broker = 0,
@@ -70,7 +80,9 @@ namespace SmartCOM3
 		PortfolioStatus_AutoRestricted = 5,
 		PortfolioStatus_OrderNotSigned = 6
 	} PortfolioStatus;
-	const char *GetPortfolioStatusString(PortfolioStatus code);
+
+	inline const char *GetPortfolioStatusString(PortfolioStatus code);
+
 	typedef enum
 	{
 		ErrorCode_SecurityNotFound = -1610612735,
@@ -80,7 +92,8 @@ namespace SmartCOM3
 		ErrorCode_InternalError = -1610612731,
 		ErrorCode_ExchangeNotAccessible = -1610612730
 	} ErrorCode;
-	const char *GetErrorCodeString(ErrorCode code);
+
+	inline const char *GetErrorCodeString(ErrorCode code);
 }
 
 #endif

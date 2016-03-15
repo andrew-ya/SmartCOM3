@@ -3,7 +3,7 @@
 
 namespace SmartCOM3
 {
-	const char *GetOrderStateString(OrderState code)
+	inline const char *GetOrderStateString(OrderState code)
 	{
 		switch (code)
 		{
@@ -21,10 +21,11 @@ namespace SmartCOM3
 		}
 		return "Unknown OrderState";
 	}
-	const char *GetOrderActionString(OrderAction code)
+	inline const char *GetOrderActionString(OrderAction code)
 	{
 		switch (code)
 		{
+		case OrderAction_NoAction: return "NoAction";
 		case OrderAction_Buy: return "Buy";
 		case OrderAction_Sell: return "Sell";
 		case OrderAction_Short: return "Short";
@@ -32,7 +33,7 @@ namespace SmartCOM3
 		}
 		return "Unknown OrderAction";
 	}
-	const char *GetOrderTypeString(OrderType code)
+	inline const char *GetOrderTypeString(OrderType code)
 	{
 		switch (code)
 		{
@@ -43,7 +44,7 @@ namespace SmartCOM3
 		}
 		return "Unknown OrderType";
 	}
-	const char *GetOrderValidityString(OrderValidity code)
+	inline const char *GetOrderValidityString(OrderValidity code)
 	{
 		switch (code)
 		{
@@ -52,7 +53,7 @@ namespace SmartCOM3
 		}
 		return "Unknown OrderValidity";
 	}
-	const char *GetBarIntervalString(BarInterval code)
+	inline const char *GetBarIntervalString(BarInterval code)
 	{
 		switch (code)
 		{
@@ -73,7 +74,7 @@ namespace SmartCOM3
 		}
 		return "Unknown BarInterval";
 	}
-	const char *GetPortfolioStatusString(PortfolioStatus code)
+	inline const char *GetPortfolioStatusString(PortfolioStatus code)
 	{
 		switch (code)
 		{
@@ -87,7 +88,7 @@ namespace SmartCOM3
 		}
 		return "Unknown PortfolioStatus";
 	}
-	const char *GetErrorCodeString(ErrorCode code)
+	inline const char *GetErrorCodeString(ErrorCode code)
 	{
 		switch (code)
 		{
