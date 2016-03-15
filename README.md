@@ -57,7 +57,7 @@ IStClient::InitializeApartments() OK
 IStClient::IStClient() OK
 SmartCOM3 lib version: 3,0,162,5805
 
-Connecting to mxdemo.ittrade.ru:8443 with login X6Q7HI5U
+Connecting to mxdemo.ittrade.ru:8443 with login XXXXXX
 Press ENTER to disconnect
 TestRobot::Connected()
 TestRobot::AddSymbol() received all of 21450 symbols
