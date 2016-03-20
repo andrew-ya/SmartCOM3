@@ -1,4 +1,4 @@
-# SmartCOM3 C++ connector
+# SmartCOM3 API C++ connector
 ITInvest SmartCOM3 API C++ connector (Windows/Linux and possibly Mac OS X)    
 It's usefull for coding C++ and linking native high performance C/C++ libraries with SmartCOM3 API (e.g. CUDA or OpenCL)
 #Tested platforms
