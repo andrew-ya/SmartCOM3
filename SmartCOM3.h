@@ -505,8 +505,8 @@ namespace SmartCOM3
 	inline std::string GetDatetimeString(time_t datetime)
 	{
 	    struct tm tstruct = *localtime(&datetime);
-	    char buf[32];
-	    strftime(buf, 32, "%d.%m.%Y %H:%M:%S", &tstruct);
+	    char buf[20];
+	    strftime(buf, sizeof(buf), "%d.%m.%Y %H:%M:%S", &tstruct);
 	    return buf;
 	}
 }
