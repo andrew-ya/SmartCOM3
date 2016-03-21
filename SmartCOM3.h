@@ -40,20 +40,28 @@ namespace SmartCOM3
 
 		static std::mutex s_ApartmentsInitializationMutex;
 		static bool s_ApartmentsInitializationFlag;
-public:
+
+	public:
+
 		static void InitializeApartments();
 		static void UninitializeApartments();
-private:
+
+	private:
+
 		IStServer *m_IStServer;
 		IConnectionPoint *m_pIConnectionPoint;
 		DWORD m_dwCookie;
 		ISmartComVersion *m_ISmartComVersion;
 		HRESULT Advise();
 		void UnAdvise();
-public:
-		IStClient();
+
+	public:
+
+		IStClient(bool autoInitializeApartments = true);
 		virtual ~IStClient();
-public:
+
+	protected:
+
 		/* SmartCOM3 EVENTS */
 
 		virtual void Connected() = 0;
@@ -234,6 +242,8 @@ public:
 		virtual void OrderMoveFailed(
 			const char *orderid) = 0;
 
+	public:
+
 		/* SmartCOM3 METHODS */
 
 		void ListenQuotes(
@@ -301,6 +311,8 @@ public:
 			const char *paramsSet);
 		std::string GetMoneyAccount(
 			const char *portfolioID);
+
+	public:
 
 		/* SmartCOM3 VERSION METHODS */
 
@@ -415,10 +427,7 @@ public:
 	const GUID IID_IStServer = {0x2c00fda6,0x45fd,0x4102,{0x90,0x9c,0x46,0xe2,0xb7,0xe2,0x55,0xdc}};
 	const GUID IID_ISmartComVersion = {0x53722a24,0xf75c,0x44c7,{0x86,0xcf,0x92,0x32,0x65,0x45,0x66,0xad}};
 	const GUID CLSID_StServer = {0x99f5ea2e,0x0636,0x49be,{0x81,0x00,0x8a,0xe3,0x09,0xb0,0x33,0x31}};
-}
 
-namespace SmartCOM3
-{
 	/* WIDECHAR <-> UNICODE */
 	inline std::string ws2s(const wchar_t *wstr)
 	{
@@ -453,7 +462,7 @@ namespace SmartCOM3
 		return wstrTo;
 	}
 
-	/* OLE DATE <-> POSIX */
+	/* MS OLE DATE <-> POSIX time_t */
 	inline time_t double2time(DATE vt_date)
 	{
 	    SYSTEMTIME sysTime;

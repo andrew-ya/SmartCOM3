@@ -357,6 +357,7 @@ namespace SmartCOM3
 	}
 
 	/* COM HELPERS */
+
 	std::mutex IStClient::s_ApartmentsInitializationMutex;
 	bool IStClient::s_ApartmentsInitializationFlag = false;
 	void IStClient::InitializeApartments()
@@ -412,12 +413,12 @@ namespace SmartCOM3
 		}
 	}
 	
-	IStClient::IStClient()
+	IStClient::IStClient(bool autoInitializeApartments)
 		: m_cRef(1), m_dwCookie(0)
 	{
 		printf("IStClient::IStClient()\n");
 
-		InitializeApartments();
+		if (autoInitializeApartments) InitializeApartments();
 
 		LPTYPELIB pTypeLib;
 		if (S_OK != LoadRegTypeLib(LIBID_SmartCOM3Lib, 1, 0, LOCALE_SYSTEM_DEFAULT, &pTypeLib)) {
