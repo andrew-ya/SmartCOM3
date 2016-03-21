@@ -6,7 +6,7 @@ Windows 7/8 (32/64) + Visual Studio 2012/2013 (MSVC 11.0/12.0)
 
 Ubuntu 12/14 & Debian 7/8 (32/64) + Winelib 1.6-1.8 (gcc 4.8-5.0)
 
-Both Windows and Linux builds works well with CUDA and OpenGL native libs (inc. CUDA-OpenGL interoperability)
+Both Windows and Linux builds works well with CUDA and OpenGL native libs (inc. CUDA-OpenGL interoperability - tested on nVidia GeForce GTX 680 & Tesla K20Xm)
 
 # Installation & building
 #Windows
