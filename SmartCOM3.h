@@ -500,6 +500,15 @@ namespace SmartCOM3
 
 	    return vt_date;
 	}
+
+	/* Date & time string */
+	inline std::string GetDatetimeString(time_t datetime)
+	{
+	    struct tm tstruct = *localtime(&datetime);
+	    char buf[32];
+	    strftime(buf, 32, "%d.%m.%Y %H:%M:%S", &tstruct);
+	    return buf;
+	}
 }
 
 #endif
