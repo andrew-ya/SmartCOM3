@@ -1,11 +1,10 @@
 
-
 #include "SmartCOM3.h"
 #include <map>
 #include <string>
 #include <stdlib.h>
 #include <assert.h>
-
+#include <stdexcept>
 
 using namespace SmartCOM3;
 
@@ -226,7 +225,7 @@ int main(int argc, char **argv)
 
 	TestRobot *robot = new TestRobot();
 
-	printf("SmartCOM3 lib version: %s\n\n", robot->GetClientVersionString().c_str());
+	printf("\nSmartCOM3 lib version: %s\n\n", robot->GetClientVersionString().c_str());
 
 	robot->ConfigureClient(
 		"CalcPlannedPos=no;"
@@ -239,8 +238,15 @@ int main(int argc, char **argv)
 		"logLevel=5;"
 		"logFilePath=C:\\;");
 
-	printf("Connecting to %s:%d with login %s\n", server, port, login);
-	robot->Connect(server, port, login, password);
+	try {
+		printf("Connecting to %s:%d with login %s\n", server, port, login);
+		robot->Connect(server, port, login, password);
+	} catch (std::runtime_error &ex) {
+		printf("%s "
+			"Possibly log path doesn't exist or "
+			"you don't have write permission.\n", ex.what());
+		return 0;
+	}
 
 	printf("Press ENTER to disconnect\n");
 	getchar();

@@ -433,16 +433,14 @@ namespace SmartCOM3
 	{
 		if (wstr == NULL) return "NULL_POINTER";
 		size_t wsize = 0; // wcslen(wstr); // wrong size
-		while (wstr[wsize++] != '\0'); // temp fix
-		if (wsize < 2) return "ZERO_LENGTH";
-		wsize--;
+		while (wstr[wsize++] != '\0'); wsize--; // temp fix
+		if (wsize < 1) return "ZERO_LENGTH";
 
 		size_t size_needed = WideCharToMultiByte(CP_UTF8, 0, wstr, wsize, NULL, 0, NULL, NULL);
 
-		char strTo[size_needed + 1];
-		int result = WideCharToMultiByte(CP_UTF8, 0, wstr, wsize, strTo, size_needed, NULL, NULL);
+		std::string strTo(size_needed, 0);
+		int result = WideCharToMultiByte(CP_UTF8, 0, wstr, wsize, &strTo[0], size_needed, NULL, NULL);
 		assert(result != 0);
-		strTo[size_needed] = '\0';
 
 		return strTo;
 	}
@@ -454,10 +452,9 @@ namespace SmartCOM3
 
 		size_t size_needed = MultiByteToWideChar(CP_UTF8, 0, str, size, NULL, 0);
 
-		wchar_t wstrTo[size_needed + 1];
-		int result = MultiByteToWideChar(CP_UTF8, 0, str, size, wstrTo, size_needed);
+		std::wstring wstrTo(size_needed, 0);
+		int result = MultiByteToWideChar(CP_UTF8, 0, str, size, &wstrTo[0], size_needed);
 		assert(result != 0);
-		wstrTo[size_needed] = '\0';
 
 		return wstrTo;
 	}
