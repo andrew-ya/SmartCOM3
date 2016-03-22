@@ -108,7 +108,7 @@ Use try-catch around all SmartCOM3 methods for std::runtime_error
 try {
 	ListenTicks(symbol);
 } catch (std::runtime_error &er) {
-	printf("error: %s", er.what());
+	printf("error: %s\n", er.what());
 }
 ```
 ##THE SOFTWARE IS PROVIDED "AS IS",     
