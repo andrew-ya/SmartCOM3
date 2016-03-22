@@ -1,6 +1,6 @@
 # SmartCOM3 API C++ connector
 ITInvest SmartCOM3 API C++ connector (Windows/Linux & possibly Mac OS X)    
-Implemented without using MFC, ATL or IDL		
+Implemented in raw without using MFC, ATL or IDL		
 It's usefull for coding C++ and linking native high performance C/C++ libraries with SmartCOM3 API (e.g. CUDA or OpenCL)
 #Tested platforms
 ###Windows 7/8 (32/64) + Visual Studio 2012/2013 (MSVC 11.0/12.0)
