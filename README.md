@@ -103,8 +103,8 @@ TestRobot *robot = new TestRobot();
 robot->Connect("mxdemo.ittrade.ru", 8443, "LOGIN", "PASSWORD");
 getchar(); /* waiting 'Connected()' event on success or 'Disconnected()' event on fail */
 delete robot;
-``` 
-#Using notes    
+```
+#Note    
 Use try-catch around all SmartCOM3 methods for std::runtime_error   
 ```
 try {
