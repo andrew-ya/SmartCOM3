@@ -463,8 +463,8 @@ namespace SmartCOM3
 	inline time_t double2time(DATE vt_date)
 	{
 	    SYSTEMTIME sysTime;
-	    int status = ::VariantTimeToSystemTime(vt_date, &sysTime);
-	    assert(status != 0);
+	    int result = VariantTimeToSystemTime(vt_date, &sysTime);
+	    assert(result != 0);
 
 	    struct tm localtm;
 	    localtm.tm_sec = sysTime.wSecond;
@@ -492,8 +492,8 @@ namespace SmartCOM3
 	    sysTime.wMilliseconds = 0;
 
 	    DATE vt_date;
-	    int status = ::SystemTimeToVariantTime(&sysTime, &vt_date);
-	    assert(status != 0);
+	    int result = SystemTimeToVariantTime(&sysTime, &vt_date);
+	    assert(result != 0);
 
 	    return vt_date;
 	}
