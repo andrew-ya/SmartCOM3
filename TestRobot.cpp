@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <stdexcept>
+#include <thread>
 
 using namespace SmartCOM3;
 
@@ -21,6 +22,10 @@ public:
 		symbols["GAZP"] = "";
 		symbols["ROSN"] = "";
 	}
+	~TestRobot()
+	{
+
+	}
 private:
 	void Connected()
 	{
@@ -29,7 +34,7 @@ private:
 	}
 	void Disconnected(const char *reason)
 	{
-		printf("TestRobot::Disconnected(%s)\n", reason);
+		printf("TestRobot::Disconnected(%s)\n\n", reason);
 	}
 	void UpdateQuote(
 		const char *symbol,
@@ -54,7 +59,10 @@ private:
 		double low_limit,
 		long trading_status,
 		double volat,
-		double theor_price){}
+		double theor_price)
+	{
+
+	}
 	void UpdateBidAsk(
 		const char *symbol,
 		long row,
@@ -62,14 +70,20 @@ private:
 		double bid,
 		double bidsize,
 		double ask,
-		double asksize){}
+		double asksize)
+	{
+
+	}
 	void AddTick(
 		const char *symbol,
 		time_t datetime,
 		double price,
 		double volume,
 		const char *tradeno,
-		OrderAction action){}
+		OrderAction action)
+	{
+
+	}
 	void AddBar(
 		long row,
 		long nrows,
@@ -81,13 +95,19 @@ private:
 		double low,
 		double close,
 		double volume,
-		double open_int){}
+		double open_int)
+	{
+
+	}
 	void SetPortfolio(
 		const char *portfolio,
 		double cash,
 		double leverage,
 		double comission,
-		double saldo){}
+		double saldo)
+	{
+
+	}
 	void AddTrade(
 		const char *portfolio,
 		const char *symbol,
@@ -95,7 +115,10 @@ private:
 		double price,
 		double amount,
 		time_t datetime,
-		const char *tradeno){}
+		const char *tradeno)
+	{
+
+	}
 	void UpdateOrder(
 		const char *portfolio,
 		const char *symbol,
@@ -111,13 +134,19 @@ private:
 		const char *orderid,
 		const char *orderno,
 		long status_mask,
-		long cookie){}
+		long cookie)
+	{
+
+	}
 	void UpdatePosition(
 		const char *portfolio,
 		const char *symbol,
 		double avprice,
 		double amount,
-		double planned){}
+		double planned)
+	{
+
+	}
 	void AddTickHistory(
 		long row,
 		long nrows,
@@ -126,7 +155,10 @@ private:
 		double price,
 		double volume,
 		const char *tradeno,
-		OrderAction action){}
+		OrderAction action)
+	{
+
+	}
 	void AddSymbol(
 		long row,
 		long nrows,
@@ -154,15 +186,32 @@ private:
 			}
 		}
 	}
-	void OrderSucceeded(long cookie, const char *orderid){}
-	void OrderFailed(long cookie, const char *orderid, const char *reason){}
+	void OrderSucceeded(
+		long cookie,
+		const char *orderid)
+	{
+
+	}
+	void OrderFailed(
+		long cookie,
+		const char *orderid,
+		const char *reason)
+	{
+
+	}
 	void AddPortfolio(
 		long row,
 		long nrows,
 		const char *portfolioName,
 		const char *portfolioExch,
-		PortfolioStatus portfolioStatus){}
-	void SetSubscribtionCheckReult(long result){}
+		PortfolioStatus portfolioStatus)
+	{
+
+	}
+	void SetSubscribtionCheckReult(long result)
+	{
+
+	}
 	void SetMyTrade(
 		long row,
 		long nrows,
@@ -173,7 +222,10 @@ private:
 		double volume,
 		const char *tradeno,
 		OrderAction buysell,
-		const char *orderno){}
+		const char *orderno)
+	{
+
+	}
 	void SetMyOrder(
 		long row,
 		long nrows,
@@ -190,7 +242,10 @@ private:
 		time_t datetime,
 		const char *id,
 		const char *no,
-		long cookie){}
+		long cookie)
+	{
+
+	}
 	void SetMyClosePos(
 		long row,
 		long nrows,
@@ -201,11 +256,26 @@ private:
 		double price_sell,
 		time_t postime,
 		const char *order_open,
-		const char *order_close){}
-	void OrderCancelSucceeded(const char *orderid){}
-	void OrderCancelFailed(const char *orderid){}
-	void OrderMoveSucceeded(const char *orderid){}
-	void OrderMoveFailed(const char *orderid){}
+		const char *order_close)
+	{
+
+	}
+	void OrderCancelSucceeded(const char *orderid)
+	{
+
+	}
+	void OrderCancelFailed(const char *orderid)
+	{
+
+	}
+	void OrderMoveSucceeded(const char *orderid)
+	{
+
+	}
+	void OrderMoveFailed(const char *orderid)
+	{
+
+	}
 };
 
 
@@ -230,16 +300,16 @@ int main(int argc, char **argv)
 	robot->ConfigureClient(
 		"CalcPlannedPos=no;"
 		"asyncSocketConnectionMode=yes;"
-		"logLevel=5;"
+		"logLevel=4;"
 		"logFilePath=C:\\;");
 
 	robot->ConfigureServer(
 		"pingTimeout=2;"
-		"logLevel=5;"
+		"logLevel=4;"
 		"logFilePath=C:\\;");
 
 	try {
-		printf("Connecting to %s:%d with login %s\n", server, port, login);
+		printf("Connecting to %s:%d with login %s, please wait...\n", server, port, login);
 		robot->Connect(server, port, login, password);
 	} catch (std::runtime_error &ex) {
 		printf("%s "
@@ -248,7 +318,7 @@ int main(int argc, char **argv)
 		return 0;
 	}
 
-	printf("Press ENTER to disconnect\n");
+	printf("Press ENTER to exit\n");
 	getchar();
 
 	if (robot->IsConnected()) {
@@ -258,11 +328,9 @@ int main(int argc, char **argv)
 		printf("Not connected\n");
 	}
 
-	printf("Press ENTER to exit\n");
-	getchar();
-
 	delete robot;
 
 	TestRobot::UninitializeApartments();
+
 	return 0;
 }

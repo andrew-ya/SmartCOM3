@@ -454,17 +454,6 @@ namespace SmartCOM3
 	{
 		printf("IStClient::~IStClient()\n");
 
-		try {
-			if (IsConnected()) {
-				Disconnect();
-				int timeout = 50;
-				while (timeout-- && IsConnected())
-					std::this_thread::sleep_for(std::chrono::milliseconds(10));
-			}
-		} catch (std::runtime_error &ex) {
-			printf("IStClient::~IStClient() %s\n", ex.what());
-		}
-
 		UnAdvise();
 		m_IStServer->Release();
 		m_ISmartComVersion->Release();
