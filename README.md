@@ -50,6 +50,13 @@ for russian support, custom WINEPREFIX & no Wine's debug messages:
 $ LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./SmartCOM3.exe
 ```
 #Test program output	
+####Environment		
+    Wine build: wine-1.9.5	
+    Platform: x86_64	
+    Version: Windows 7	
+    Host system: Linux	
+    Host version: 3.16.0-4-amd64	
+####Output		
 ```
 IStClient::IStClient()
 IStClient::InitializeApartments()
