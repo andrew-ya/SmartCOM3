@@ -17,28 +17,64 @@ class TestRobot : public SmartCOM3::IStClient
 
 public:
 
-	TestRobot()
+	TestRobot(const char *server, unsigned short port, const char *login, const char *password)
 	{
+		printf("\nTestRobot::TestRobot()\n");
+
 		symbols["SBER"] = "";
 		symbols["VTBR"] = "";
 		symbols["GAZP"] = "";
 		symbols["ROSN"] = "";
+
+		printf("TestRobot::TestRobot() SmartCOM3 lib version: %s\n", GetClientVersionString().c_str());
+
+		ConfigureClient(
+			"CalcPlannedPos=no;"
+			"asyncSocketConnectionMode=yes;"
+			"logLevel=4;"
+			"logFilePath=C:\\;"); // to store logs in C:\ you must become Adminnistrator
+
+		ConfigureServer(
+			"pingTimeout=2;"
+			"logLevel=4;"
+			"logFilePath=C:\\;"); // to store logs in C:\ you must become Adminnistrator
+
+		try {
+			printf("TestRobot::TestRobot() Connecting to %s:%d with login %s, please wait...\n", server, port, login);
+			Connect(server, port, login, password);
+		} catch (std::runtime_error &ex) {
+			printf("TestRobot::TestRobot() Connection error %s "
+				"Possibly log path doesn't exist or "
+				"you don't have write permission.\n", ex.what());
+			exit(1);
+		}
+
+		printf("TestRobot::TestRobot() OK\n\n");
 	}
 	~TestRobot()
 	{
+		printf("TestRobot::~TestRobot()\n");
 
+		if (IsConnected()) {
+			printf("TestRobot::~TestRobot() Disconnecting...\n");
+			Disconnect();
+		} else {
+			printf("TestRobot::~TestRobot() Not connected\n");
+		}
+
+		printf("TestRobot::~TestRobot() OK\n\n");
 	}
 
 private:
 
 	void Connected()
 	{
-		printf("TestRobot::Connected()\n");
+		printf("\nTestRobot::Connected()\n");
 		this->GetSymbols();
 	}
 	void Disconnected(const char *reason)
 	{
-		printf("TestRobot::Disconnected(%s)\n\n", reason);
+		printf("TestRobot::Disconnected(%s)\n", reason);
 	}
 	void UpdateQuote(
 		const char *symbol,
@@ -297,40 +333,10 @@ int main(int argc, char **argv)
 	const char *login = argv[3];
 	const char *password = argv[4];
 
-	TestRobot *robot = new TestRobot();
-
-	printf("\nSmartCOM3 lib version: %s\n\n", robot->GetClientVersionString().c_str());
-
-	robot->ConfigureClient(
-		"CalcPlannedPos=no;"
-		"asyncSocketConnectionMode=yes;"
-		"logLevel=4;"
-		"logFilePath=C:\\;");
-
-	robot->ConfigureServer(
-		"pingTimeout=2;"
-		"logLevel=4;"
-		"logFilePath=C:\\;");
-
-	try {
-		printf("Connecting to %s:%d with login %s, please wait...\n", server, port, login);
-		robot->Connect(server, port, login, password);
-	} catch (std::runtime_error &ex) {
-		printf("%s "
-			"Possibly log path doesn't exist or "
-			"you don't have write permission.\n", ex.what());
-		return 0;
-	}
+	TestRobot *robot = new TestRobot(server,port,login,password);
 
 	printf("Press ENTER to exit\n");
 	getchar();
-
-	if (robot->IsConnected()) {
-		printf("Disconnecting...\n");
-		robot->Disconnect();
-	} else {
-		printf("Not connected\n");
-	}
 
 	delete robot;
 
