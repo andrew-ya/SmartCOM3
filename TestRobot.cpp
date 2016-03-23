@@ -70,7 +70,7 @@ private:
 	void Connected()
 	{
 		printf("\nTestRobot::Connected()\n");
-		this->GetSymbols();
+		GetSymbols();
 	}
 	void Disconnected(const char *reason)
 	{
