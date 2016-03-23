@@ -9,7 +9,6 @@ SmartCOM3 lib version: 3.0.162.5805
 Both Windows and Linux builds works well with CUDA and OpenGL native libs       
 (inc. CUDA-OpenGL interoperability - tested on nVidia GeForce GTX 680 & Tesla K20Xm)
 
-# Installation & building
 #Windows
 1. Download SmartCOM3 API 32 or 64 bit from http://www.itinvest.ru/software/smartcom/
 2. Install it
@@ -50,7 +49,7 @@ $ wine SmartCOM3.exe.so
 for russian support, custom WINEPREFIX & no Wine's debug messages:
 $ LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./SmartCOM3.exe
 ```
-#Test program output
+#Test program output	
 ```
 IStClient::IStClient()
 IStClient::InitializeApartments()
