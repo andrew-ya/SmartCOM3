@@ -16,7 +16,7 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
 4. Just add sources and build project
 
 #Linux
-###Installation
+####Installation
 1. Create Wine prefix 32 or 64 bit
 2. Download corresponding SmartCOM3 API from http://www.itinvest.ru/software/smartcom/
 3. Install it:      
@@ -24,7 +24,7 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
     or just register dll like "wine regsvr32 /i /path/to/smartcom.dll"
 4. Setup cyrillic support ru_RU.utf8
 
-###Building     
+####Building     
 Notes:      
 1. Add "-D_FORCENAMELESSUNION" compiler flag (VARIANTs support)        
 2. Link with libole32, liboleaut32 and libuuid      
@@ -37,7 +37,7 @@ $ wineg++ -o "SmartCOM3"  ./SmartCOM3.o ./TestRobot.o    -lole32 -loleaut32 -luu
 $ ls
 $ SmartCOM3.exe  SmartCOM3.exe.so  SmartCOM3.o  TestRobot.o
 ```
-###Launching
+####Launching
 Notes about error "wrong binary format"      
 1. Check that you link all libs above and they are exist on LD path         
 2. Wine prefix and downloaded SmartCOM3 version must be the same architecture (32 or 64 bit)       
@@ -122,9 +122,9 @@ try {
 	printf("error: %s\n", er.what());
 }
 ```
-##THE SOFTWARE IS PROVIDED "AS IS",     
-##WITHOUT WARRANTY OF ANY KIND    
-##TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
+###THE SOFTWARE IS PROVIDED "AS IS",     
+###WITHOUT WARRANTY OF ANY KIND    
+###TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
 #Contact
 Feel free for contact        
 moex@anton.red russian or english
