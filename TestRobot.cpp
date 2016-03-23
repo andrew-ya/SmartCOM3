@@ -67,6 +67,8 @@ public:
 
 private:
 
+	/* SmartCOM3 events implementation */
+
 	void Connected()
 	{
 		printf("\nTestRobot::Connected()\n");
