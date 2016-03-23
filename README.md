@@ -57,10 +57,13 @@ IStClient::InitializeApartments()
 IStClient::InitializeApartments() OK
 IStClient::IStClient() OK
 
-SmartCOM3 lib version: 3,0,162,5805
+TestRobot::TestRobot()
+TestRobot::TestRobot() SmartCOM3 lib version: 3,0,162,5805
+TestRobot::TestRobot() Connecting to mxdemo.ittrade.ru:8443 with login XXXXXX, please wait...
+TestRobot::TestRobot() OK
 
-Connecting to mxdemo.ittrade.ru:8443 with login XXXXXX, please wait...
 Press ENTER to exit
+
 TestRobot::Connected()
 TestRobot::AddSymbol() received all of 21749 symbols
 TestRobot::AddSymbol() added symbol 'GAZP' with short_name 'ГАЗПРОМ ао'
@@ -68,8 +71,10 @@ TestRobot::AddSymbol() added symbol 'ROSN' with short_name 'Роснефть'
 TestRobot::AddSymbol() added symbol 'SBER' with short_name 'Сбербанк'
 TestRobot::AddSymbol() added symbol 'VTBR' with short_name 'ВТБ ао'
 
-Disconnecting...
+TestRobot::~TestRobot()
+TestRobot::~TestRobot() Disconnecting...
 TestRobot::Disconnected(Disconnected by user)
+TestRobot::~TestRobot() OK
 
 IStClient::~IStClient()
 IStClient::~IStClient() OK
