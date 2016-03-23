@@ -12,9 +12,11 @@ using namespace SmartCOM3;
 
 class TestRobot : public SmartCOM3::IStClient
 {
-public:
+
 	std::map<std::string,std::string> symbols;
+
 public:
+
 	TestRobot()
 	{
 		symbols["SBER"] = "";
@@ -26,7 +28,9 @@ public:
 	{
 
 	}
+
 private:
+
 	void Connected()
 	{
 		printf("TestRobot::Connected()\n");
