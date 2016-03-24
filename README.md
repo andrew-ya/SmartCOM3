@@ -119,7 +119,7 @@ Use try-catch around all SmartCOM3 methods for std::runtime_error
 try {
 	ListenTicks(symbol);
 } catch (std::runtime_error &er) {
-	printf("error: %s\n", er.what());
+	printf("Can't find symbol '%s'. Error: %s\n", symbol, er.what());
 }
 ```
 ###THE SOFTWARE IS PROVIDED "AS IS",     
