@@ -58,20 +58,15 @@ $ LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./SmartCOM3.exe
     Host version: 3.16.0-4-amd64	
 ####Output		
 ```
-IStClient::IStClient()
-IStClient::InitializeApartments()
-IStClient::InitializeApartments() OK
-IStClient::IStClient() OK
-
 TestRobot::TestRobot()
 TestRobot::TestRobot() SmartCOM3 lib version: 3,0,162,5805
-TestRobot::TestRobot() Connecting to mxdemo.ittrade.ru:8443 with login XXXXXX, please wait...
+TestRobot::TestRobot() Connecting to mxdemo.ittrade.ru:8443 with login X6Q7HI5U, please wait...
 TestRobot::TestRobot() OK
 
 Press ENTER to exit
 
 TestRobot::Connected()
-TestRobot::AddSymbol() received all of 21749 symbols
+TestRobot::AddSymbol() received all of 21757 symbols
 TestRobot::AddSymbol() added symbol 'GAZP' with short_name 'ГАЗПРОМ ао'
 TestRobot::AddSymbol() added symbol 'ROSN' with short_name 'Роснефть'
 TestRobot::AddSymbol() added symbol 'SBER' with short_name 'Сбербанк'
@@ -81,11 +76,6 @@ TestRobot::~TestRobot()
 TestRobot::~TestRobot() Disconnecting...
 TestRobot::Disconnected(Disconnected by user)
 TestRobot::~TestRobot() OK
-
-IStClient::~IStClient()
-IStClient::~IStClient() OK
-IStClient::UninitializeApartments()
-IStClient::UninitializeApartments() OK
 ```
 #Test program SmartCOM3 log output (level 4)   
 ```
