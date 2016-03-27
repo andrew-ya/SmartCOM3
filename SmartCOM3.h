@@ -242,7 +242,7 @@ namespace SmartCOM3
 		virtual void OrderMoveFailed(
 			const char *orderid) = 0;
 
-	protected:
+	public:
 
 		/* SmartCOM3 METHODS */
 
@@ -312,7 +312,7 @@ namespace SmartCOM3
 		std::string GetMoneyAccount(
 			const char *portfolioID);
 
-	protected:
+	public:
 
 		/* SmartCOM3 VERSION METHODS */
 
