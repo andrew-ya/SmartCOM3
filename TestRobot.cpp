@@ -62,7 +62,7 @@ public:
 			printf("TestRobot::~TestRobot() Not connected\n");
 		}
 
-		printf("TestRobot::~TestRobot() OK\n\n");
+		printf("TestRobot::~TestRobot() OK\n");
 	}
 
 private:
