@@ -362,7 +362,7 @@ namespace SmartCOM3
 	bool IStClient::s_ApartmentsInitializationFlag = false;
 	void IStClient::InitializeApartments()
 	{
-		printf("IStClient::InitializeApartments()\n");
+		//printf("IStClient::InitializeApartments()\n");
 		s_ApartmentsInitializationMutex.lock();
 		if (s_ApartmentsInitializationFlag == false) {
 			if (S_OK != CoInitializeEx(NULL, COINIT_MULTITHREADED)) {
@@ -371,22 +371,22 @@ namespace SmartCOM3
 				exit(1);
 			}
 			s_ApartmentsInitializationFlag = true;
-			printf("IStClient::InitializeApartments() OK\n");
+			//printf("IStClient::InitializeApartments() OK\n");
 		} else {
-			printf("IStClient::InitializeApartments() already initialized\n");
+			//printf("IStClient::InitializeApartments() already initialized\n");
 		}
 		s_ApartmentsInitializationMutex.unlock();
 	}
 	void IStClient::UninitializeApartments()
 	{
-		printf("IStClient::UninitializeApartments()\n");
+		//printf("IStClient::UninitializeApartments()\n");
 		s_ApartmentsInitializationMutex.lock();
 		if (s_ApartmentsInitializationFlag == true) {
 			CoUninitialize();
 			s_ApartmentsInitializationFlag = false;
-			printf("IStClient::UninitializeApartments() OK\n");
+			//printf("IStClient::UninitializeApartments() OK\n");
 		} else {
-			printf("IStClient::UninitializeApartments() not initialized\n");
+			//printf("IStClient::UninitializeApartments() not initialized\n");
 		}
 		s_ApartmentsInitializationMutex.unlock();
 	}
@@ -416,7 +416,7 @@ namespace SmartCOM3
 	IStClient::IStClient(bool autoInitializeApartments)
 		: m_cRef(1), m_dwCookie(0)
 	{
-		printf("IStClient::IStClient()\n");
+		//printf("IStClient::IStClient()\n");
 
 		if (autoInitializeApartments) InitializeApartments();
 
@@ -448,18 +448,18 @@ namespace SmartCOM3
 			exit(1);
 		}
 		
-		printf("IStClient::IStClient() OK\n");
+		//printf("IStClient::IStClient() OK\n");
 	}
 	IStClient::~IStClient()
 	{
-		printf("IStClient::~IStClient()\n");
+		//printf("IStClient::~IStClient()\n");
 
 		UnAdvise();
 		m_IStServer->Release();
 		m_ISmartComVersion->Release();
 		m_ptinfo->Release();
 
-		printf("IStClient::~IStClient() OK\n");
+		//printf("IStClient::~IStClient() OK\n");
 	}
 
 	/* SmartCOM3 METHODS */

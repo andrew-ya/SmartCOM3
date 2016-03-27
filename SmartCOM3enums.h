@@ -118,20 +118,20 @@ namespace SmartCOM3
 	{
 		switch (code)
 		{
-		case BarInterval_Tick: return "Tick";
-		case BarInterval_1Min: return "1Min";
-		case BarInterval_5Min: return "5Min";
+		case BarInterval_Tick:  return " Tick";
+		case BarInterval_1Min:  return " 1Min";
+		case BarInterval_5Min:  return " 5Min";
 		case BarInterval_10Min: return "10Min";
 		case BarInterval_15Min: return "15Min";
 		case BarInterval_30Min: return "30Min";
-		case BarInterval_60Min: return "60Min";
+		case BarInterval_60Min: return "1Hour";
 		case BarInterval_2Hour: return "2Hour";
 		case BarInterval_4Hour: return "4Hour";
-		case BarInterval_Day: return "Day";
-		case BarInterval_Week: return "Week";
+		case BarInterval_Day:   return "1Day ";
+		case BarInterval_Week:  return "Week ";
 		case BarInterval_Month: return "Month";
-		case BarInterval_Quarter: return "Quarter";
-		case BarInterval_Year: return "Year";
+		case BarInterval_Quarter:return "Quarter";
+		case BarInterval_Year:  return "Year ";
 		}
 		return "Unknown BarInterval";
 	}

@@ -8,6 +8,7 @@
 #include <time.h>
 #include <assert.h>
 #include <mutex>
+#include <atomic>
 
 namespace SmartCOM3
 {

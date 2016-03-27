@@ -19,7 +19,7 @@ public:
 
 	TestRobot(const char *server, unsigned short port, const char *login, const char *password)
 	{
-		printf("\nTestRobot::TestRobot()\n");
+		printf("TestRobot::TestRobot()\n");
 
 		symbols["SBER"] = "";
 		symbols["VTBR"] = "";
