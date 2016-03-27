@@ -460,7 +460,7 @@ namespace SmartCOM3
 	}
 
 	/* MS OLE DATE <-> POSIX time_t */
-	inline time_t double2time(DATE vt_date)
+	inline time_t d2t(DATE vt_date)
 	{
 	    SYSTEMTIME sysTime;
 	    int result = VariantTimeToSystemTime(vt_date, &sysTime);
@@ -477,7 +477,7 @@ namespace SmartCOM3
 
 	    return mktime(&localtm);
 	}
-	inline DATE time2double(time_t timet)
+	inline DATE t2d(time_t timet)
 	{
 	    struct tm localtm = *localtime(&timet);
 
