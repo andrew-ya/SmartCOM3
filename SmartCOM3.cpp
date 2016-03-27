@@ -501,7 +501,8 @@ namespace SmartCOM3
 			throw std::runtime_error("CancelOrder(): SmartCOM3 API error!");
 	}
 	void IStClient::MoveOrder(const char *portfolio, const char *orderid, double targetPrice) {
-		if (m_IStServer->raw_MoveOrder(s2ws(portfolio).c_str(), s2ws(orderid).c_str(), targetPrice))
+		if (m_IStServer->raw_MoveOrder(s2ws(portfolio).c_str(),
+			s2ws(orderid).c_str(), targetPrice))
 			throw std::runtime_error("MoveOrder(): SmartCOM3 API error!");
 	}
 	void IStClient::GetSymbols() {
