@@ -2,6 +2,9 @@
 #ifndef SMARTCOM3ENUMS_H_
 #define SMARTCOM3ENUMS_H_
 
+#include <string>
+#include <time.h>
+
 namespace SmartCOM3
 {
 	typedef enum
@@ -184,6 +187,15 @@ namespace SmartCOM3
 		case ErrorCode_ExchangeNotAccessible: return "ExchangeNotAccessible";
 		}
 		return "Unknown ErrorCode";
+	}
+
+	/* Date & time string */
+	inline std::string GetDatetimeString(time_t datetime)
+	{
+	    struct tm tstruct = *localtime(&datetime);
+	    char buf[20];
+	    strftime(buf, sizeof(buf), "%d.%m.%Y %H:%M:%S", &tstruct);
+	    return buf;
 	}
 }
 

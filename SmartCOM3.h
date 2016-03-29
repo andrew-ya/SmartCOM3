@@ -2,8 +2,8 @@
 #ifndef SMARTCOM3_H_
 #define SMARTCOM3_H_
 
-#include "SmartCOM3enums.h"
 #include <ocidl.h>
+#include "SmartCOM3enums.h"
 #include <string>
 #include <time.h>
 #include <assert.h>
@@ -496,15 +496,6 @@ namespace SmartCOM3
 	    assert(result != 0);
 
 	    return vt_date;
-	}
-
-	/* Date & time string */
-	inline std::string GetDatetimeString(time_t datetime)
-	{
-	    struct tm tstruct = *localtime(&datetime);
-	    char buf[20];
-	    strftime(buf, sizeof(buf), "%d.%m.%Y %H:%M:%S", &tstruct);
-	    return buf;
 	}
 }
 
