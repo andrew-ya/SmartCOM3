@@ -12,7 +12,7 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
 #Windows
 1. Download SmartCOM3 API 32 or 64 bit from http://www.itinvest.ru/software/smartcom/
 2. Install it
-3. Launch Visual Studio and create empty WIN32 project
+3. Launch Visual Studio and create empty WIN32 project 32 or 64 bit
 4. Just add sources and build project
 
 #Linux
@@ -21,7 +21,7 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
 2. Download corresponding SmartCOM3 API from http://www.itinvest.ru/software/smartcom/
 3. Install it:      
     e.g. "wine msiexec /i /path/to/smartcom/setup.msi"    
-    or just register dll like "wine regsvr32 /i /path/to/smartcom.dll"
+    or just register dll like "$ wine regsvr32 /i /path/to/smartcom.dll" or "$ wine64 regsvr32 /i /path/to/smartcom.dll"
 4. Setup cyrillic support ru_RU.utf8
 
 ####Building     
@@ -45,6 +45,8 @@ Notes about error "wrong binary format"
 $ ./SmartCOM3.exe    
 or without that launcher script
 $ wine SmartCOM3.exe.so
+for 64 bit
+$ wine64 SmartCOM3.exe.so
 
 for russian support, custom WINEPREFIX & no Wine's debug messages:
 $ LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./SmartCOM3.exe
