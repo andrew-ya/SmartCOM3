@@ -21,8 +21,10 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
 2. Download corresponding SmartCOM3 API from http://www.itinvest.ru/software/smartcom/
 3. Install it:      
     e.g. "wine msiexec /i /path/to/smartcom/setup.msi"    
-    or just register dll like "$ wine regsvr32 /i /path/to/smartcom.dll" or "$ wine64 regsvr32 /i /path/to/smartcom.dll"
-4. Setup cyrillic support ru_RU.utf8
+    or just register dll like
+    32 bit: "wine regsvr32 /i /path/to/smartcom_32.dll"
+    64 bit: "wine64 regsvr32 /i /path/to/smartcom_64.dll"
+4. Add cyrillic locale ru_RU.utf8
 
 ####Building     
 Notes:      
