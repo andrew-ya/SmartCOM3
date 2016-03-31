@@ -10,9 +10,9 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
 (inc. CUDA-OpenGL interoperability - tested on nVidia GeForce GTX 680 & Tesla K20Xm)
 
 #Windows
-1. Download SmartCOM3 API 32 or 64 bit from http://www.itinvest.ru/software/smartcom/
-2. Install it
-3. Launch Visual Studio and create empty WIN32 project 32 or 64 bit
+1. Download and install SmartCOM3 API 32 or 64 bit from http://www.itinvest.ru/software/smartcom/
+2. Launch Visual Studio and create empty WIN32 project 32 or 64 bit
+3. Create directory C:\logs or change default path in TestRobot constructor
 4. Just add sources and build project
 
 #Linux
