@@ -44,7 +44,7 @@ public:
 			Connect(server, port, login, password);
 		} catch (...) {
 			printf("TestRobot::TestRobot() Connection error. "
-				"Possibly log path doesn't exist or "
+				"Possibly log path (C:\\logs) doesn't exist or "
 				"you don't have write permission.\n");
 			exit(1);
 		}
