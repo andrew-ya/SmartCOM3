@@ -32,12 +32,12 @@ public:
 			"CalcPlannedPos=no;"
 			"asyncSocketConnectionMode=yes;"
 			"logLevel=4;"
-			"logFilePath=C:\\;"); // to store logs in C:\ on Windows you must become Adminnistrator
+			"logFilePath=C:\\logs;"); // to store logs in C:\ on Windows you must become Adminnistrator
 
 		ConfigureServer(
 			"pingTimeout=2;"
 			"logLevel=4;"
-			"logFilePath=C:\\;"); // to store logs in C:\ on Windows you must become Adminnistrator
+			"logFilePath=C:\\logs;"); // to store logs in C:\ on Windows you must become Adminnistrator
 
 		try {
 			printf("TestRobot::TestRobot() Connecting to %s:%d with login %s, please wait...\n", server, port, login);
