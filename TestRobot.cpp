@@ -323,6 +323,8 @@ private:
 
 int main(int argc, char **argv)
 {
+	SetConsoleOutputCP(CP_UTF8);
+
 	if (argc != 5) {
 		printf("Usage: SmartCOM3.exe <server> <port> <login> <password>\n");
 		printf("E.g.: SmartCOM3.exe mxdemo.ittrade.ru 8443 LOGIN PASSWORD\n");

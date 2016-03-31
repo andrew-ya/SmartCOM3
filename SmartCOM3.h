@@ -479,8 +479,12 @@ namespace SmartCOM3
 	}
 	inline DATE t2d(time_t timet)
 	{
-	    struct tm localtm = *localtime(&timet);
-
+#if defined(WIN32) && !defined(__WINE__)
+		struct tm localtm;
+		localtime_s(&localtm, &timet);
+#else
+		struct tm localtm = *localtime(&timet);
+#endif
 	    SYSTEMTIME sysTime;
 	    sysTime.wYear = static_cast<WORD>(1900 + localtm.tm_year);
 	    sysTime.wMonth = static_cast<WORD>(localtm.tm_mon + 1);

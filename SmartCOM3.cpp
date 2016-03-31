@@ -513,7 +513,7 @@ namespace SmartCOM3
 		VARIANT_BOOL result = 0;
 		if (m_IStServer->raw_IsConnected(&result))
 			throw std::runtime_error("IsConnected(): SmartCOM3 API error!");
-		if (result == 0) return false;
+		if (result == 0) return false; // return bool(result) - slow performance warning
 		else return true;
 	}
 	void IStClient::Connect(const char *ip, unsigned short port,

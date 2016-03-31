@@ -107,7 +107,7 @@ namespace SmartCOM3
 		BarInterval_10Min = 3,
 		BarInterval_15Min = 4,
 		BarInterval_30Min = 5,
-		BarInterval_60Min = 6,
+		BarInterval_1Hour = 6,
 		BarInterval_2Hour = 7,
 		BarInterval_4Hour = 8,
 		BarInterval_Day = 9,
@@ -127,7 +127,7 @@ namespace SmartCOM3
 		case BarInterval_10Min: return "10Min";
 		case BarInterval_15Min: return "15Min";
 		case BarInterval_30Min: return "30Min";
-		case BarInterval_60Min: return "1Hour";
+		case BarInterval_1Hour: return "1Hour";
 		case BarInterval_2Hour: return "2Hour";
 		case BarInterval_4Hour: return "4Hour";
 		case BarInterval_Day:   return "1Day ";
@@ -192,7 +192,12 @@ namespace SmartCOM3
 	/* Date & time string */
 	inline std::string GetDatetimeString(time_t datetime)
 	{
-	    struct tm tstruct = *localtime(&datetime);
+#if defined(WIN32) && !defined(__WINE__)
+		struct tm tstruct;
+		localtime_s(&tstruct, &datetime);
+#else
+		struct tm tstruct = *localtime(&datetime);
+#endif
 	    char buf[20];
 	    strftime(buf, sizeof(buf), "%d.%m.%Y %H:%M:%S", &tstruct);
 	    return buf;
