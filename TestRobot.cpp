@@ -42,10 +42,10 @@ public:
 		try {
 			printf("TestRobot::TestRobot() Connecting to %s:%d with login %s, please wait...\n", server, port, login);
 			Connect(server, port, login, password);
-		} catch (std::runtime_error &ex) {
-			printf("TestRobot::TestRobot() Connection error %s "
+		} catch (...) {
+			printf("TestRobot::TestRobot() Connection error. "
 				"Possibly log path doesn't exist or "
-				"you don't have write permission.\n", ex.what());
+				"you don't have write permission.\n");
 			exit(1);
 		}
 
