@@ -70,11 +70,14 @@ TestRobot::TestRobot() OK
 Press ENTER to exit
 
 TestRobot::Connected()
-TestRobot::AddSymbol() received all of 21757 symbols
+TestRobot::AddSymbol() received all of 22000 symbols
 TestRobot::AddSymbol() added symbol 'GAZP' with short_name 'ГАЗПРОМ ао'
 TestRobot::AddSymbol() added symbol 'ROSN' with short_name 'Роснефть'
 TestRobot::AddSymbol() added symbol 'SBER' with short_name 'Сбербанк'
 TestRobot::AddSymbol() added symbol 'VTBR' with short_name 'ВТБ ао'
+TestRobot::AddPortfolio(1/3) name STXXXXXX-MO-01 exchage MON status Broker
+TestRobot::AddPortfolio(2/3) name STXXXXXX-MS-01 exchage EQ status Broker
+TestRobot::AddPortfolio(3/3) name STXXXXXX-RF-01 exchage RTS_FUT status Blocked
 
 TestRobot::~TestRobot()
 TestRobot::~TestRobot() Disconnecting...
@@ -83,22 +86,23 @@ TestRobot::~TestRobot() OK
 ```
 #Test program SmartCOM3 log output (level 4)   
 ```
-2016-Mar-22 03:39:03.865905 [TID=24] - INFO : SmartCOM3 client module (v3.0.162.5805) logging started.. 
-2016-Mar-22 03:39:03.865949 [TID=24] - INFO : Logging level is set to 4 value. 
-2016-Mar-22 03:39:03.865960 [TID=24] - INFO : Using maximum 7 worker threads to process data. 
-2016-Mar-22 03:39:03.865968 [TID=24] - INFO : Store logs in C:\\ 
-2016-Mar-22 03:39:04.001174 [TID=24] - INFO : Trying to authenticate in mxdemo.ittrade.ru:8443 using SSL connection (login XXXXXX) 
-2016-Mar-22 03:39:04.004996 [TID=24] - jelly:  : Trying connect to 213.247.232.236:8443 
-2016-Mar-22 03:39:04.046128 [TID=24] - jelly:  : Https channel 0x2719E0 OK.. 
-2016-Mar-22 03:39:04.105232 [TID=28] - INFO : Login OK, loading securities.. 
-2016-Mar-22 03:39:04.105360 [TID=28] - jelly:  : Trying connect to 213.247.232.236:8090 
-2016-Mar-22 03:39:04.105388 [TID=28] - jelly:  : Channel 0x284890 will use async connect mode (140) 
-2016-Mar-22 03:39:04.105482 [TID=29] - jelly:  : Destroying https channel..0x2719E0 
-2016-Mar-22 03:39:04.117046 [TID=2f] - jelly:  : Http channel 0x284890 OK.. 
-2016-Mar-22 03:39:06.444457 [TID=2a] - INFO : Securities table loaded OK 
-2016-Mar-22 03:39:06.444520 [TID=2a] - INFO : StServer::GetSymbols method 
-2016-Mar-22 03:39:06.525705 [TID=2d] - jelly:  : Destroying http channel..0x284890 
-2016-Mar-22 03:39:08.528713 [TID=24] - INFO : Disconnected by user.. 
+2016-Apr-19 17:14:13.177266 [TID=24] - INFO : SmartCOM3 client module (v3.0.162.5805) logging started.. 
+2016-Apr-19 17:14:13.177312 [TID=24] - INFO : Logging level is set to 4 value. 
+2016-Apr-19 17:14:13.177323 [TID=24] - INFO : Using maximum 7 worker threads to process data. 
+2016-Apr-19 17:14:13.177331 [TID=24] - INFO : Store logs in C:\logs\ 
+2016-Apr-19 17:14:13.220850 [TID=24] - INFO : Trying to authenticate in mxdemo.ittrade.ru:8443 using SSL connection (login XXXXXX) 
+2016-Apr-19 17:14:13.265645 [TID=24] - jelly:  : Trying connect to 213.247.232.236:8443 
+2016-Apr-19 17:14:14.331970 [TID=24] - jelly:  : Https channel 0x2719E0 OK.. 
+2016-Apr-19 17:14:14.373027 [TID=2e] - INFO : Login OK, loading securities.. 
+2016-Apr-19 17:14:14.373155 [TID=2e] - jelly:  : Trying connect to 213.247.232.236:8090 
+2016-Apr-19 17:14:14.373192 [TID=2e] - jelly:  : Channel 0x284890 will use async connect mode (140) 
+2016-Apr-19 17:14:14.373277 [TID=2e] - jelly:  : Destroying https channel..0x2719E0 
+2016-Apr-19 17:14:14.389419 [TID=2f] - jelly:  : Http channel 0x284890 OK.. 
+2016-Apr-19 17:14:16.417065 [TID=2d] - INFO : Securities table loaded OK 
+2016-Apr-19 17:14:16.417153 [TID=2d] - INFO : StServer::GetSymbols method 
+2016-Apr-19 17:14:16.545367 [TID=2d] - INFO : StServer::GetPrortfolioList method 
+2016-Apr-19 17:14:16.545488 [TID=2a] - jelly:  : Destroying http channel..0x284890 
+2016-Apr-19 17:14:21.551759 [TID=24] - INFO : Disconnected by user.. 
 ``` 
 #Minimal example        
 ```
