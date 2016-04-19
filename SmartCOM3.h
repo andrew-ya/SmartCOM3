@@ -293,7 +293,7 @@ namespace SmartCOM3
 			const char *login,
 			const char *password);
 		void Disconnect();
-		void GetPrortfolioList();
+		void GetPortfolioList();
 		void GetMyOrders(
 			long onlyActive,
 			const char *portfolio);
@@ -381,7 +381,7 @@ namespace SmartCOM3
 			const wchar_t *login,
 			const wchar_t *password) = 0;
 		virtual HRESULT __stdcall raw_disconnect() = 0;
-		virtual HRESULT __stdcall raw_GetPrortfolioList() = 0;
+		virtual HRESULT __stdcall raw_GetPortfolioList() = 0;
 		virtual HRESULT __stdcall raw_GetMyOrders(
 			long onlyActive,
 			const wchar_t *portfolio) = 0;

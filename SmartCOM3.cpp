@@ -527,9 +527,9 @@ namespace SmartCOM3
 		if (m_IStServer->raw_disconnect())
 			throw std::runtime_error("Disconnect(): SmartCOM3 API error!");
 	}
-	void IStClient::GetPrortfolioList() {
-		if (m_IStServer->raw_GetPrortfolioList())
-			throw std::runtime_error("GetPrortfolioList(): SmartCOM3 API error!");
+	void IStClient::GetPortfolioList() {
+		if (m_IStServer->raw_GetPortfolioList())
+			throw std::runtime_error("GetPortfolioList(): SmartCOM3 API error!");
 	}
 	void IStClient::GetMyOrders(long onlyActive, const char *portfolio) {
 		if (m_IStServer->raw_GetMyOrders(onlyActive, s2ws(portfolio).c_str()))

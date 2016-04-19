@@ -73,6 +73,7 @@ private:
 	{
 		printf("\nTestRobot::Connected()\n");
 		GetSymbols();
+		GetPortfolioList();
 	}
 	void Disconnected(const char *reason)
 	{
@@ -248,7 +249,8 @@ private:
 		const char *portfolioExch,
 		PortfolioStatus portfolioStatus)
 	{
-
+		printf("TestRobot::AddPortfolio(%ld/%ld) name %s exchage %s status %s\n",
+			row, nrows, portfolioName, portfolioExch, GetPortfolioStatusString(portfolioStatus));
 	}
 	void SetSubscribtionCheckReult(long result)
 	{
