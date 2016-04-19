@@ -64,7 +64,7 @@ $ LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./SmartCOM3.exe
 ```
 TestRobot::TestRobot()
 TestRobot::TestRobot() SmartCOM3 lib version: 3,0,162,5805
-TestRobot::TestRobot() Connecting to mxdemo.ittrade.ru:8443 with login X6Q7HI5U, please wait...
+TestRobot::TestRobot() Connecting to mxdemo.ittrade.ru:8443 with login XXXXXX, please wait...
 TestRobot::TestRobot() OK
 
 Press ENTER to exit
