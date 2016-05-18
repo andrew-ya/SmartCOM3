@@ -112,7 +112,7 @@ getchar(); /* waiting 'Connected()' event on success or 'Disconnected()' event o
 delete robot;
 ```
 #Note    
-All SmartCOM3 methods return ErrorCode for user side error handling   
+All SmartCOM3 methods return ErrorCode for user side error handling:   
 ```
 ErrorCode er = ListenTicks(symbol);
 if (er != ErrorCode_Success) {
@@ -120,6 +120,7 @@ if (er != ErrorCode_Success) {
 }
 ```
 Possible output: ListenTicks(SBER) error: NotConnected		
+
 For error description call GetErrorCodeString(code).		
 Error codes:
 ```
