@@ -4,8 +4,6 @@
 
 #include <ocidl.h>
 #include "SmartCOM3enums.h"
-#include <string>
-#include <time.h>
 #include <assert.h>
 #include <mutex>
 
@@ -246,28 +244,28 @@ namespace SmartCOM3
 
 		/* SmartCOM3 METHODS */
 
-		void ListenQuotes(
+		ErrorCode ListenQuotes(
 			const char *symbol);
-		void CancelQuotes(
+		ErrorCode CancelQuotes(
 			const char *symbol);
-		void ListenBidAsks(
+		ErrorCode ListenBidAsks(
 			const char *symbol);
-		void CancelBidAsks(
+		ErrorCode CancelBidAsks(
 			const char *symbol);
-		void ListenTicks(
+		ErrorCode ListenTicks(
 			const char *symbol);
-		void CancelTicks(
+		ErrorCode CancelTicks(
 			const char *symbol);
-		void GetBars(
+		ErrorCode GetBars(
 			const char *symbol,
 			BarInterval interval,
 			time_t since,
 			long count);
-		void ListenPortfolio(
+		ErrorCode ListenPortfolio(
 			const char *portfolio);
-		void CancelPortfolio(
+		ErrorCode CancelPortfolio(
 			const char *portfolio);
-		void PlaceOrder(
+		ErrorCode PlaceOrder(
 			const char *portfolio,
 			const char *symbol,
 			OrderAction action,
@@ -277,53 +275,54 @@ namespace SmartCOM3
 			double amount,
 			double stop,
 			long cookie);
-		void CancelOrder(
+		ErrorCode CancelOrder(
 			const char *portfolio,
 			const char *symbol,
 			const char *orderid);
-		void MoveOrder(
+		ErrorCode MoveOrder(
 			const char *portfolio,
 			const char *orderid,
 			double targetPrice);
-		void GetSymbols();
-		bool IsConnected();
-		void Connect(
+		ErrorCode GetSymbols();
+		ErrorCode IsConnected(bool *connected);
+		ErrorCode Connect(
 			const char *ip,
 			unsigned short port,
 			const char *login,
 			const char *password);
-		void Disconnect();
-		void GetPortfolioList();
-		void GetMyOrders(
+		ErrorCode Disconnect();
+		ErrorCode GetPortfolioList();
+		ErrorCode GetMyOrders(
 			long onlyActive,
 			const char *portfolio);
-		void GetMyTrades(
+		ErrorCode GetMyTrades(
 			const char *portfolio);
-		void GetMyClosePos(
+		ErrorCode GetMyClosePos(
 			const char *portfolio);
-		void GetTrades(
+		ErrorCode GetTrades(
 			const char *symbol,
 			time_t from,
 			long count);
-		void ConfigureClient(
+		ErrorCode ConfigureClient(
 			const char *paramsSet);
-		void ConfigureServer(
+		ErrorCode ConfigureServer(
 			const char *paramsSet);
-		std::string GetMoneyAccount(
-			const char *portfolioID);
+		ErrorCode GetMoneyAccount(
+			const char *portfolioID,
+			std::string *portfolioMO);
 
 	public:
 
 		/* SmartCOM3 VERSION METHODS */
 
-		std::string GetServerVersionString();
-		void GetServerVersion(
+		ErrorCode GetServerVersionString(std::string *version);
+		ErrorCode GetServerVersion(
 			long *major,
 			long *minor,
 			long *build,
 			long *rev);
-		std::string GetClientVersionString();
-		void GetClientVersion(
+		ErrorCode GetClientVersionString(std::string *version);
+		ErrorCode GetClientVersion(
 			long *major,
 			long *minor,
 			long *build,
@@ -374,7 +373,7 @@ namespace SmartCOM3
 			double targetPrice) = 0;
 		virtual HRESULT __stdcall raw_GetSymbols() = 0;
 		virtual HRESULT __stdcall raw_IsConnected(
-			VARIANT_BOOL *result) = 0;
+			short *result) = 0;
 		virtual HRESULT __stdcall raw_connect(
 			const wchar_t *ip,
 			unsigned short port,
@@ -399,21 +398,21 @@ namespace SmartCOM3
 			const wchar_t *paramsSet) = 0;
 		virtual HRESULT __stdcall raw_GetMoneyAccount(
 			const wchar_t *portfolioID,
-			const wchar_t **moneyAccount) = 0;
+			wchar_t **moneyAccount) = 0;
 	};
 
 	/* SmartCOM3 VERSION RAW METHODS */
 	struct ISmartComVersion : IDispatch
 	{
 		virtual HRESULT __stdcall raw_GetServerVersionString(
-			BSTR *stversion) = 0;
+			wchar_t **stversion) = 0;
 		virtual HRESULT __stdcall raw_GetServerVersion(
 			long *major,
 			long *minor,
 			long *build,
 			long *rev) = 0;
 		virtual HRESULT __stdcall raw_GetStClientVersionString(
-			BSTR *stversion) = 0;
+			wchar_t **stversion) = 0;
 		virtual HRESULT __stdcall raw_GetStClientVersion(
 			long *major,
 			long *minor,

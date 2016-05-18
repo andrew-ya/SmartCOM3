@@ -1,8 +1,5 @@
 
 #include "SmartCOM3.h"
-#include <iomanip>
-#include <thread>
-#include <chrono>
 
 namespace SmartCOM3
 {
@@ -451,138 +448,140 @@ namespace SmartCOM3
 
 	/* SmartCOM3 METHODS */
 
-	void IStClient::ListenQuotes(const char *symbol) {
-		if (m_IStServer->raw_ListenQuotes(s2ws(symbol).c_str()))
-			throw std::runtime_error("ListenQuotes(): SmartCOM3 API error!");
+	ErrorCode IStClient::ListenQuotes(const char *symbol)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_ListenQuotes(s2ws(symbol).c_str()));
 	}
-	void IStClient::CancelQuotes(const char *symbol) {
-		if (m_IStServer->raw_CancelQuotes(s2ws(symbol).c_str()))
-			throw std::runtime_error("CancelQuotes(): SmartCOM3 API error!");
+	ErrorCode IStClient::CancelQuotes(const char *symbol)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_CancelQuotes(s2ws(symbol).c_str()));
 	}
-	void IStClient::ListenBidAsks(const char *symbol) {
-		if (m_IStServer->raw_ListenBidAsks(s2ws(symbol).c_str()))
-			throw std::runtime_error("ListenBidAsks(): SmartCOM3 API error!");
+	ErrorCode IStClient::ListenBidAsks(const char *symbol)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_ListenBidAsks(s2ws(symbol).c_str()));
 	}
-	void IStClient::CancelBidAsks(const char *symbol) {
-		if (m_IStServer->raw_CancelBidAsks(s2ws(symbol).c_str()))
-			throw std::runtime_error("CancelBidAsks(): SmartCOM3 API error!");
+	ErrorCode IStClient::CancelBidAsks(const char *symbol)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_CancelBidAsks(s2ws(symbol).c_str()));
 	}
-	void IStClient::ListenTicks(const char *symbol) {
-		if (m_IStServer->raw_ListenTicks(s2ws(symbol).c_str()))
-			throw std::runtime_error("ListenTicks(): SmartCOM3 API error!");
+	ErrorCode IStClient::ListenTicks(const char *symbol)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_ListenTicks(s2ws(symbol).c_str()));
 	}
-	void IStClient::CancelTicks(const char *symbol) {
-		if (m_IStServer->raw_CancelTicks(s2ws(symbol).c_str()))
-			throw std::runtime_error("CancelTicks(): SmartCOM3 API error!");
+	ErrorCode IStClient::CancelTicks(const char *symbol)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_CancelTicks(s2ws(symbol).c_str()));
 	}
-	void IStClient::GetBars(const char *symbol, BarInterval interval, time_t since, long count) {
-		if (m_IStServer->raw_GetBars(s2ws(symbol).c_str(), interval, t2d(since), count))
-			throw std::runtime_error("GetBars(): SmartCOM3 API error!");
+	ErrorCode IStClient::GetBars(const char *symbol, BarInterval interval, time_t since, long count)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_GetBars(s2ws(symbol).c_str(), interval, t2d(since), count));
 	}
-	void IStClient::ListenPortfolio(const char *portfolio) {
-		if (m_IStServer->raw_ListenPortfolio(s2ws(portfolio).c_str()))
-			throw std::runtime_error("ListenPortfolio(): SmartCOM3 API error!");
+	ErrorCode IStClient::ListenPortfolio(const char *portfolio)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_ListenPortfolio(s2ws(portfolio).c_str()));
 	}
-	void IStClient::CancelPortfolio(const char *portfolio) {
-		if (m_IStServer->raw_CancelPortfolio(s2ws(portfolio).c_str()))
-			throw std::runtime_error("CancelPortfolio(): SmartCOM3 API error!");
+	ErrorCode IStClient::CancelPortfolio(const char *portfolio)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_CancelPortfolio(s2ws(portfolio).c_str()));
 	}
-	void IStClient::PlaceOrder(const char *portfolio, const char *symbol,
+	ErrorCode IStClient::PlaceOrder(const char *portfolio, const char *symbol,
 		OrderAction action, OrderType type, OrderValidity validity,
 		double price, double amount, double stop, long cookie)
 	{
-		if (m_IStServer->raw_PlaceOrder(s2ws(portfolio).c_str(),
-			s2ws(symbol).c_str(), action, type, validity, price, amount, stop, cookie))
-			throw std::runtime_error("PlaceOrder(): SmartCOM3 API error!");
+		return static_cast<ErrorCode>(m_IStServer->raw_PlaceOrder(s2ws(portfolio).c_str(),
+			s2ws(symbol).c_str(), action, type, validity, price, amount, stop, cookie));
 	}
-	void IStClient::CancelOrder(const char *portfolio, const char *symbol, const char *orderid) {
-		if (m_IStServer->raw_CancelOrder(s2ws(portfolio).c_str(),
-			s2ws(symbol).c_str(), s2ws(orderid).c_str()))
-			throw std::runtime_error("CancelOrder(): SmartCOM3 API error!");
-	}
-	void IStClient::MoveOrder(const char *portfolio, const char *orderid, double targetPrice) {
-		if (m_IStServer->raw_MoveOrder(s2ws(portfolio).c_str(),
-			s2ws(orderid).c_str(), targetPrice))
-			throw std::runtime_error("MoveOrder(): SmartCOM3 API error!");
-	}
-	void IStClient::GetSymbols() {
-		if (m_IStServer->raw_GetSymbols())
-			throw std::runtime_error("GetSymbols(): SmartCOM3 API error!");
-	}
-	bool IStClient::IsConnected() {
-		VARIANT_BOOL result = 0;
-		if (m_IStServer->raw_IsConnected(&result))
-			throw std::runtime_error("IsConnected(): SmartCOM3 API error!");
-		if (result == 0) return false; // return bool(result) - slow performance warning
-		else return true;
-	}
-	void IStClient::Connect(const char *ip, unsigned short port,
-		const char *login, const char *password)
+	ErrorCode IStClient::CancelOrder(const char *portfolio, const char *symbol, const char *orderid)
 	{
-		if (m_IStServer->raw_connect(s2ws(ip).c_str(), port,
-			s2ws(login).c_str(), s2ws(password).c_str()))
-			throw std::runtime_error("Connect(): SmartCOM3 API error!");
+		return static_cast<ErrorCode>(m_IStServer->raw_CancelOrder(s2ws(portfolio).c_str(),
+			s2ws(symbol).c_str(), s2ws(orderid).c_str()));
 	}
-	void IStClient::Disconnect() {
-		if (m_IStServer->raw_disconnect())
-			throw std::runtime_error("Disconnect(): SmartCOM3 API error!");
+	ErrorCode IStClient::MoveOrder(const char *portfolio, const char *orderid, double targetPrice)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_MoveOrder(s2ws(portfolio).c_str(),
+			s2ws(orderid).c_str(), targetPrice));
 	}
-	void IStClient::GetPortfolioList() {
-		if (m_IStServer->raw_GetPortfolioList())
-			throw std::runtime_error("GetPortfolioList(): SmartCOM3 API error!");
+	ErrorCode IStClient::GetSymbols()
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_GetSymbols());
 	}
-	void IStClient::GetMyOrders(long onlyActive, const char *portfolio) {
-		if (m_IStServer->raw_GetMyOrders(onlyActive, s2ws(portfolio).c_str()))
-			throw std::runtime_error("GetMyOrders(): SmartCOM3 API error!");
+	ErrorCode IStClient::IsConnected(bool *connected)
+	{
+		short raw_connected;
+		ErrorCode ercode = static_cast<ErrorCode>(m_IStServer->raw_IsConnected(&raw_connected));
+		if (ercode == ErrorCode_Success) {
+			if (raw_connected == 0) *connected = false; // *connected = bool(result); // slow performance warning
+			else *connected = true;
+		}
+		return ercode;
 	}
-	void IStClient::GetMyTrades(const char *portfolio) {
-		if (m_IStServer->raw_GetMyTrades(s2ws(portfolio).c_str()))
-			throw std::runtime_error("GetMyTrades(): SmartCOM3 API error!");
+	ErrorCode IStClient::Connect(const char *ip, unsigned short port, const char *login, const char *password)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_connect(s2ws(ip).c_str(), port,
+			s2ws(login).c_str(), s2ws(password).c_str()));
 	}
-	void IStClient::GetMyClosePos(const char *portfolio) {
-		if (m_IStServer->raw_GetMyClosePos(s2ws(portfolio).c_str()))
-			throw std::runtime_error("GetMyClosePos(): SmartCOM3 API error!");
+	ErrorCode IStClient::Disconnect()
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_disconnect());
 	}
-	void IStClient::GetTrades(const char *symbol, time_t from, long count) {
-		if (m_IStServer->raw_GetTrades(s2ws(symbol).c_str(), t2d(from), count))
-			throw std::runtime_error("GetTrades(): SmartCOM3 API error!");
+	ErrorCode IStClient::GetPortfolioList()
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_GetPortfolioList());
 	}
-	void IStClient::ConfigureClient(const char *paramsSet) {
-		if (m_IStServer->raw_ConfigureClient(s2ws(paramsSet).c_str()))
-			throw std::runtime_error("ConfigureClient(): SmartCOM3 API error!");
+	ErrorCode IStClient::GetMyOrders(long onlyActive, const char *portfolio)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_GetMyOrders(onlyActive, s2ws(portfolio).c_str()));
 	}
-	void IStClient::ConfigureServer(const char *paramsSet) {
-		if (m_IStServer->raw_ConfigureServer(s2ws(paramsSet).c_str()))
-			throw std::runtime_error("ConfigureServer(): SmartCOM3 API error!");
+	ErrorCode IStClient::GetMyTrades(const char *portfolio)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_GetMyTrades(s2ws(portfolio).c_str()));
 	}
-	std::string IStClient::GetMoneyAccount(const char *portfolioID) {
-		const wchar_t *result = 0;
-		if (m_IStServer->raw_GetMoneyAccount(s2ws(portfolioID).c_str(), &result))
-			throw std::runtime_error("GetMoneyAccount(): SmartCOM3 API error!");
-		return ws2s(result);
+	ErrorCode IStClient::GetMyClosePos(const char *portfolio)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_GetMyClosePos(s2ws(portfolio).c_str()));
+	}
+	ErrorCode IStClient::GetTrades(const char *symbol, time_t from, long count)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_GetTrades(s2ws(symbol).c_str(), t2d(from), count));
+	}
+	ErrorCode IStClient::ConfigureClient(const char *paramsSet)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_ConfigureClient(s2ws(paramsSet).c_str()));
+	}
+	ErrorCode IStClient::ConfigureServer(const char *paramsSet)
+	{
+		return static_cast<ErrorCode>(m_IStServer->raw_ConfigureServer(s2ws(paramsSet).c_str()));
+	}
+	ErrorCode IStClient::GetMoneyAccount(const char *portfolioID, std::string *portfolioMO)
+	{
+		wchar_t *raw_portfoliomo;
+		ErrorCode ercode = static_cast<ErrorCode>(m_IStServer->raw_GetMoneyAccount(s2ws(portfolioID).c_str(), &raw_portfoliomo));
+		if (ercode == ErrorCode_Success) *portfolioMO = ws2s(raw_portfoliomo);
+		return ercode;
 	}
 
 	/* SmartCOM3 VERSION METHODS */
 
-	std::string IStClient::GetServerVersionString() {
-		BSTR result = 0;
-		if (m_ISmartComVersion->raw_GetServerVersionString(&result))
-			throw std::runtime_error("GetServerVersionString(): SmartCOM3 API error!");
-		return ws2s(result);
+	ErrorCode IStClient::GetServerVersionString(std::string *version)
+	{
+		wchar_t *raw_version;
+		ErrorCode ercode = static_cast<ErrorCode>(m_ISmartComVersion->raw_GetServerVersionString(&raw_version));
+		if (ercode == ErrorCode_Success) *version = ws2s(raw_version);
+		return ercode;
 	}
-	void IStClient::GetServerVersion(long *major, long *minor, long *build, long *rev) {
-		if (m_ISmartComVersion->raw_GetServerVersion(major, minor, build, rev))
-			throw std::runtime_error("GetServerVersion(): SmartCOM3 API error!");
+	ErrorCode IStClient::GetServerVersion(long *major, long *minor, long *build, long *rev)
+	{
+		return static_cast<ErrorCode>(m_ISmartComVersion->raw_GetServerVersion(major, minor, build, rev));
 	}
-	std::string IStClient::GetClientVersionString() {
-		BSTR result = 0;
-		if (m_ISmartComVersion->raw_GetStClientVersionString(&result))
-			throw std::runtime_error("GetClientVersionString(): SmartCOM3 API error!");
-		return ws2s(result);
+	ErrorCode IStClient::GetClientVersionString(std::string *version)
+	{
+		wchar_t *raw_version;
+		ErrorCode ercode = static_cast<ErrorCode>(m_ISmartComVersion->raw_GetStClientVersionString(&raw_version));
+		if (ercode == ErrorCode_Success) *version = ws2s(raw_version);
+		return ercode;
 	}
-	void IStClient::GetClientVersion(long *major, long *minor, long *build, long *rev) {
-		if (m_ISmartComVersion->raw_GetStClientVersion(major, minor, build, rev))
-			throw std::runtime_error("GetClientVersion(): SmartCOM3 API error!");
+	ErrorCode IStClient::GetClientVersion(long *major, long *minor, long *build, long *rev)
+	{
+		return static_cast<ErrorCode>(m_ISmartComVersion->raw_GetStClientVersion(major, minor, build, rev));
 	}
 }
-

@@ -167,6 +167,7 @@ namespace SmartCOM3
 
 	typedef enum
 	{
+		ErrorCode_Success = 0,
 		ErrorCode_SecurityNotFound = -1610612735,
 		ErrorCode_PortfolioNotFound = -1610612734,
 		ErrorCode_NotConnected = -1610612733,
@@ -179,6 +180,7 @@ namespace SmartCOM3
 	{
 		switch (code)
 		{
+		case ErrorCode_Success: return "Success";
 		case ErrorCode_SecurityNotFound: return "SecurityNotFound";
 		case ErrorCode_PortfolioNotFound: return "PortfolioNotFound";
 		case ErrorCode_NotConnected: return "NotConnected";
@@ -186,7 +188,7 @@ namespace SmartCOM3
 		case ErrorCode_InternalError: return "InternalError";
 		case ErrorCode_ExchangeNotAccessible: return "ExchangeNotAccessible";
 		}
-		return "Unknown ErrorCode";
+		return "UnknownErrorCode";
 	}
 
 	/* Date & time string */

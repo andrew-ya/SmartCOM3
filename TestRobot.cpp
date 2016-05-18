@@ -26,26 +26,31 @@ public:
 		symbols["GAZP"] = "";
 		symbols["ROSN"] = "";
 
-		printf("TestRobot::TestRobot() SmartCOM3 lib version: %s\n", GetClientVersionString().c_str());
+		std::string version;
+		GetClientVersionString(&version);
+		printf("TestRobot::TestRobot() SmartCOM3 lib version: %s\n", version.c_str());
 
 		ConfigureClient(
 			"CalcPlannedPos=no;"
 			"asyncSocketConnectionMode=yes;"
 			"logLevel=4;"
-			"logFilePath=C:\\logs;"); // to store logs in C:\ on Windows you must become Adminnistrator
+			"logFilePath=C:\\logs;"); // to store logs in C:\ on Windows you must have administrator permission
 
 		ConfigureServer(
 			"pingTimeout=2;"
 			"logLevel=4;"
-			"logFilePath=C:\\logs;"); // to store logs in C:\ on Windows you must become Adminnistrator
+			"logFilePath=C:\\logs;"); // to store logs in C:\ on Windows you must have administrator permission
 
-		try {
-			printf("TestRobot::TestRobot() Connecting to %s:%d with login %s, please wait...\n", server, port, login);
-			Connect(server, port, login, password);
-		} catch (...) {
-			printf("TestRobot::TestRobot() Connection error. "
+		printf("TestRobot::TestRobot() Connecting to %s:%d with login %s, please wait...\n", server, port, login);
+
+		ErrorCode ercode = Connect(server, port, login, password);
+		// for demo server, if bad user name or password, lib calls Disconnected(reason) with zero length of reason string
+		// but if real - correctly calls Disconnected(reason) with "Bad user name or password"
+		if (ErrorCode_Success != ercode)
+		{
+			printf("TestRobot::TestRobot() Connection error: %s. "
 				"Possibly log path (C:\\logs) doesn't exist or "
-				"you don't have write permission.\n");
+				"you don't have write permission.\n", GetErrorCodeString(ercode));
 			exit(1);
 		}
 
@@ -55,7 +60,9 @@ public:
 	{
 		printf("TestRobot::~TestRobot()\n");
 
-		if (IsConnected()) {
+		bool connected;
+		IsConnected(&connected);
+		if (connected) {
 			printf("TestRobot::~TestRobot() Disconnecting...\n");
 			Disconnect();
 		} else {
