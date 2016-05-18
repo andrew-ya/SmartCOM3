@@ -117,9 +117,14 @@ All SmartCOM3 methods return ErrorCode for user side error handling:
 ErrorCode er = ListenTicks(symbol);
 if (er != ErrorCode_Success) {
 	printf("ListenTicks(%s) error: %s\n", symbol, GetErrorCodeString(er));
+	switch (er) {
+	case ErrorCode_NotConnected: ....
+	case ErrorCode_SecurityNotFound: ....
+	....
+	}
 }
 ```
-Possible output: ListenTicks(SBER) error: SecurityNotFound		
+Possible output: ListenTicks(SYMB) error: SecurityNotFound		
 
 For error description call GetErrorCodeString(code).	
 	
