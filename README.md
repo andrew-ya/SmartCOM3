@@ -119,7 +119,7 @@ if (er != ErrorCode_Success) {
 	printf("ListenTicks(%s) error: %s\n", symbol, GetErrorCodeString(er));
 }
 ```
-Possible output: ListenTicks(SBER) error: NotConnected		
+Possible output: ListenTicks(SBER) error: SecurityNotFound		
 
 For error description call GetErrorCodeString(code).		
 Error codes:
