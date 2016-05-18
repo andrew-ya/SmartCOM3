@@ -256,7 +256,7 @@ namespace SmartCOM3
 		   break;
 		}
 		case 0x21: {
-		   SetSubscribtionCheckReult(
+		   SetSubscribtionCheckResult(
 			   static_cast<long>(pdispparams->rgvarg[0].lVal) // long result
 		   );
 		   break;

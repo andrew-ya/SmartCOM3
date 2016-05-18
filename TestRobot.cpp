@@ -252,7 +252,7 @@ private:
 		printf("TestRobot::AddPortfolio(%ld/%ld) name %s exchage %s status %s\n",
 			row, nrows, portfolioName, portfolioExch, GetPortfolioStatusString(portfolioStatus));
 	}
-	void SetSubscribtionCheckReult(long result)
+	void SetSubscribtionCheckResult(long result)
 	{
 
 	}

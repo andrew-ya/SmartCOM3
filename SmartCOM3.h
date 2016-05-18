@@ -192,7 +192,7 @@ namespace SmartCOM3
 			const char *portfolioName,
 			const char *portfolioExch,
 			PortfolioStatus portfolioStatus) = 0;
-		virtual void SetSubscribtionCheckReult(
+		virtual void SetSubscribtionCheckResult(
 			long result) = 0;
 		virtual void SetMyTrade(
 			long row,
