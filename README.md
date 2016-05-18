@@ -112,14 +112,14 @@ getchar(); /* waiting 'Connected()' event on success or 'Disconnected()' event o
 delete robot;
 ```
 #Note    
-Use try-catch around all SmartCOM3 methods for std::runtime_error   
+All SmartCOM3 methods return ErrorCode for user side error handling   
 ```
-try {
-	ListenTicks(symbol);
-} catch (std::runtime_error &er) {
-	printf("Can't find symbol '%s'. Error: %s\n", symbol, er.what());
+ErrorCode er = ListenTicks(symbol);
+if (er != ErrorCode_Success) {
+	printf("ListenTicks(%s) error: %s\n", symbol, GetErrorCodeString(er));
 }
 ```
+Possible output: ListenTicks(SBER) error: NotConnected
 ###THE SOFTWARE IS PROVIDED "AS IS",     
 ###WITHOUT WARRANTY OF ANY KIND    
 ###TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
