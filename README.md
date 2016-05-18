@@ -129,7 +129,7 @@ Possible output: ListenTicks(SYMB) error: SecurityNotFound
 
 For error description call GetErrorCodeString(code).	
 	
-Error codes:
+Error codes (ErrorCode enum in SmartCOM3enums.h):
 ```
 ErrorCode_Success
 ErrorCode_SecurityNotFound
