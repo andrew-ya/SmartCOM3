@@ -119,7 +119,18 @@ if (er != ErrorCode_Success) {
 	printf("ListenTicks(%s) error: %s\n", symbol, GetErrorCodeString(er));
 }
 ```
-Possible output: ListenTicks(SBER) error: NotConnected
+Possible output: ListenTicks(SBER) error: NotConnected		
+For error description call GetErrorCodeString(code).		
+Error codes:
+```
+ErrorCode_Success
+ErrorCode_SecurityNotFound
+ErrorCode_PortfolioNotFound
+ErrorCode_NotConnected
+ErrorCode_BadParameters
+ErrorCode_InternalError
+ErrorCode_ExchangeNotAccessible
+```
 ###THE SOFTWARE IS PROVIDED "AS IS",     
 ###WITHOUT WARRANTY OF ANY KIND    
 ###TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
