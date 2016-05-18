@@ -121,7 +121,8 @@ if (er != ErrorCode_Success) {
 ```
 Possible output: ListenTicks(SBER) error: SecurityNotFound		
 
-For error description call GetErrorCodeString(code).		
+For error description call GetErrorCodeString(code).	
+	
 Error codes:
 ```
 ErrorCode_Success
