@@ -346,7 +346,14 @@ int main(int argc, char **argv)
 	const char *login = argv[3];
 	const char *password = argv[4];
 
-	TestRobot *robot = new TestRobot(server,port,login,password);
+	TestRobot *robot = nullptr;
+
+	try {
+		robot = new TestRobot(server,port,login,password);
+	} catch (std::runtime_error &er) {
+		printf("Robot error: %s\n", er.what());
+		return 0;
+	}
 
 	printf("Press ENTER to exit\n");
 	getchar();

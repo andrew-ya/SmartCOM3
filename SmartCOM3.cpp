@@ -334,8 +334,8 @@ namespace SmartCOM3
 		   break;
 		}
 		default: {
-			 printf("IStClient::InvokeDispatch(%d) unknown code\n", dispidMember);
-			 break;
+			throw std::runtime_error(
+				("IStClient::InvokeDispatch(" + std::to_string(dispidMember) + ") unknown code").c_str());
 		}
 		}
 	}
@@ -346,31 +346,27 @@ namespace SmartCOM3
 	bool IStClient::s_ApartmentsInitializationFlag = false;
 	void IStClient::InitializeApartments()
 	{
-		//printf("IStClient::InitializeApartments()\n");
 		s_ApartmentsInitializationMutex.lock();
-		if (s_ApartmentsInitializationFlag == false) {
-			if (S_OK != CoInitializeEx(NULL, COINIT_MULTITHREADED)) {
-				printf("IStClient::InitializeApartments() "
-						"CoInitializeEx(NULL, COINIT_MULTITHREADED) FAIL\n");
-				exit(1);
+
+		if (s_ApartmentsInitializationFlag == false)
+		{
+			if (S_OK != CoInitializeEx(NULL, COINIT_MULTITHREADED))
+			{
+				throw std::runtime_error("IStClient::InitializeApartments() "
+					"CoInitializeEx(NULL,COINIT_MULTITHREADED)");
 			}
 			s_ApartmentsInitializationFlag = true;
-			//printf("IStClient::InitializeApartments() OK\n");
-		} else {
-			//printf("IStClient::InitializeApartments() already initialized\n");
 		}
 		s_ApartmentsInitializationMutex.unlock();
 	}
 	void IStClient::UninitializeApartments()
 	{
-		//printf("IStClient::UninitializeApartments()\n");
 		s_ApartmentsInitializationMutex.lock();
-		if (s_ApartmentsInitializationFlag == true) {
+
+		if (s_ApartmentsInitializationFlag == true)
+		{
 			CoUninitialize();
 			s_ApartmentsInitializationFlag = false;
-			//printf("IStClient::UninitializeApartments() OK\n");
-		} else {
-			//printf("IStClient::UninitializeApartments() not initialized\n");
 		}
 		s_ApartmentsInitializationMutex.unlock();
 	}
@@ -378,6 +374,7 @@ namespace SmartCOM3
 	{
 		HRESULT hr = S_FALSE;
 		IConnectionPointContainer* cpc;
+
 		if (S_OK == m_IStServer->QueryInterface(IID_IConnectionPointContainer, (void**)&cpc))
 		{
 			if (S_OK == cpc->FindConnectionPoint(DIID_IStClient, &m_pIConnectionPoint))
@@ -390,60 +387,52 @@ namespace SmartCOM3
 	}
 	void IStClient::UnAdvise()
 	{
-		if (m_dwCookie) {
+		if (m_dwCookie)
+		{
 			m_pIConnectionPoint->Unadvise(m_dwCookie);
 			m_pIConnectionPoint->Release();
 			m_dwCookie = 0;
 		}
 	}
 	
+	/* Constructor / destructor */
+
 	IStClient::IStClient(bool autoInitializeApartments)
 		: m_cRef(1), m_dwCookie(0)
 	{
-		//printf("IStClient::IStClient()\n");
-
 		if (autoInitializeApartments) InitializeApartments();
 
 		LPTYPELIB pTypeLib;
-		if (S_OK != LoadRegTypeLib(LIBID_SmartCOM3Lib, 1, 0, LOCALE_SYSTEM_DEFAULT, &pTypeLib)) {
-			printf("IStClient::IStClient() LoadRegTypeLib FAIL\n");
-			exit(1);
+		if (S_OK != LoadRegTypeLib(LIBID_SmartCOM3Lib, 1, 0, LOCALE_SYSTEM_DEFAULT, &pTypeLib))
+		{
+			throw std::runtime_error("IStClient::IStClient() LoadRegTypeLib");
 		}
 		if (S_OK != pTypeLib->GetTypeInfoOfGuid(DIID_IStClient, &m_ptinfo)) {
-			printf("IStClient::IStClient() GetTypeInfoOfGuid FAIL\n");
-			exit(1);
+			throw std::runtime_error("IStClient::IStClient() GetTypeInfoOfGuid");
 		}
 		pTypeLib->Release();
 
 		if (S_OK != CoCreateInstance(CLSID_StServer, NULL, CLSCTX_INPROC_SERVER, IID_IStServer,
 				reinterpret_cast<void**>(&m_IStServer)))
 		{
-			printf("IStClient::IStClient() CoCreateInstance(Server) FAIL\n");
-			exit(1);
+			throw std::runtime_error("IStClient::IStClient() CoCreateInstance(Server)");
 		}
-		if (S_OK != Advise()) {
-			printf("IStClient::IStClient() COM Advise FAIL\n");
-			exit(1);
+		if (S_OK != Advise())
+		{
+			throw std::runtime_error("IStClient::IStClient() COM Advise");
 		}
 		if (S_OK != CoCreateInstance(CLSID_StServer, NULL, CLSCTX_INPROC_SERVER,
 				IID_ISmartComVersion, reinterpret_cast<void**>(&m_ISmartComVersion)))
 		{
-			printf("IStClient::IStClient() CoCreateInstance(Version) FAIL\n");
-			exit(1);
+			throw std::runtime_error("IStClient::IStClient() CoCreateInstance(Version)");
 		}
-		
-		//printf("IStClient::IStClient() OK\n");
 	}
 	IStClient::~IStClient()
 	{
-		//printf("IStClient::~IStClient()\n");
-
 		UnAdvise();
 		m_IStServer->Release();
 		m_ISmartComVersion->Release();
 		m_ptinfo->Release();
-
-		//printf("IStClient::~IStClient() OK\n");
 	}
 
 	/* SmartCOM3 METHODS */
