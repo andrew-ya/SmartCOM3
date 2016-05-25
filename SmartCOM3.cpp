@@ -34,15 +34,15 @@ namespace SmartCOM3
 
 	STDMETHODIMP IStClient::GetTypeInfoCount(UINT *pctinfo)
 	{
-		if (pctinfo == NULL) return E_NOTIMPL;
+		if (pctinfo == nullptr) return E_NOTIMPL;
 		*pctinfo = 1;
 		return NOERROR;
 	}
 	STDMETHODIMP IStClient::GetTypeInfo(UINT itinfo, LCID lcid, ITypeInfo **pptinfo)
 	{
-		if (pptinfo == NULL) return E_INVALIDARG;
+		if (pptinfo == nullptr) return E_INVALIDARG;
 		if (itinfo != 0) return DISP_E_BADINDEX;
-		*pptinfo = NULL;
+		*pptinfo = nullptr;
 		m_ptinfo->AddRef();
 		*pptinfo = m_ptinfo;
 		return NOERROR;
@@ -350,10 +350,10 @@ namespace SmartCOM3
 
 		if (s_ApartmentsInitializationFlag == false)
 		{
-			if (S_OK != CoInitializeEx(NULL, COINIT_MULTITHREADED))
+			if (S_OK != CoInitializeEx(nullptr, COINIT_MULTITHREADED))
 			{
 				throw std::runtime_error("IStClient::InitializeApartments() "
-					"CoInitializeEx(NULL,COINIT_MULTITHREADED)");
+					"CoInitializeEx(nullptr,COINIT_MULTITHREADED)");
 			}
 			s_ApartmentsInitializationFlag = true;
 		}
@@ -412,7 +412,7 @@ namespace SmartCOM3
 		}
 		pTypeLib->Release();
 
-		if (S_OK != CoCreateInstance(CLSID_StServer, NULL, CLSCTX_INPROC_SERVER, IID_IStServer,
+		if (S_OK != CoCreateInstance(CLSID_StServer, nullptr, CLSCTX_INPROC_SERVER, IID_IStServer,
 				reinterpret_cast<void**>(&m_IStServer)))
 		{
 			throw std::runtime_error("IStClient::IStClient() CoCreateInstance(Server)");
@@ -421,7 +421,7 @@ namespace SmartCOM3
 		{
 			throw std::runtime_error("IStClient::IStClient() COM Advise");
 		}
-		if (S_OK != CoCreateInstance(CLSID_StServer, NULL, CLSCTX_INPROC_SERVER,
+		if (S_OK != CoCreateInstance(CLSID_StServer, nullptr, CLSCTX_INPROC_SERVER,
 				IID_ISmartComVersion, reinterpret_cast<void**>(&m_ISmartComVersion)))
 		{
 			throw std::runtime_error("IStClient::IStClient() CoCreateInstance(Version)");
