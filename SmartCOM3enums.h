@@ -38,7 +38,7 @@ namespace SmartCOM3
 		case OrderState_SystemReject: return "SystemReject";
 		case OrderState_SystemCancel: return "SystemCancel";
 		}
-		return "Unknown OrderState";
+		return "UnknownOrderState";
 	}
 
 	typedef enum
@@ -60,7 +60,7 @@ namespace SmartCOM3
 		case OrderAction_Short: return "Short";
 		case OrderAction_Cover: return "Cover";
 		}
-		return "Unknown OrderAction";
+		return "UnknownOrderAction";
 	}
 
 	typedef enum
@@ -80,7 +80,7 @@ namespace SmartCOM3
 		case OrderType_Stop: return "Stop";
 		case OrderType_StopLimit: return "StopLimit";
 		}
-		return "Unknown OrderType";
+		return "UnknownOrderType";
 	}
 
 	typedef enum
@@ -96,12 +96,17 @@ namespace SmartCOM3
 		case OrderValidity_Day: return "Day";
 		case OrderValidity_Gtc: return "Gtc";
 		}
-		return "Unknown OrderValidity";
+		return "UnknownOrderValidity";
 	}
 
 	typedef enum
 	{
 		BarInterval_Tick = 0,
+		BarInterval_1Sec =  -104, // warning: extended time frame, GetBars will fail
+		BarInterval_5Sec =  -103, // warning: extended time frame, GetBars will fail
+		BarInterval_10Sec = -102, // warning: extended time frame, GetBars will fail
+		BarInterval_15Sec = -101, // warning: extended time frame, GetBars will fail
+		BarInterval_30Sec = -100, // warning: extended time frame, GetBars will fail
 		BarInterval_1Min = 1,
 		BarInterval_5Min = 2,
 		BarInterval_10Min = 3,
@@ -121,22 +126,27 @@ namespace SmartCOM3
 	{
 		switch (code)
 		{
-		case BarInterval_Tick:  return " Tick";
-		case BarInterval_1Min:  return " 1Min";
-		case BarInterval_5Min:  return " 5Min";
+		case BarInterval_Tick:  return "Tick";
+		case BarInterval_1Sec:  return "1Sec";
+		case BarInterval_5Sec:  return "5Sec";
+		case BarInterval_10Sec: return "10Sec";
+		case BarInterval_15Sec: return "15Sec";
+		case BarInterval_30Sec: return "30Sec";
+		case BarInterval_1Min:  return "1Min";
+		case BarInterval_5Min:  return "5Min";
 		case BarInterval_10Min: return "10Min";
 		case BarInterval_15Min: return "15Min";
 		case BarInterval_30Min: return "30Min";
 		case BarInterval_1Hour: return "1Hour";
 		case BarInterval_2Hour: return "2Hour";
 		case BarInterval_4Hour: return "4Hour";
-		case BarInterval_Day:   return "1Day ";
-		case BarInterval_Week:  return "Week ";
+		case BarInterval_Day:   return "1Day";
+		case BarInterval_Week:  return "Week";
 		case BarInterval_Month: return "Month";
-		case BarInterval_Quarter:return "Quarter";
+		case BarInterval_Quarter:return"Quarter";
 		case BarInterval_Year:  return "Year ";
 		}
-		return "Unknown BarInterval";
+		return "UnknownBarInterval";
 	}
 
 	typedef enum
@@ -162,7 +172,7 @@ namespace SmartCOM3
 		case PortfolioStatus_AutoRestricted: return "AutoRestricted";
 		case PortfolioStatus_OrderNotSigned: return "OrderNotSigned";
 		}
-		return "Unknown PortfolioStatus";
+		return "UnknownPortfolioStatus";
 	}
 
 	typedef enum
