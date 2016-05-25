@@ -407,7 +407,8 @@ namespace SmartCOM3
 		{
 			throw std::runtime_error("IStClient::IStClient() LoadRegTypeLib");
 		}
-		if (S_OK != pTypeLib->GetTypeInfoOfGuid(DIID_IStClient, &m_ptinfo)) {
+		if (S_OK != pTypeLib->GetTypeInfoOfGuid(DIID_IStClient, &m_ptinfo))
+		{
 			throw std::runtime_error("IStClient::IStClient() GetTypeInfoOfGuid");
 		}
 		pTypeLib->Release();
