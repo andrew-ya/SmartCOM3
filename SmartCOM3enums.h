@@ -144,9 +144,35 @@ namespace SmartCOM3
 		case BarInterval_Week:  return "Week";
 		case BarInterval_Month: return "Month";
 		case BarInterval_Quarter:return"Quarter";
-		case BarInterval_Year:  return "Year ";
+		case BarInterval_Year:  return "Year";
 		}
 		return "UnknownBarInterval";
+	}
+	inline size_t GetSecondsCount(BarInterval code)
+	{
+		switch (code)
+		{
+		case BarInterval_Tick:  return 0;
+		case BarInterval_1Sec:  return 1;
+		case BarInterval_5Sec:  return 5;
+		case BarInterval_10Sec: return 10;
+		case BarInterval_15Sec: return 15;
+		case BarInterval_30Sec: return 30;
+		case BarInterval_1Min:  return 60;
+		case BarInterval_5Min:  return 300;
+		case BarInterval_10Min: return 600;
+		case BarInterval_15Min: return 900;
+		case BarInterval_30Min: return 1800;
+		case BarInterval_1Hour: return 3600;
+		case BarInterval_2Hour: return 7200;
+		case BarInterval_4Hour: return 14400;
+		case BarInterval_Day:   return 86400;
+		case BarInterval_Week:  return 604800;
+		case BarInterval_Month: return 2628000; // rounded: float(365 / 12) * 24 * 60 * 60
+		case BarInterval_Quarter:return 7884000; // rounded: float(365 / 4) * 24 * 60 * 60
+		case BarInterval_Year:  return 31536000; // rounded: 365 * 24 * 60 * 60
+		}
+		return 0;
 	}
 
 	typedef enum
