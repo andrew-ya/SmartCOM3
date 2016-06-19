@@ -49,8 +49,9 @@ git clone https://github.com/antonred/SmartCOM3
 cd SmartCOM3
 mkdir build
 cd build
-
+```
 #####32 bit:
+```
 wineg++ -m32 -Wall -std=c++1y -c -D_FORCENAMELESSUNION ../SmartCOM3.cpp ../TestRobot.cpp
 ls
 SmartCOM3.o  TestRobot.o
@@ -58,8 +59,9 @@ SmartCOM3.o  TestRobot.o
 wineg++ -m32 -o "TestRobot"  ./SmartCOM3.o ./TestRobot.o    -lole32 -loleaut32 -luuid -L"/opt/wine-devel/lib/wine" -L"/opt/wine-devel/lib"
 ls
 SmartCOM3.o  TestRobot.exe  TestRobot.exe.so  TestRobot.o
-
+```
 #####64 bit:
+```
 wineg++ -Wall -std=c++1y -c -D_FORCENAMELESSUNION ../SmartCOM3.cpp ../TestRobot.cpp
 ls
 SmartCOM3.o  TestRobot.o
