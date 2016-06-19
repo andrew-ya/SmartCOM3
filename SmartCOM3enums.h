@@ -37,8 +37,8 @@ namespace SmartCOM3
 		case OrderState_ContragentCancel: return "ContragentCancel";
 		case OrderState_SystemReject: return "SystemReject";
 		case OrderState_SystemCancel: return "SystemCancel";
+		default: return "UnknownOrderState";
 		}
-		return "UnknownOrderState";
 	}
 
 	typedef enum
@@ -59,8 +59,8 @@ namespace SmartCOM3
 		case OrderAction_Sell: return "Sell";
 		case OrderAction_Short: return "Short";
 		case OrderAction_Cover: return "Cover";
+		default: return "UnknownOrderAction";
 		}
-		return "UnknownOrderAction";
 	}
 
 	typedef enum
@@ -79,8 +79,8 @@ namespace SmartCOM3
 		case OrderType_Limit: return "Limit";
 		case OrderType_Stop: return "Stop";
 		case OrderType_StopLimit: return "StopLimit";
+		default: return "UnknownOrderType";
 		}
-		return "UnknownOrderType";
 	}
 
 	typedef enum
@@ -95,18 +95,19 @@ namespace SmartCOM3
 		{
 		case OrderValidity_Day: return "Day";
 		case OrderValidity_Gtc: return "Gtc";
+		default: return "UnknownOrderValidity";
 		}
-		return "UnknownOrderValidity";
 	}
 
 	typedef enum
 	{
+		BarInterval_NoInterval = -6,
+		BarInterval_1Sec =  -5, // warning: extended time frame, GetBars will fail
+		BarInterval_5Sec =  -4, // warning: extended time frame, GetBars will fail
+		BarInterval_10Sec = -3, // warning: extended time frame, GetBars will fail
+		BarInterval_15Sec = -2, // warning: extended time frame, GetBars will fail
+		BarInterval_30Sec = -1, // warning: extended time frame, GetBars will fail
 		BarInterval_Tick = 0,
-		BarInterval_1Sec =  -104, // warning: extended time frame, GetBars will fail
-		BarInterval_5Sec =  -103, // warning: extended time frame, GetBars will fail
-		BarInterval_10Sec = -102, // warning: extended time frame, GetBars will fail
-		BarInterval_15Sec = -101, // warning: extended time frame, GetBars will fail
-		BarInterval_30Sec = -100, // warning: extended time frame, GetBars will fail
 		BarInterval_1Min = 1,
 		BarInterval_5Min = 2,
 		BarInterval_10Min = 3,
@@ -119,13 +120,15 @@ namespace SmartCOM3
 		BarInterval_Week = 10,
 		BarInterval_Month = 11,
 		BarInterval_Quarter = 12,
-		BarInterval_Year = 13
+		BarInterval_Year = 13,
+		BarInterval_Size
 	} BarInterval;
 
 	inline const char *GetBarIntervalString(BarInterval code)
 	{
 		switch (code)
 		{
+		case BarInterval_NoInterval:  return "NoInterval";
 		case BarInterval_Tick:  return "Tick";
 		case BarInterval_1Sec:  return "1Sec";
 		case BarInterval_5Sec:  return "5Sec";
@@ -145,8 +148,8 @@ namespace SmartCOM3
 		case BarInterval_Month: return "Month";
 		case BarInterval_Quarter:return"Quarter";
 		case BarInterval_Year:  return "Year";
+		default: return "UnknownBarInterval";
 		}
-		return "UnknownBarInterval";
 	}
 	inline size_t GetSecondsCount(BarInterval code)
 	{
@@ -171,8 +174,8 @@ namespace SmartCOM3
 		case BarInterval_Month: return 2628000; // rounded: float(365 / 12) * 24 * 60 * 60
 		case BarInterval_Quarter:return 7884000; // rounded: float(365 / 4) * 24 * 60 * 60
 		case BarInterval_Year:  return 31536000; // rounded: 365 * 24 * 60 * 60
+		default: return 0;
 		}
-		return 0;
 	}
 
 	typedef enum
@@ -197,8 +200,8 @@ namespace SmartCOM3
 		case PortfolioStatus_Restricted: return "Restricted";
 		case PortfolioStatus_AutoRestricted: return "AutoRestricted";
 		case PortfolioStatus_OrderNotSigned: return "OrderNotSigned";
+		default: return "UnknownPortfolioStatus";
 		}
-		return "UnknownPortfolioStatus";
 	}
 
 	typedef enum
@@ -223,8 +226,8 @@ namespace SmartCOM3
 		case ErrorCode_BadParameters: return "BadParameters";
 		case ErrorCode_InternalError: return "InternalError";
 		case ErrorCode_ExchangeNotAccessible: return "ExchangeNotAccessible";
+		default: return "UnknownErrorCode";
 		}
-		return "UnknownErrorCode";
 	}
 
 	/* Date & time string */
