@@ -2,7 +2,7 @@
 #####(Clean stock setup of Debian 8 netinst / Ubuntu Server 16.04 LTS)
 ```
 sudo apt-get install software-properties-common
-sudo apt-get install gcc g++ git
+sudo apt-get install gcc g++ gcc-multilib g++-multilib libc6-dev-i386 git
 sudo locale-gen ru_RU.UTF-8
 ```
 #####Debian:
@@ -50,6 +50,16 @@ cd SmartCOM3
 mkdir build
 cd build
 
+#####32 bit:
+wineg++ -m32 -Wall -std=c++1y -c -D_FORCENAMELESSUNION ../SmartCOM3.cpp ../TestRobot.cpp
+ls
+SmartCOM3.o  TestRobot.o
+
+wineg++ -m32 -o "TestRobot"  ./SmartCOM3.o ./TestRobot.o    -lole32 -loleaut32 -luuid -L"/opt/wine-devel/lib/wine" -L"/opt/wine-devel/lib"
+ls
+SmartCOM3.o  TestRobot.exe  TestRobot.exe.so  TestRobot.o
+
+#####64 bit:
 wineg++ -Wall -std=c++1y -c -D_FORCENAMELESSUNION ../SmartCOM3.cpp ../TestRobot.cpp
 ls
 SmartCOM3.o  TestRobot.o
