@@ -36,23 +36,23 @@ Notes:
 $ mkdir build
 $ cd build
 $ wineg++ -Wall -std=c++1y -c -D_FORCENAMELESSUNION ../SmartCOM3.cpp ../TestRobot.cpp
-$ wineg++ -o "SmartCOM3"  ./SmartCOM3.o ./TestRobot.o    -lole32 -loleaut32 -luuid
+$ wineg++ -o "TestRobot"  ./SmartCOM3.o ./TestRobot.o    -lole32 -loleaut32 -luuid
 $ ls
-$ SmartCOM3.exe  SmartCOM3.exe.so  SmartCOM3.o  TestRobot.o
+$ TestRobot.exe  TestRobot.exe.so  SmartCOM3.o  TestRobot.o
 ```
 #####Launching
 Notes about error "wrong binary format"      
 1. Check that you link all libs above and they are exist on LD path         
 2. Wine prefix and downloaded SmartCOM3 version must be the same architecture (32 or 64 bit)       
 ```
-$ ./SmartCOM3.exe    
+$ ./TestRobot.exe    
 or without that launcher script
-$ wine SmartCOM3.exe.so
+$ wine TestRobot.exe.so
 for 64 bit
-$ wine64 SmartCOM3.exe.so
+$ wine64 TestRobot.exe.so
 
 for russian support, custom WINEPREFIX & no Wine's debug messages:
-$ LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./SmartCOM3.exe
+$ LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./TestRobot.exe
 ```
 ##Test program output	
 #####Environment		
