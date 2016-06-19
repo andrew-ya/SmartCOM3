@@ -1,4 +1,4 @@
-##WINE installation
+##Prepare & WINE installation
 #####(Clean stock setup of Debian 8 netinst / Ubuntu Server 16.04 LTS)
 ```
 sudo apt-get install software-properties-common
