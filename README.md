@@ -1,23 +1,23 @@
-# SmartCOM3 API C++ connector
+## SmartCOM3 API C++ connector
 ITInvest SmartCOM3 API C++ connector (Windows/Linux & possibly Mac OS X)    
 Implemented in raw without using MFC, ATL or IDL		
 It's usefull for coding C++ and linking native high performance C/C++ libraries with SmartCOM3 API (e.g. CUDA or OpenCL)
-#Tested platforms
-####● Windows 7/8 (32/64) + Visual Studio 2012/2013 (MSVC 11.0/12.0)
-####● Ubuntu 12/14 & Debian 7/8 (32/64) + Winelib 1.6-1.9 (gcc 4.8-5.0)	
+##Tested platforms
+#####● Windows 7/8 (32/64) + Visual Studio 2012/2013 (MSVC 11.0/12.0)
+#####● Ubuntu 12/14 & Debian 7/8 (32/64) + Winelib 1.6-1.9 (gcc 4.8-5.0)	
 SmartCOM3 lib version: 3.0.162.5805     
 Both Windows and Linux builds works well with CUDA and OpenGL native libs       
 (inc. CUDA-OpenGL interoperability - tested on nVidia GeForce GTX 680 & Tesla K20Xm)
 
-#Windows
+##Windows
 1. Download and install SmartCOM3 API 32 or 64 bit from http://www.itinvest.ru/software/smartcom/
 2. Launch Visual Studio and create empty WIN32 project 32 or 64 bit
 3. Create directory C:\logs or change default path in TestRobot constructor
 4. Just add sources and build project
 
-#Linux
+##Linux
 #####(full description in WINE_SETUP.md https://github.com/antonred/SmartCOM3/blob/master/WINE_SETUP.md)
-####Installation
+#####Installation
 1. Create Wine prefix 32 or 64 bit
 2. Download corresponding SmartCOM3 API from http://www.itinvest.ru/software/smartcom/
 3. Install it:      
@@ -27,7 +27,7 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
     64 bit: "wine64 regsvr32 /i /path/to/smartcom_64.dll"	
 4. Add cyrillic locale ru_RU.utf8
 
-####Building     
+#####Building     
 Notes:      
 1. Add "-D_FORCENAMELESSUNION" compiler flag (VARIANTs support)        
 2. Link with libole32, liboleaut32 and libuuid      
@@ -40,7 +40,7 @@ $ wineg++ -o "SmartCOM3"  ./SmartCOM3.o ./TestRobot.o    -lole32 -loleaut32 -luu
 $ ls
 $ SmartCOM3.exe  SmartCOM3.exe.so  SmartCOM3.o  TestRobot.o
 ```
-####Launching
+#####Launching
 Notes about error "wrong binary format"      
 1. Check that you link all libs above and they are exist on LD path         
 2. Wine prefix and downloaded SmartCOM3 version must be the same architecture (32 or 64 bit)       
@@ -54,14 +54,14 @@ $ wine64 SmartCOM3.exe.so
 for russian support, custom WINEPREFIX & no Wine's debug messages:
 $ LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./SmartCOM3.exe
 ```
-#Test program output	
-####Environment		
+##Test program output	
+#####Environment		
     Wine build: wine-1.9.5	
     Platform: x86_64	
     Version: Windows 7	
     Host system: Linux	
     Host version: 3.16.0-4-amd64	
-####Output		
+#####Output		
 ```
 TestRobot::TestRobot()
 TestRobot::TestRobot() SmartCOM3 lib version: 3,0,162,5805
@@ -85,7 +85,7 @@ TestRobot::~TestRobot() Disconnecting...
 TestRobot::Disconnected(Disconnected by user)
 TestRobot::~TestRobot() OK
 ```
-#Test program SmartCOM3 log output (level 4)   
+##Test program SmartCOM3 log output (level 4)   
 ```
 2016-Apr-19 17:14:13.177266 [TID=24] - INFO : SmartCOM3 client module (v3.0.162.5805) logging started.. 
 2016-Apr-19 17:14:13.177312 [TID=24] - INFO : Logging level is set to 4 value. 
@@ -105,14 +105,14 @@ TestRobot::~TestRobot() OK
 2016-Apr-19 17:14:16.545488 [TID=2a] - jelly:  : Destroying http channel..0x284890 
 2016-Apr-19 17:14:21.551759 [TID=24] - INFO : Disconnected by user.. 
 ``` 
-#Minimal example        
+##Minimal example        
 ```
 TestRobot *robot = new TestRobot();
 robot->Connect("mxdemo.ittrade.ru", 8443, "LOGIN", "PASSWORD");
 getchar(); /* waiting 'Connected()' event on success or 'Disconnected()' event on fail */
 delete robot;
 ```
-#Note    
+##Note    
 All SmartCOM3 methods return ErrorCode for user side error handling:   
 ```
 ErrorCode er = ListenTicks(symbol);
@@ -140,9 +140,9 @@ ErrorCode_BadParameters
 ErrorCode_InternalError
 ErrorCode_ExchangeNotAccessible
 ```
-###THE SOFTWARE IS PROVIDED "AS IS",     
-###WITHOUT WARRANTY OF ANY KIND    
-###TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
-#Contact
+####THE SOFTWARE IS PROVIDED "AS IS",     
+####WITHOUT WARRANTY OF ANY KIND    
+####TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
+##Contact
 Feel free for contact        
 moex@anton.red russian or english
