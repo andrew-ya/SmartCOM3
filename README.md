@@ -25,7 +25,7 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
     or just register dll like		
     32 bit: "wine regsvr32 /i /path/to/smartcom_32.dll"		
     64 bit: "wine64 regsvr32 /i /path/to/smartcom_64.dll"	
-4. Add cyrillic locale ru_RU.utf8
+4. Add cyrillic locale ru_RU.UTF-8
 
 #####Building     
 Notes:      
@@ -52,7 +52,7 @@ for 64 bit
 $ wine64 TestRobot.exe.so
 
 for russian support, custom WINEPREFIX & no Wine's debug messages:
-$ LANG=ru_RU.utf8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./TestRobot.exe
+$ LANG=ru_RU.UTF-8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./TestRobot.exe
 ```
 ##Test program output	
 #####Environment		
