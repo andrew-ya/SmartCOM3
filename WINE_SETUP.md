@@ -1,4 +1,4 @@
-##WINE INSTALLATION
+##WINE installation
 #####(Clean stock setup of Debian 8 netinst / Ubuntu Server 16.04 LTS)
 ```
 sudo apt-get install software-properties-common
@@ -21,7 +21,7 @@ sudo dpkg --add-architecture i386
 sudo apt-get update
 sudo apt-get install winehq-devel wine-devel-dev
 ```
-##SmartCOM3 INSTALLATION
+##SmartCOM3 installation
 #####If you already have SmartCOM3.dll (32bit) / SmartCOM3_x64.dll (64bit) from SmartCOM3 windows installation:
 #####32 bit:
 ```
@@ -42,7 +42,7 @@ WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine msiexec /i SmartCOM-3.0.162.msi
 (e.g. wget -O SmartCOM-x64-3.0.162.msi http://www.itinvest.ru/downloads/software/SmartCOM-x64/3.0.162)
 WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 msiexec /i SmartCOM-x64-3.0.162.msi
 ```
-##COMPILING EXAMPLE
+##Compiling example
 ```
 cd ~
 git clone https://github.com/antonred/SmartCOM3
@@ -60,7 +60,7 @@ SmartCOM3.o  TestRobot.exe  TestRobot.exe.so  TestRobot.o
 ```
 #####TestRobot.exe.so - this is our program packed in shared lib
 #####TestRobot.exe - this is launching script containing something "wine TestRobot.exe.so"
-##RUNNING EXAMPLE
+##Running example
 #####!!! mkdir ~/smartcom3prefix/drive_c/logs
 #####32 bit:
 ```
