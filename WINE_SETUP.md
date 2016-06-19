@@ -2,8 +2,12 @@
 #####(Clean stock setup of Debian 8 netinst / Ubuntu Server 16.04 LTS)
 ```
 sudo apt-get install software-properties-common
-sudo apt-get install gcc g++ gcc-multilib g++-multilib libc6-dev-i386 git
 sudo locale-gen ru_RU.UTF-8
+sudo apt-get install gcc g++ git
+```
+#####32 bit (if required):
+```
+sudo apt-get install gcc-multilib g++-multilib libc6-dev-i386
 ```
 #####Debian:
 ```
