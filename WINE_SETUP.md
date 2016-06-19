@@ -75,7 +75,7 @@ ls
 SmartCOM3.o  TestRobot.exe  TestRobot.exe.so  TestRobot.o
 ```
 #####TestRobot.exe.so - this is our program packed in shared lib
-#####TestRobot.exe - this is launching script containing something "wine TestRobot.exe.so"
+#####TestRobot.exe - this is launching script containing something like "wine TestRobot.exe.so"
 ##Running example
 #####!!! mkdir ~/smartcom3prefix/drive_c/logs
 #####32 bit:
