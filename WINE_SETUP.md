@@ -2,8 +2,7 @@
 ####(Clean automated minimal setup of Debian 8 netinst / Ubuntu Server 16.04 LTS)
 ```
 sudo apt-get install software-properties-common
-sudo apt-get install gcc
-sudo apt-get install g++
+sudo apt-get install gcc g++ git
 sudo locale-gen ru_RU.UTF-8
 ```
 ####Debian:
@@ -20,8 +19,7 @@ sudo add-apt-repository ppa:wine/wine-builds
 ```
 sudo dpkg --add-architecture i386
 sudo apt-get update
-sudo apt-get install winehq-devel
-sudo apt-get install wine-devel-dev
+sudo apt-get install winehq-devel wine-devel-dev
 ```
 #SmartCOM3 INSTALLATION
 ####If you already have SmartCOM3.dll (32bit) / SmartCOM3_x64.dll (64bit) from SmartCOM3 windows installation:
@@ -63,25 +61,23 @@ SmartCOM3.o  TestRobot.exe  TestRobot.exe.so  TestRobot.o
 ####TestRobot.exe.so - this is our program packed in shared lib
 ####TestRobot.exe - this is launching script containing something "wine TestRobot.exe.so"
 #RUNNING EXAMPLE
-```
-mkdir ~/smartcom3prefix/drive_c/logs
-```
+####mkdir ~/smartcom3prefix/drive_c/logs
 ####32 bit:
 ```
-WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all ./TestRobot.exe mxdemo.ittrade 8443 LOGIN PASSWORD
+WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all ./TestRobot.exe mxdemo.ittrade.ru 8443 LOGIN PASSWORD
 ```
 ####Or without script:
 ```
-WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine TestRobot.exe.so mxdemo.ittrade 8443 LOGIN PASSWORD
+WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine TestRobot.exe.so mxdemo.ittrade.ru 8443 LOGIN PASSWORD
 ```
 
 ####64 bit:
 ```
-WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all ./TestRobot.exe mxdemo.ittrade 8443 LOGIN PASSWORD
+WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all ./TestRobot.exe mxdemo.ittrade.ru 8443 LOGIN PASSWORD
 ```
 ####Or without script:
 ```
-WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine64 TestRobot.exe.so mxdemo.ittrade 8443 LOGIN PASSWORD
+WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine64 TestRobot.exe.so mxdemo.ittrade.ru 8443 LOGIN PASSWORD
 ```
 
 #Troubleshooting
