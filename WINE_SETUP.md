@@ -98,8 +98,15 @@ WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine64 TestRobot.exe.
 
 ##Troubleshooting
 #####Fixing linking troubles:
+#####32 bit:
 ```
 echo "/opt/wine-devel/lib" | sudo tee --append /etc/ld.so.conf
+echo "/opt/wine-devel/lib/wine" | sudo tee --append /etc/ld.so.conf
+sudo ldconfig
+```
+#####64 bit:
+```
 echo "/opt/wine-devel/lib64" | sudo tee --append /etc/ld.so.conf
+echo "/opt/wine-devel/lib64/wine" | sudo tee --append /etc/ld.so.conf
 sudo ldconfig
 ```
