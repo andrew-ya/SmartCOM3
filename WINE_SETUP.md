@@ -22,9 +22,6 @@ sudo dpkg --add-architecture i386
 sudo apt-get update
 sudo apt-get install winehq-devel
 sudo apt-get install wine-devel-dev
-echo "/opt/wine-devel/lib" | sudo tee --append /etc/ld.so.conf
-echo "/opt/wine-devel/lib64" | sudo tee --append /etc/ld.so.conf
-sudo ldconfig
 ```
 #SmartCOM3 INSTALLATION
 ####If you already have SmartCOM3.dll (32bit) / SmartCOM3_x64.dll (64bit) from SmartCOM3 windows installation:
@@ -47,7 +44,7 @@ WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine msiexec /i SmartCOM-3.0.162.msi
 (e.g. wget -O SmartCOM-x64-3.0.162.msi http://www.itinvest.ru/downloads/software/SmartCOM-x64/3.0.162)
 WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 msiexec /i SmartCOM-x64-3.0.162.msi
 ```
-#COMPILIMG EXAMPLE
+#COMPILING EXAMPLE
 ```
 cd ~
 git clone https://github.com/antonred/SmartCOM3
@@ -85,4 +82,12 @@ WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all ./TestRobot.exe mxdem
 ####Or without script:
 ```
 WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine64 TestRobot.exe.so mxdemo.ittrade 8443 LOGIN PASSWORD
+```
+
+#Troubleshooting
+####Fixing linking troubles:
+```
+echo "/opt/wine-devel/lib" | sudo tee --append /etc/ld.so.conf
+echo "/opt/wine-devel/lib64" | sudo tee --append /etc/ld.so.conf
+sudo ldconfig
 ```
