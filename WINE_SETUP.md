@@ -1,5 +1,5 @@
 #WINE INSTALLATION
-####(Clean automated minimal setup of Debian 8 netinst / Ubuntu Server 16.04 LTS)
+####(Clean stock setup of Debian 8 netinst / Ubuntu Server 16.04 LTS)
 ```
 sudo apt-get install software-properties-common
 sudo apt-get install gcc g++ git
