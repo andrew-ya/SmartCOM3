@@ -1,5 +1,4 @@
 #WINE INSTALLATION
-####Debian/Ubuntu prepare & wine installation
 ####(Clean automated minimal setup of Debian 8 netinst / Ubuntu Server 16.04 LTS)
 ```
 sudo apt-get install software-properties-common
