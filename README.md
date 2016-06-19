@@ -140,8 +140,7 @@ ErrorCode_BadParameters
 ErrorCode_InternalError
 ErrorCode_ExchangeNotAccessible
 ```
-####THE SOFTWARE IS PROVIDED "AS IS",     
-####WITHOUT WARRANTY OF ANY KIND    
+####THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND    
 ####TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
 ##Contact
 Feel free for contact        
