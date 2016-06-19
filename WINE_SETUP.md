@@ -31,7 +31,7 @@ WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine regsvr32 /i /path/to/SmartCOM3.
 ```
 WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 regsvr32 /i /path/to/SmartCOM3_x64.dll
 ```
-####Or download from itinvest.ru SmartCOM3 distrib & install:
+#####Or download from itinvest.ru SmartCOM3 distrib & install:
 #####32 bit:
 ```
 (e.g. wget -O SmartCOM-3.0.162.msi http://www.itinvest.ru/downloads/software/SmartCOM/3.0.162)
