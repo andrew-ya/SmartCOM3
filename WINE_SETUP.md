@@ -126,12 +126,28 @@ WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine64 TestRobot.exe.
 ```
 
 ##Troubleshooting
-#####Fixing linking troubles:
+#####Demo server connect fail with wrong login/password "ZERO_LENGTH" SmartX bug
+```
+TestRobot::Disconnected(ZERO_LENGTH)
+```
+#####Real server connect fail is ok
+```
+TestRobot::Disconnected(Bad user name or password)
+```
+#####Fixing linking troubles
 #####32 bit:
 ```
 echo "/opt/wine-devel/lib" | sudo tee --append /etc/ld.so.conf
 echo "/opt/wine-devel/lib/wine" | sudo tee --append /etc/ld.so.conf
 sudo ldconfig
+```
+Passing to compiler direct paths to 32 bit headers:
+```
+wineg++ -I"/path/to/unresolved/headers"
+```
+Passing to linker direct paths to 32 bit libs:
+```
+wineg++ -L"/opt/wine-devel/lib" -L"/opt/wine-devel/lib/wine"
 ```
 #####64 bit:
 ```
