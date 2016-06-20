@@ -3,7 +3,7 @@
 ```
 sudo apt-get install software-properties-common
 sudo locale-gen ru_RU.UTF-8
-sudo apt-get install gcc g++ git
+sudo apt-get install g++ git
 ```
 #####32 bit (if required):
 ```
