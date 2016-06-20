@@ -405,7 +405,7 @@ namespace SmartCOM3
 		LPTYPELIB pTypeLib;
 		if (S_OK != LoadRegTypeLib(LIBID_SmartCOM3Lib, 1, 0, LOCALE_SYSTEM_DEFAULT, &pTypeLib))
 		{
-			throw std::runtime_error("IStClient::IStClient() LoadRegTypeLib");
+			throw std::runtime_error("IStClient::IStClient() LoadRegTypeLib. SmartCOM3.dll not installed?");
 		}
 		if (S_OK != pTypeLib->GetTypeInfoOfGuid(DIID_IStClient, &m_ptinfo))
 		{
