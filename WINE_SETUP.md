@@ -57,11 +57,12 @@ Output at the end: **regsvr32: Successfully installed DLL '.../SmartCOM3.dll'**
 WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 msiexec /i SmartCOM-x64-3.0.162.msi
 ```
 Output at the end: **regsvr32: Successfully installed DLL '.../SmartCOM3_x64.dll'**     
-####With graphical interface
+####With graphical interface     
+_Don't install Mono, Gecko and other if not required - just cancel_     
 #####32 bit:
 ```
 (e.g. wget -O SmartCOM-3.0.162.msi http://www.itinvest.ru/downloads/software/SmartCOM/3.0.162)
-WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine msiexec /i SmartCOM-3.0.162.msi
+WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine msiexec /i SmartCOM-3.0.162.msi
 ```
 #####64 bit:
 First install distrib (with wine 32 bit):
