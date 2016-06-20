@@ -26,26 +26,44 @@ sudo apt-get update
 sudo apt-get install winehq-devel wine-devel-dev
 ```
 ##SmartCOM3 installation
-#####If you already have SmartCOM3.dll (32bit) / SmartCOM3_x64.dll (64bit) from SmartCOM3 windows installation:
+#####If you already have SmartCOM3.dll (32bit) / SmartCOM3_x64.dll (64bit) just register dll:
 #####32 bit:
 ```
-WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine regsvr32 /i /path/to/SmartCOM3.dll
+WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine regsvr32 /i "/full/path/to/SmartCOM3.dll"
 ```
+_Note: path to dll may be like wine ("C:\\..." or "Z:\\...\home\...") or like linux ("/home/...")_
 #####64 bit:
 ```
-WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 regsvr32 /i /path/to/SmartCOM3_x64.dll
+WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 regsvr32 /i "/full/path/to/SmartCOM3_x64.dll"
 ```
+_Note: path to dll may be like wine ("C:\\..." or "Z:\\...\home\...") or like linux ("/home/...")_
 #####Or download from itinvest.ru SmartCOM3 distrib & install:
 #####32 bit:
 ```
 (e.g. wget -O SmartCOM-3.0.162.msi http://www.itinvest.ru/downloads/software/SmartCOM/3.0.162)
 WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine msiexec /i SmartCOM-3.0.162.msi
 ```
+Output at the end: regsvr32: Successfully installed DLL '/home/anton/smartcom3prefix/drive_c/.../SmartCOM3.dll'
 #####64 bit:
 ```
 (e.g. wget -O SmartCOM-x64-3.0.162.msi http://www.itinvest.ru/downloads/software/SmartCOM-x64/3.0.162)
+```
+If you don't have graphical interface (local or remote without X-forwarding) just type & ignore all errors:
+```
 WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 msiexec /i SmartCOM-x64-3.0.162.msi
 ```
+Output at the end: regsvr32: Successfully installed DLL '/home/anton/smartcom3prefix/drive_c/.../SmartCOM3_x64.dll'     
+#####64 bit: If you with graphical interface:      
+First install distrib (don't install Gecko, Mono and other, just cancel):
+```
+WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine msiexec /i SmartCOM-x64-3.0.162.msi
+```
+#####64 bit: And then register dll manually (like above):
+```
+WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 regsvr32 /i "/full/path/to/SmartCOM3_x64.dll"
+```
+Output at the end: regsvr32: Successfully installed DLL '/home/anton/smartcom3prefix/drive_c/.../SmartCOM3_x64.dll'     
+_Note: path to dll may be like wine ("C:\\..." or "Z:\\...\home\...") or like linux ("/home/...")_
 ##Compiling example
 ```
 cd ~
