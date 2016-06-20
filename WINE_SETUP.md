@@ -7,6 +7,7 @@ sudo apt-get install gcc g++ git
 ```
 #####32 bit (if required):
 ```
+sudo dpkg --add-architecture i386
 sudo apt-get install gcc-multilib g++-multilib libc6-dev-i386
 ```
 #####Debian:
@@ -21,7 +22,6 @@ sudo add-apt-repository ppa:wine/wine-builds
 ```
 #####Both:
 ```
-sudo dpkg --add-architecture i386
 sudo apt-get update
 sudo apt-get install winehq-devel wine-devel-dev
 ```
