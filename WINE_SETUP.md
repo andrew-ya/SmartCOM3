@@ -29,7 +29,7 @@ sudo apt-get install winehq-devel wine-devel-dev
 _Note: paths to dll may be    
     * like wine "C:\\Program Files\\..." or "Z:\\home\\...\prefix\drive_c\Program Files\\...") or    
     * like linux ("/home/.../prefix/drive_c/Program Files/...")_
-###You already have SmartCOM3*.dll so just register:
+###You already have SmartCOM3*.dll - just register:
 #####32 bit:
 ```
 WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine regsvr32 /i "/full/path/to/SmartCOM3.dll"
