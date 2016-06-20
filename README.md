@@ -16,7 +16,7 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
 4. Just add sources and build project
 
 ##Linux
-#####(full description https://github.com/antonred/SmartCOM3/blob/master/WINE_SETUP.md)
+#####(full description https://github.com/antonred/SmartCOM3/blob/master/README_WINE.md)
 #####Installation
 1. Create Wine prefix 32 or 64 bit
 2. Download corresponding SmartCOM3 API from http://www.itinvest.ru/software/smartcom/
