@@ -106,7 +106,10 @@ SmartCOM3.o  TestRobot.exe  TestRobot.exe.so  TestRobot.o
 #####TestRobot.exe.so - this is our program packed in shared lib
 #####TestRobot.exe - this is launching script containing something like "wine TestRobot.exe.so"
 ##Running example
-#####!!! mkdir ~/smartcom3prefix/drive_c/logs
+#####Note: example store logs in C:\logs (.../prefix/drive_c/logs). This dir must exist and user have write permission
+```
+mkdir ~/smartcom3prefix/drive_c/logs
+```
 #####32 bit:
 ```
 WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all ./TestRobot.exe mxdemo.ittrade.ru 8443 LOGIN PASSWORD
