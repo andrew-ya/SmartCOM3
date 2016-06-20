@@ -40,7 +40,7 @@ Output at the end: **regsvr32: Successfully installed DLL '.../SmartCOM3.dll'**
 WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 regsvr32 /i "/full/path/to/SmartCOM3_x64.dll"
 ```
 Output at the end: **regsvr32: Successfully installed DLL '.../SmartCOM3_x64.dll'**
-###You don't have SmartCOM3*.dll - download from itinvest.ru SmartCOM3 distrib & install:    
+###You don't have SmartCOM3*.dll - download distrib & install:    
 ####Without graphical interface (local or remote without X-forwarding) just type & ignore all errors:
 #####32 bit:
 ```
