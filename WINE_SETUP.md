@@ -65,7 +65,7 @@ _Don't install Mono, Gecko and other if not required - just cancel_
 WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine msiexec /i SmartCOM-3.0.162.msi
 ```
 #####64 bit:
-First install distrib (with wine 32 bit):
+First install distrib (with wine 32 bit launcher):
 ```
 (e.g. wget -O SmartCOM-x64-3.0.162.msi http://www.itinvest.ru/downloads/software/SmartCOM-x64/3.0.162)
 WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine msiexec /i SmartCOM-x64-3.0.162.msi
