@@ -93,20 +93,20 @@ mkdir ~/smartcom3prefix/drive_c/logs
 ```
 #####32 bit:
 ```
-WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all ./TestRobot.exe mxdemo.ittrade.ru 8443 LOGIN PASSWORD
+WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all LANG=ru_RU.UTF-8 ./TestRobot.exe mxdemo.ittrade.ru 8443 LOGIN PASSWORD
 ```
 #####Or without script:
 ```
-WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine TestRobot.exe.so mxdemo.ittrade.ru 8443 LOGIN PASSWORD
+WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all LANG=ru_RU.UTF-8 wine TestRobot.exe.so mxdemo.ittrade.ru 8443 LOGIN PASSWORD
 ```
 
 #####64 bit:
 ```
-WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all ./TestRobot.exe mxdemo.ittrade.ru 8443 LOGIN PASSWORD
+WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all LANG=ru_RU.UTF-8 ./TestRobot.exe mxdemo.ittrade.ru 8443 LOGIN PASSWORD
 ```
 #####Or without script:
 ```
-WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine64 TestRobot.exe.so mxdemo.ittrade.ru 8443 LOGIN PASSWORD
+WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all LANG=ru_RU.UTF-8 wine64 TestRobot.exe.so mxdemo.ittrade.ru 8443 LOGIN PASSWORD
 ```
 
 ##Troubleshooting
