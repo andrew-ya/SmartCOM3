@@ -18,14 +18,13 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
 ##Linux
 #####(full description https://github.com/antonred/SmartCOM3/blob/master/README_WINE.md)
 #####Installation
-1. Create Wine prefix 32 or 64 bit
-2. Download corresponding SmartCOM3 API from http://www.itinvest.ru/software/smartcom/
+1. Add cyrillic locale ru_RU.UTF-8
+2. Download 32 or 64 bit SmartCOM3 API from http://www.itinvest.ru/software/smartcom/
 3. Install it:      
-    e.g. "wine msiexec /i /path/to/smartcom/setup.msi"    
+    e.g. "WINEARCH=win64 WINEPREFIX=~/prefix wine msiexec /i /path/to/smartcom/setup.msi /quiet /qn"    
     or just register dll like		
-    32 bit: "wine regsvr32 /i /path/to/smartcom_32.dll"		
-    64 bit: "wine64 regsvr32 /i /path/to/smartcom_64.dll"	
-4. Add cyrillic locale ru_RU.UTF-8
+    32 bit: "WINEARCH=win32 WINEPREFIX=~/prefix wine regsvr32 /i /path/to/smartcom_32.dll"		
+    64 bit: "WINEARCH=win64 WINEPREFIX=~/prefix wine64 regsvr32 /i /path/to/smartcom_64.dll"	
 
 #####Building     
 Notes:      
