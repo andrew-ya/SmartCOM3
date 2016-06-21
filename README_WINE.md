@@ -29,7 +29,7 @@ sudo apt-get install winehq-devel wine-devel-dev
 _Notes:_    
    _1. Don't install Mono, Gecko and other if not required - just cancel_      
    _2. Paths to dll may be:_    
-    _* like wine "C:\\Program Files\\..." or "Z:\\home\\...\prefix\drive_c\Program Files\\...") or_    
+    _* like wine "C:\\Program Files\\..."       
     _* like linux ("/home/.../prefix/drive_c/Program Files/...")_
     
 ###You already have SmartCOM3*.dll - just register:
