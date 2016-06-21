@@ -42,7 +42,7 @@ $ TestRobot.exe  TestRobot.exe.so  SmartCOM3.o  TestRobot.o
 #####Launching
 Notes about error "wrong binary format"      
 1. Check that you link all libs above and they are exist on LD path         
-2. Wine prefix and downloaded SmartCOM3 version must be the same architecture (32 or 64 bit)       
+2. WINE *prefix and* downloaded *SmartCOM3* version must be the same architecture *(32 or 64 bit)*       
 ```
 $ ./TestRobot.exe    
 or without that launcher script
