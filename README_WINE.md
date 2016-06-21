@@ -139,11 +139,6 @@ TestRobot::Disconnected(Bad user name or password)
 ```
 #####Fixing linking troubles
 #####32 bit:
-```
-echo "/opt/wine-devel/lib" | sudo tee --append /etc/ld.so.conf
-echo "/opt/wine-devel/lib/wine" | sudo tee --append /etc/ld.so.conf
-sudo ldconfig
-```
 Passing to compiler direct paths to 32 bit headers:
 ```
 wineg++ -I"/path/to/unresolved/headers"
