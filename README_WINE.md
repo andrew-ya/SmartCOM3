@@ -35,25 +35,25 @@ _Notes:_
 ###You already have SmartCOM3*.dll - just register:
 #####32 bit:
 ```
-WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine regsvr32 /i "/full/path/to/SmartCOM3.dll"
+WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine regsvr32 /i "/full/path/to/SmartCOM3.dll"
 ```
 Output at the end: **regsvr32: Successfully installed DLL '.../SmartCOM3.dll'**
 #####64 bit:
 ```
-WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 regsvr32 /i "/full/path/to/SmartCOM3_x64.dll"
+WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine64 regsvr32 /i "/full/path/to/SmartCOM3_x64.dll"
 ```
 Output at the end: **regsvr32: Successfully installed DLL '.../SmartCOM3_x64.dll'**
 ###You don't have SmartCOM3*.dll - download distrib & install:    
 #####32 bit:
 ```
 (e.g. wget -O SmartCOM-3.0.162.msi http://www.itinvest.ru/downloads/software/SmartCOM/3.0.162)
-WINEARCH=win32 WINEPREFIX=~/smartcom3prefix wine msiexec /i SmartCOM-3.0.162.msi /quiet /qn
+WINEARCH=win32 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine msiexec /i SmartCOM-3.0.162.msi /quiet /qn
 ```
 Output at the end: **regsvr32: Successfully installed DLL '.../SmartCOM3.dll'**
 #####64 bit:
 ```
 (e.g. wget -O SmartCOM-x64-3.0.162.msi http://www.itinvest.ru/downloads/software/SmartCOM-x64/3.0.162)
-WINEARCH=win64 WINEPREFIX=~/smartcom3prefix wine64 msiexec /i SmartCOM-x64-3.0.162.msi /quiet /qn
+WINEARCH=win64 WINEPREFIX=~/smartcom3prefix WINEDEBUG=-all wine64 msiexec /i SmartCOM-x64-3.0.162.msi /quiet /qn
 ```
 Output at the end: **regsvr32: Successfully installed DLL '.../SmartCOM3_x64.dll'**     
 ##Compiling example
