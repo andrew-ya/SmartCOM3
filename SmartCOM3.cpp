@@ -545,7 +545,8 @@ namespace SmartCOM3
 	ErrorCode IStClient::GetMoneyAccount(const char *portfolioID, std::string *portfolioMO)
 	{
 		wchar_t *raw_portfoliomo;
-		ErrorCode ercode = static_cast<ErrorCode>(m_IStServer->raw_GetMoneyAccount(s2ws(portfolioID).c_str(), &raw_portfoliomo));
+		ErrorCode ercode = static_cast<ErrorCode>(
+			m_IStServer->raw_GetMoneyAccount(s2ws(portfolioID).c_str(), &raw_portfoliomo));
 		if (ercode == ErrorCode_Success) *portfolioMO = ws2s(raw_portfoliomo);
 		return ercode;
 	}
