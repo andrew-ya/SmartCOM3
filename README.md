@@ -63,21 +63,31 @@ $ LANG=ru_RU.UTF-8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./TestRobot.exe
 #####Output		
 ```
 TestRobot::TestRobot()
-TestRobot::TestRobot() SmartCOM3 lib version: 3,0,162,5805
-TestRobot::TestRobot() Connecting to mxdemo.ittrade.ru:8443 with login XXXXXX, please wait...
+TestRobot::GetClientVersionString() Success SmartCOM3 dll version: 3,0,162,5805
+TestRobot::ConfigureClient() Success
+TestRobot::ConfigureServer() Success
+TestRobot::Connect() Connecting to mx.ittrade.ru:8443 with login XXXXXX, please wait...
 TestRobot::TestRobot() OK
 
 Press ENTER to exit
 
 TestRobot::Connected()
-TestRobot::AddSymbol() received all of 22000 symbols
+TestRobot::AddSymbol() received all of 22600 symbols
 TestRobot::AddSymbol() added symbol 'GAZP' with short_name 'ГАЗПРОМ ао'
 TestRobot::AddSymbol() added symbol 'ROSN' with short_name 'Роснефть'
 TestRobot::AddSymbol() added symbol 'SBER' with short_name 'Сбербанк'
 TestRobot::AddSymbol() added symbol 'VTBR' with short_name 'ВТБ ао'
-TestRobot::AddPortfolio(1/3) name STXXXXXX-MO-01 exchage MON status Broker
-TestRobot::AddPortfolio(2/3) name STXXXXXX-MS-01 exchage EQ status Broker
-TestRobot::AddPortfolio(3/3) name STXXXXXX-RF-01 exchage RTS_FUT status Blocked
+TestRobot::ListenTicks(GAZP) Success
+TestRobot::GetSymbols() Success
+TestRobot::AddPortfolio(1/4) name BPXXXXX-FX-01 exchage CETS status Broker
+TestRobot::AddPortfolio(2/4) name BPXXXXX-MO-01 exchage MON status ReadOnly
+TestRobot::AddPortfolio(3/4) name BPXXXXX-MS-01 exchage EQ status Broker
+TestRobot::AddPortfolio(4/4) name BPXXXXX-RF-01 exchage RTS_FUT status Broker
+TestRobot::GetPortfolioList() Success
+TestRobot::AddTick(GAZP) 21.06.2016 15:59:40 143.57000 180 157098 Sell
+TestRobot::AddTick(GAZP) 21.06.2016 15:59:40 143.55000 500 157099 Sell
+TestRobot::AddTick(GAZP) 21.06.2016 15:59:40 143.55000 20 157100 Buy
+TestRobot::AddTick(GAZP) 21.06.2016 15:59:41 143.59000 10 157105 Buy
 
 TestRobot::~TestRobot()
 TestRobot::~TestRobot() Disconnecting...
@@ -86,23 +96,28 @@ TestRobot::~TestRobot() OK
 ```
 ##Test program SmartCOM3 log output (level 4)   
 ```
-2016-Apr-19 17:14:13.177266 [TID=24] - INFO : SmartCOM3 client module (v3.0.162.5805) logging started.. 
-2016-Apr-19 17:14:13.177312 [TID=24] - INFO : Logging level is set to 4 value. 
-2016-Apr-19 17:14:13.177323 [TID=24] - INFO : Using maximum 7 worker threads to process data. 
-2016-Apr-19 17:14:13.177331 [TID=24] - INFO : Store logs in C:\logs\ 
-2016-Apr-19 17:14:13.220850 [TID=24] - INFO : Trying to authenticate in mxdemo.ittrade.ru:8443 using SSL connection (login XXXXXX) 
-2016-Apr-19 17:14:13.265645 [TID=24] - jelly:  : Trying connect to 213.247.232.236:8443 
-2016-Apr-19 17:14:14.331970 [TID=24] - jelly:  : Https channel 0x2719E0 OK.. 
-2016-Apr-19 17:14:14.373027 [TID=2e] - INFO : Login OK, loading securities.. 
-2016-Apr-19 17:14:14.373155 [TID=2e] - jelly:  : Trying connect to 213.247.232.236:8090 
-2016-Apr-19 17:14:14.373192 [TID=2e] - jelly:  : Channel 0x284890 will use async connect mode (140) 
-2016-Apr-19 17:14:14.373277 [TID=2e] - jelly:  : Destroying https channel..0x2719E0 
-2016-Apr-19 17:14:14.389419 [TID=2f] - jelly:  : Http channel 0x284890 OK.. 
-2016-Apr-19 17:14:16.417065 [TID=2d] - INFO : Securities table loaded OK 
-2016-Apr-19 17:14:16.417153 [TID=2d] - INFO : StServer::GetSymbols method 
-2016-Apr-19 17:14:16.545367 [TID=2d] - INFO : StServer::GetPrortfolioList method 
-2016-Apr-19 17:14:16.545488 [TID=2a] - jelly:  : Destroying http channel..0x284890 
-2016-Apr-19 17:14:21.551759 [TID=24] - INFO : Disconnected by user.. 
+2016-Jun-21 16:02:01.066719 [TID=1aa] - INFO : SmartCOM3 client module (v3.0.162.5805) logging started.. 
+2016-Jun-21 16:02:01.066765 [TID=1aa] - INFO : Logging level is set to 4 value. 
+2016-Jun-21 16:02:01.066774 [TID=1aa] - INFO : Using maximum 7 worker threads to process data. 
+2016-Jun-21 16:02:01.066782 [TID=1aa] - INFO : Store logs in C:\logs\ 
+2016-Jun-21 16:02:01.094257 [TID=1aa] - INFO : Trying to authenticate in mx.ittrade.ru:8443 using SSL connection (login XXXXXX)
+2016-Jun-21 16:02:01.112897 [TID=1aa] - jelly:  : Trying connect to 213.59.8.133:8443 
+2016-Jun-21 16:02:01.162103 [TID=1aa] - jelly:  : Https channel 0x271B70 OK.. 
+2016-Jun-21 16:02:01.213248 [TID=1b5] - INFO : Login OK, loading securities.. 
+2016-Jun-21 16:02:01.213377 [TID=1b5] - jelly:  : Trying connect to 213.59.8.133:48091 
+2016-Jun-21 16:02:01.213406 [TID=1b5] - jelly:  : Channel 0x284B40 will use async connect mode (140) 
+2016-Jun-21 16:02:01.213487 [TID=1b4] - jelly:  : Destroying https channel..0x271B70 
+2016-Jun-21 16:02:01.225003 [TID=1bd] - jelly:  : Http channel 0x284B40 OK.. 
+2016-Jun-21 16:02:07.821963 [TID=1b4] - INFO : Securities table loaded OK 
+2016-Jun-21 16:02:07.822023 [TID=1b4] - INFO : StServer::GetSymbols method 
+2016-Jun-21 16:02:08.024374 [TID=1b4] - INFO : StServer::ListenTicks method (Symbol: GAZP) 
+2016-Jun-21 16:02:08.024573 [TID=1b4] - jelly:  : Trying connect to 213.59.8.133:48091 
+2016-Jun-21 16:02:08.024625 [TID=1b4] - jelly:  : Channel 0x462FE00 will use async connect mode (136) 
+2016-Jun-21 16:02:08.024756 [TID=1b4] - INFO : StServer::GetPrortfolioList method 
+2016-Jun-21 16:02:08.024860 [TID=1b5] - jelly:  : Destroying http channel..0x284B40 
+2016-Jun-21 16:02:08.039057 [TID=1bd] - jelly:  : Http channel 0x462FE00 OK.. 
+2016-Jun-21 16:02:12.450707 [TID=1aa] - jelly:  : Destroying http channel..0x462FE00 
+2016-Jun-21 16:02:12.450875 [TID=1aa] - INFO : Disconnected by user.. 
 ``` 
 ##Minimal example        
 ```
