@@ -120,7 +120,7 @@ namespace SmartCOM3
 	}
 	void IStClient::InvokeDispatch(DISPID dispidMember, DISPPARAMS *pdispparams)
 	{
-#if 1 // DEBUG INVOKE PARAMS
+#if 0 // DEBUG INVOKE PARAMS
 {
 	wchar_t *names[1];
 	uint32_t count = 0;
