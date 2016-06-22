@@ -177,6 +177,24 @@ namespace SmartCOM3
 		default: return 0;
 		}
 	}
+	inline time_t RoundBarDatetime(BarInterval barInterval, time_t datetime)
+	{
+		datetime += 10800; // UTC + 3 hours to Moscow
+
+		time_t secondsCount = GetSecondsCount(barInterval);
+		double periods = double(datetime) / secondsCount;
+
+		if (periods > size_t(periods)) return secondsCount * (size_t(periods) + 1) - 10800;  // UTC - 3 hours from Moscow
+		else return secondsCount * size_t(periods) - 10800;
+	}
+	inline time_t RoundTickDatetime(BarInterval barInterval, time_t datetime)
+	{
+		datetime += 10800; // UTC + 3 hours to Moscow
+
+		time_t secondsCount = GetSecondsCount(barInterval);
+
+		return secondsCount * (datetime / secondsCount + 1) - 10800;  // UTC - 3 hours from Moscow
+	}
 
 	typedef enum
 	{
