@@ -179,21 +179,21 @@ namespace SmartCOM3
 	}
 	inline time_t RoundBarDatetime(BarInterval barInterval, time_t datetime)
 	{
-		datetime += 10800; // UTC + 3 hours to Moscow
+		datetime += 10800; // UTC + 3 hours to MOEX
 
 		time_t secondsCount = GetSecondsCount(barInterval);
 		double periods = double(datetime) / secondsCount;
 
-		if (periods > size_t(periods)) return secondsCount * (size_t(periods) + 1) - 10800;  // UTC - 3 hours from Moscow
+		if (periods > size_t(periods)) return secondsCount * (size_t(periods) + 1) - 10800;  // UTC - 3 hours from MOEX
 		else return secondsCount * size_t(periods) - 10800;
 	}
 	inline time_t RoundTickDatetime(BarInterval barInterval, time_t datetime)
 	{
-		datetime += 10800; // UTC + 3 hours to Moscow
+		datetime += 10800; // UTC + 3 hours to MOEX
 
 		time_t secondsCount = GetSecondsCount(barInterval);
 
-		return secondsCount * (datetime / secondsCount + 1) - 10800;  // UTC - 3 hours from Moscow
+		return secondsCount * (datetime / secondsCount + 1) - 10800;  // UTC - 3 hours from MOEX
 	}
 
 	typedef enum
