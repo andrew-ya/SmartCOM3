@@ -168,7 +168,7 @@ namespace SmartCOM3
 			   static_cast<double>(pdispparams->rgvarg[5].dblVal), // double go_base_backed
 			   static_cast<double>(pdispparams->rgvarg[4].dblVal), // double high_limit
 			   static_cast<double>(pdispparams->rgvarg[3].dblVal), // double low_limit
-			   static_cast<TradingStatus>(pdispparams->rgvarg[2].lVal), // long trading_status
+			   static_cast<TradingStatus>(pdispparams->rgvarg[2].lVal), // TradingStatus trading_status
 			   static_cast<double>(pdispparams->rgvarg[1].dblVal), // double volat
 			   static_cast<double>(pdispparams->rgvarg[0].dblVal) // double theor_price
 		   );
