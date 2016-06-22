@@ -1,23 +1,7 @@
 
-#include "SmartCOM3.h"
-#include <map>
-#include <string>
-#include <stdlib.h>
-#include <assert.h>
-#include <stdexcept>
-#include <thread>
+#include "TestRobot.h"
 
-using namespace SmartCOM3;
-
-
-class TestRobot : public SmartCOM3::IStClient
-{
-
-	std::map<std::string,std::string> symbols;
-
-public:
-
-	TestRobot(const char *server, unsigned short port, const char *login, const char *password)
+	TestRobot::TestRobot(const char *server, unsigned short port, const char *login, const char *password)
 	{
 		printf("TestRobot::TestRobot()\n");
 
@@ -26,29 +10,32 @@ public:
 		symbols["GAZP"] = "";
 		symbols["ROSN"] = "";
 
-		std::string version;
-		GetClientVersionString(&version);
-		printf("TestRobot::TestRobot() SmartCOM3 lib version: %s\n", version.c_str());
+		std::string version = "UNKNOWN";
+		ErrorCode ercode = GetClientVersionString(&version);
+		printf("TestRobot::GetClientVersionString() %s SmartCOM3 dll version: %s\n",
+			GetErrorCodeString(ercode), version.c_str());
 
-		ConfigureClient(
+		printf("TestRobot::ConfigureClient() %s\n", GetErrorCodeString(
+			ConfigureClient(
 			"CalcPlannedPos=no;"
 			"asyncSocketConnectionMode=yes;"
 			"logLevel=4;"
-			"logFilePath=C:\\logs;"); // to store logs in C:\ on Windows you must have administrator permission
+			"logFilePath=C:\\logs;"))); // to store logs in C:\ on Windows you must have administrator permission
 
-		ConfigureServer(
+		printf("TestRobot::ConfigureServer() %s\n", GetErrorCodeString(
+			ConfigureServer(
 			"pingTimeout=2;"
 			"logLevel=4;"
-			"logFilePath=C:\\logs;"); // to store logs in C:\ on Windows you must have administrator permission
+			"logFilePath=C:\\logs;"))); // to store logs in C:\ on Windows you must have administrator permission
 
-		printf("TestRobot::TestRobot() Connecting to %s:%d with login %s, please wait...\n", server, port, login);
-
-		ErrorCode ercode = Connect(server, port, login, password);
+		ercode = Connect(server, port, login, password);
 		// for demo server, if bad user name or password, lib calls Disconnected(reason) with zero length of reason string
 		// but if real - correctly calls Disconnected(reason) with "Bad user name or password"
-		if (ErrorCode_Success != ercode)
-		{
-			printf("TestRobot::TestRobot() Connection error: %s. "
+
+		if (ercode == ErrorCode_Success) {
+			printf("TestRobot::Connect() Connecting to %s:%d with login %s, please wait...\n", server, port, login);
+		} else {
+			printf("TestRobot::Connect() Connection error: %s. "
 				"Possibly log path (C:\\logs) doesn't exist or "
 				"you don't have write permission.\n", GetErrorCodeString(ercode));
 			exit(1);
@@ -56,7 +43,7 @@ public:
 
 		printf("TestRobot::TestRobot() OK\n\n");
 	}
-	~TestRobot()
+	TestRobot::~TestRobot()
 	{
 		printf("TestRobot::~TestRobot()\n");
 
@@ -72,21 +59,19 @@ public:
 		printf("TestRobot::~TestRobot() OK\n");
 	}
 
-private:
-
 	/* SmartCOM3 events implementation */
 
-	void Connected()
+	void TestRobot::Connected()
 	{
 		printf("\nTestRobot::Connected()\n");
-		GetSymbols();
-		GetPortfolioList();
+		printf("TestRobot::GetSymbols() %s\n", GetErrorCodeString(GetSymbols()));
+		printf("TestRobot::GetPortfolioList() %s\n", GetErrorCodeString(GetPortfolioList()));
 	}
-	void Disconnected(const char *reason)
+	void TestRobot::Disconnected(const char *reason)
 	{
 		printf("TestRobot::Disconnected(%s)\n", reason);
 	}
-	void UpdateQuote(
+	void TestRobot::UpdateQuote(
 		const char *symbol,
 		time_t datetime,
 		double open,
@@ -107,13 +92,14 @@ private:
 		double go_base_backed,
 		double high_limit,
 		double low_limit,
-		long trading_status,
+		TradingStatus trading_status,
 		double volat,
 		double theor_price)
 	{
-
+		printf("TestRobot::UpdateQuote(%s) %s ask %.5f bid %.5f status %s\n",
+			symbol, GetDatetimeString(datetime).c_str(), ask, bid, GetTradingStatusString(trading_status));
 	}
-	void UpdateBidAsk(
+	void TestRobot::UpdateBidAsk(
 		const char *symbol,
 		long row,
 		long nrows,
@@ -122,9 +108,10 @@ private:
 		double ask,
 		double asksize)
 	{
-
+		if (row == 0) printf("TestRobot::UpdateBidAsk() %s %ld:%ld %.5f %.f %.5f %.f\n",
+			symbol, row, nrows, bid, bidsize, ask, asksize);
 	}
-	void AddTick(
+	void TestRobot::AddTick(
 		const char *symbol,
 		time_t datetime,
 		double price,
@@ -132,9 +119,10 @@ private:
 		const char *tradeno,
 		OrderAction action)
 	{
-
+		printf("TestRobot::AddTick(%s) %s %.5f %.f %s %s\n",
+			symbol, GetDatetimeString(datetime).c_str(), price, volume, tradeno, GetOrderActionString(action));
 	}
-	void AddBar(
+	void TestRobot::AddBar(
 		long row,
 		long nrows,
 		const char *symbol,
@@ -147,18 +135,24 @@ private:
 		double volume,
 		double open_int)
 	{
-
+		if (row == 0 || row == nrows - 1)
+			printf("TestRobot::AddBar() %ld:%ld %s %s %s %.5f %.5f %.5f %.5f %.f %.f\n",
+				row, nrows, symbol,
+				GetBarIntervalString(interval),
+				GetDatetimeString(datetime).c_str(),
+				open, high, low, close, volume, open_int);
 	}
-	void SetPortfolio(
+	void TestRobot::SetPortfolio(
 		const char *portfolio,
 		double cash,
 		double leverage,
 		double comission,
 		double saldo)
 	{
-
+		printf("TestRobot::SetPortfolio() %s %.2f %.f %.2f %.2f\n",
+			portfolio, cash, leverage, comission, saldo);
 	}
-	void AddTrade(
+	void TestRobot::AddTrade(
 		const char *portfolio,
 		const char *symbol,
 		const char *orderid,
@@ -167,9 +161,12 @@ private:
 		time_t datetime,
 		const char *tradeno)
 	{
-
+		printf("TestRobot::AddTrade() %s %s %s %.5f %.f %s %sf\n",
+			portfolio, symbol, orderid, price, amount,
+			GetDatetimeString(datetime).c_str(),
+			tradeno);
 	}
-	void UpdateOrder(
+	void TestRobot::UpdateOrder(
 		const char *portfolio,
 		const char *symbol,
 		OrderState state,
@@ -186,18 +183,27 @@ private:
 		long status_mask,
 		long cookie)
 	{
-
+		printf("TestRobot::UpdateOrder() %s %s %s %s %s %s %.5f %.f %.5f %.f %s %s %s %ld %ld\n",
+			portfolio, symbol,
+			GetOrderStateString(state),
+			GetOrderActionString(action),
+			GetOrderTypeString(type),
+			GetOrderValidityString(validity),
+			price, amount, stop, filled,
+			GetDatetimeString(datetime).c_str(),
+			orderid, orderno, status_mask, cookie);
 	}
-	void UpdatePosition(
+	void TestRobot::UpdatePosition(
 		const char *portfolio,
 		const char *symbol,
 		double avprice,
 		double amount,
 		double planned)
 	{
-
+		printf("TestRobot::UpdatePosition() %s %s %.f %.f %.f\n",
+			portfolio, symbol, avprice, amount, planned);
 	}
-	void AddTickHistory(
+	void TestRobot::AddTickHistory(
 		long row,
 		long nrows,
 		const char *symbol,
@@ -207,9 +213,13 @@ private:
 		const char *tradeno,
 		OrderAction action)
 	{
-
+		printf("TestRobot::AddTickHistory() %ld:%ld %s %s %.5f %.f %s %s\n",
+			row, nrows, symbol,
+			GetDatetimeString(datetime).c_str(),
+			price, volume, tradeno,
+			GetOrderActionString(action));
 	}
-	void AddSymbol(
+	void TestRobot::AddSymbol(
 		long row,
 		long nrows,
 		const char *symbol,
@@ -234,22 +244,25 @@ private:
 				printf("TestRobot::AddSymbol() added symbol '%s' with short_name '%s'\n",
 					pair.first.c_str(), pair.second.c_str());
 			}
+			//printf("TestRobot::ListenQuotes(%s) %s\n", symbols.begin()->first.c_str(), GetErrorCodeString(ListenQuotes(symbols.begin()->first.c_str())));
+			//printf("TestRobot::ListenBidAsks(%s) %s\n", symbols.begin()->first.c_str(), GetErrorCodeString(ListenBidAsks(symbols.begin()->first.c_str())));
+			printf("TestRobot::ListenTicks(%s) %s\n", symbols.begin()->first.c_str(), GetErrorCodeString(ListenTicks(symbols.begin()->first.c_str())));
 		}
 	}
-	void OrderSucceeded(
+	void TestRobot::OrderSucceeded(
 		long cookie,
 		const char *orderid)
 	{
-
+		printf("TestRobot::OrderSucceeded() %ld %s\n", cookie, orderid);
 	}
-	void OrderFailed(
+	void TestRobot::OrderFailed(
 		long cookie,
 		const char *orderid,
 		const char *reason)
 	{
-
+		printf("TestRobot::OrderFailed() %ld %s %s\n", cookie, orderid, reason);
 	}
-	void AddPortfolio(
+	void TestRobot::AddPortfolio(
 		long row,
 		long nrows,
 		const char *portfolioName,
@@ -259,11 +272,11 @@ private:
 		printf("TestRobot::AddPortfolio(%ld/%ld) name %s exchage %s status %s\n",
 			row, nrows, portfolioName, portfolioExch, GetPortfolioStatusString(portfolioStatus));
 	}
-	void SetSubscribtionCheckResult(long result)
+	void TestRobot::SetSubscribtionCheckResult(long result)
 	{
-
+		printf("TestRobot::SetSubscribtionCheckResult() %ld\n", result);
 	}
-	void SetMyTrade(
+	void TestRobot::SetMyTrade(
 		long row,
 		long nrows,
 		const char *portfolio,
@@ -275,9 +288,14 @@ private:
 		OrderAction buysell,
 		const char *orderno)
 	{
-
+		printf("TestRobot::SetMyTrade() %ld:%ld %s %s %s %.5f %.f %s %s %s\n",
+			row, nrows, portfolio, symbol,
+			GetDatetimeString(datetime).c_str(),
+			price, volume, tradeno,
+			GetOrderActionString(buysell),
+			orderno);
 	}
-	void SetMyOrder(
+	void TestRobot::SetMyOrder(
 		long row,
 		long nrows,
 		const char *portfolio,
@@ -295,9 +313,17 @@ private:
 		const char *no,
 		long cookie)
 	{
-
+		printf("TestRobot::SetMyOrder() %ld:%ld %s %s %s %s %s %s %.5f %.f %.5f %.f %s %s %s %ld\n",
+			row, nrows, portfolio, symbol,
+			GetOrderStateString(state),
+			GetOrderActionString(action),
+			GetOrderTypeString(type),
+			GetOrderValidityString(validity),
+			price, amount, stop, filled,
+			GetDatetimeString(datetime).c_str(),
+			id, no, cookie);
 	}
-	void SetMyClosePos(
+	void TestRobot::SetMyClosePos(
 		long row,
 		long nrows,
 		const char *portfolio,
@@ -309,25 +335,26 @@ private:
 		const char *order_open,
 		const char *order_close)
 	{
-
+		printf("TestRobot::SetMyClosePos() %ld:%ld %s %s %.f %.5f %.5f %s %s %s\n",
+			row, nrows - 1, portfolio, symbol, amount, price_buy, price_sell,
+			GetDatetimeString(postime).c_str(), order_open, order_close);
 	}
-	void OrderCancelSucceeded(const char *orderid)
+	void TestRobot::OrderCancelSucceeded(const char *orderid)
 	{
-
+		printf("TestRobot::OrderCancelSucceeded(%s)\n", orderid);
 	}
-	void OrderCancelFailed(const char *orderid)
+	void TestRobot::OrderCancelFailed(const char *orderid)
 	{
-
+		printf("TestRobot::OrderCancelFailed(%s)\n", orderid);
 	}
-	void OrderMoveSucceeded(const char *orderid)
+	void TestRobot::OrderMoveSucceeded(const char *orderid)
 	{
-
+		printf("TestRobot::OrderMoveSucceeded(%s)\n", orderid);
 	}
-	void OrderMoveFailed(const char *orderid)
+	void TestRobot::OrderMoveFailed(const char *orderid)
 	{
-
+		printf("TestRobot::OrderMoveFailed(%s)\n", orderid);
 	}
-};
 
 
 int main(int argc, char **argv)

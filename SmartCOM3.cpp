@@ -61,8 +61,79 @@ namespace SmartCOM3
 
 		return S_OK;
 	}
+	const char *GetTypeString(VARTYPE vt)
+	{
+		switch (vt)
+		{
+	    case VT_EMPTY: return "VT_EMPTY"; //0,
+	    case VT_NULL: return "VT_NULL"; //1,
+	    case VT_I2: return "VT_I2"; //2,
+	    case VT_I4: return "VT_I4"; //3,
+	    case VT_R4: return "VT_R4"; //4,
+	    case VT_R8: return "VT_R8"; //5,
+	    case VT_CY: return "VT_CY"; //6,
+	    case VT_DATE: return "VT_DATE"; //7,
+	    case VT_BSTR: return "VT_BSTR"; //8,
+	    case VT_DISPATCH: return "VT_DISPATCH"; //9,
+	    case VT_ERROR: return "VT_ERROR"; //10,
+	    case VT_BOOL: return "VT_BOOL"; //11,
+	    case VT_VARIANT: return "VT_VARIANT"; //12,
+	    case VT_UNKNOWN: return "VT_UNKNOWN"; //13,
+	    case VT_DECIMAL: return "VT_DECIMAL"; //14,
+	    case VT_I1: return "VT_I1"; //16,
+	    case VT_UI1: return "VT_UI1"; //17,
+	    case VT_UI2: return "VT_UI2"; //18,
+	    case VT_UI4: return "VT_UI4"; //19,
+	    case VT_I8: return "VT_I8"; //20,
+	    case VT_UI8: return "VT_UI8"; //21,
+	    case VT_INT: return "VT_INT"; //22,
+	    case VT_UINT: return "VT_UINT"; //23,
+	    case VT_VOID: return "VT_VOID"; //24,
+	    case VT_HRESULT: return "VT_HRESULT"; //25,
+	    case VT_PTR: return "VT_PTR"; //26,
+	    case VT_SAFEARRAY: return "VT_SAFEARRAY"; //27,
+	    case VT_CARRAY: return "VT_CARRAY"; //28,
+	    case VT_USERDEFINED: return "VT_USERDEFINED"; //29,
+	    case VT_LPSTR: return "VT_LPSTR"; //30,
+	    case VT_LPWSTR: return "VT_LPWSTR"; //31,
+	    case VT_RECORD: return "VT_RECORD"; //36,
+	    case VT_INT_PTR: return "VT_INT_PTR"; //37,
+	    case VT_UINT_PTR: return "VT_UINT_PTR"; //38,
+	    case VT_FILETIME: return "VT_FILETIME"; //64,
+	    case VT_BLOB: return "VT_BLOB"; //65,
+	    case VT_STREAM: return "VT_STREAM"; //66,
+	    case VT_STORAGE: return "VT_STORAGE"; //67,
+	    case VT_STREAMED_OBJECT: return "VT_STREAMED_OBJECT"; //68,
+	    case VT_STORED_OBJECT: return "VT_STORED_OBJECT"; //69,
+	    case VT_BLOB_OBJECT: return "VT_BLOB_OBJECT"; //70,
+	    case VT_CF: return "VT_CF"; //71,
+	    case VT_CLSID: return "VT_CLSID"; //72,
+	    case VT_VERSIONED_STREAM: return "VT_VERSIONED_STREAM"; //73,
+	    case VT_BSTR_BLOB: return "VT_BSTR_BLOB"; //0xfff,
+	    case VT_VECTOR: return "VT_VECTOR"; //0x1000,
+	    case VT_ARRAY: return "VT_ARRAY"; //0x2000,
+	    case VT_BYREF: return "VT_BYREF"; //0x4000,
+	    case VT_RESERVED: return "VT_RESERVED"; //0x8000,
+	    case VT_ILLEGAL: return "VT_ILLEGAL"; //0xffff,
+	    default: return "UNKNOWN_VARTYPE";
+		}
+	}
 	void IStClient::InvokeDispatch(DISPID dispidMember, DISPPARAMS *pdispparams)
 	{
+#if 0 // DEBUG INVOKE PARAMS
+{
+	wchar_t *names[1];
+	uint32_t count = 0;
+	m_ptinfo->GetNames(dispidMember,names,1,&count);
+	if (count > 0) printf("%s (", ws2s(names[0]).c_str());
+	for (int i = pdispparams->cArgs - 1; i >= 0; i--)
+	{
+		printf("%s", GetTypeString(pdispparams->rgvarg[i].vt));
+		if (i > 0) printf(" ");
+		else printf(")\n");
+	}
+}
+#endif
 		switch (dispidMember)
 		{
 		case 0x01: {
@@ -97,7 +168,7 @@ namespace SmartCOM3
 			   static_cast<double>(pdispparams->rgvarg[5].dblVal), // double go_base_backed
 			   static_cast<double>(pdispparams->rgvarg[4].dblVal), // double high_limit
 			   static_cast<double>(pdispparams->rgvarg[3].dblVal), // double low_limit
-			   static_cast<long>(pdispparams->rgvarg[2].lVal), // long trading_status
+			   TradingStatus(pdispparams->rgvarg[2].lVal), // long trading_status
 			   static_cast<double>(pdispparams->rgvarg[1].dblVal), // double volat
 			   static_cast<double>(pdispparams->rgvarg[0].dblVal) // double theor_price
 		   );

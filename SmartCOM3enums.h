@@ -206,6 +206,22 @@ namespace SmartCOM3
 
 	typedef enum
 	{
+		TradingStatus_Tradable = 0,
+		TradingStatus_NonTradable = 1
+	} TradingStatus;
+
+	inline const char *GetTradingStatusString(TradingStatus code)
+	{
+		switch (code)
+		{
+		case TradingStatus_Tradable: return "Tradable";
+		case TradingStatus_NonTradable: return "NonTradable";
+		default: return "UnknownTradingStatus";
+		}
+	}
+
+	typedef enum
+	{
 		ErrorCode_Success = 0,
 		ErrorCode_SecurityNotFound = -1610612735,
 		ErrorCode_PortfolioNotFound = -1610612734,

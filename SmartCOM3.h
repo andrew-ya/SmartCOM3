@@ -86,7 +86,7 @@ namespace SmartCOM3
 			double go_base_backed,
 			double high_limit,
 			double low_limit,
-			long trading_status,
+			TradingStatus trading_status,
 			double volat,
 			double theor_price) = 0;
 		virtual void UpdateBidAsk(
@@ -217,8 +217,8 @@ namespace SmartCOM3
 			double stop,
 			double filled,
 			time_t datetime,
-			const char *id,
-			const char *no,
+			const char *orderid,
+			const char *orderno,
 			long cookie) = 0;
 		virtual void SetMyClosePos(
 			long row,
