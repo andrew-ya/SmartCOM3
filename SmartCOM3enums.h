@@ -181,22 +181,6 @@ namespace SmartCOM3
 
 	typedef enum
 	{
-		OPEN_DATE,
-		CLOSE_DATE
-	} DatetimeType;
-
-	inline const char *GetDatetimeTypeString(DatetimeType type)
-	{
-		switch (type)
-		{
-		case OPEN_DATE: return "OPEN";
-		case CLOSE_DATE: return "CLOSE";
-		default: return "UnknownDatetimeType";
-		}
-	}
-
-	typedef enum
-	{
 		BarInterval_NoInterval = -6, // warning: extended time frame, GetBars will fail
 		BarInterval_1Sec =  -5, // warning: extended time frame, GetBars will fail
 		BarInterval_5Sec =  -4, // warning: extended time frame, GetBars will fail
@@ -248,20 +232,6 @@ namespace SmartCOM3
 		}
 	}
 
-	/* Date & time string */
-	inline std::string GetDatetimeString(time_t datetime)
-	{
-#if defined(WIN32) && !defined(__WINE__)
-		struct tm tstruct;
-		localtime_s(&tstruct, &datetime);
-#else
-		struct tm tstruct = *localtime(&datetime);
-#endif
-	    char buf[20];
-	    strftime(buf, sizeof(buf), "%d.%m.%Y %H:%M:%S", &tstruct);
-	    return buf;
-	}
-
 	inline size_t GetSecondsCount(BarInterval code)
 	{
 		switch (code)
@@ -287,6 +257,36 @@ namespace SmartCOM3
 		case BarInterval_Year:  return 31536000; // rounded: 365 * 24 * 60 * 60
 		default: return 0;
 		}
+	}
+
+	typedef enum
+	{
+		OPEN_DATE,
+		CLOSE_DATE
+	} DatetimeType;
+
+	inline const char *GetDatetimeTypeString(DatetimeType type)
+	{
+		switch (type)
+		{
+		case OPEN_DATE: return "OPEN";
+		case CLOSE_DATE: return "CLOSE";
+		default: return "UnknownDatetimeType";
+		}
+	}
+
+	/* Date & time conversion to string */
+	inline std::string GetDatetimeString(time_t datetime)
+	{
+#if defined(WIN32) && !defined(__WINE__)
+		struct tm tstruct;
+		localtime_s(&tstruct, &datetime);
+#else
+		struct tm tstruct = *localtime(&datetime);
+#endif
+	    char buf[20];
+	    strftime(buf, sizeof(buf), "%d.%m.%Y %H:%M:%S", &tstruct);
+	    return buf;
 	}
 
 	/*
