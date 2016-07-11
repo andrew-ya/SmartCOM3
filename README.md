@@ -128,22 +128,22 @@ delete robot;
 ```
 ##Library settings
 Before first call 'Connect' method you may configure SmartCOM3 library:
-#####Log files path
+####Log files path
 void **SetLogPath**(std::string path); // e.g. "C:\\\\logs"		
 *default: "%APPDATA%\\\\IT Invest"*
-#####Logging level
+####Logging level
 void **SetLogLevel**(uint8_t level);	
 *default: 2*
-#####Calculate planned position in UpdatePosition callback
+####Calculate planned position in UpdatePosition callback
 void **SetCalcPosition**(bool calc);	
 *default: true*
-#####Asynchronous mode for PlaceOrder/CancelOrder/MoveOrder methods
+####Asynchronous mode for PlaceOrder/CancelOrder/MoveOrder methods
 void **SetAsyncConnectionMode**(bool async);	
 *default: true*
-#####Disconnect after server response timeout in seconds (1..60 secs)
+####Disconnect after server response timeout in seconds (1..60 secs)
 void **SetDisconnectTimeout**(uint8_t timeout);	
 *default: 2*
-#####Apply all settings above
+####Apply all settings above
 ErrorCode ConfigureLibrary();
 ##Note    
 All SmartCOM3 methods return ErrorCode for user side error handling:   
