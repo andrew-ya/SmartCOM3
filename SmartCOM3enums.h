@@ -299,6 +299,9 @@ namespace SmartCOM3
 	    return buf;
 	}
 
+	/*
+	 * RoundBarFast rounds date & time result of GetBars to 1MIN frame (only seconds up to 00 secs)
+	 */
 	inline time_t RoundBarFast(time_t datetime)
 	{
 		int mod = datetime % 60;
@@ -515,7 +518,7 @@ namespace SmartCOM3
 	 * 	 time_t datetime5min = RoundTickDatetime(BarInterval_5Min, datetime, CLOSE_DATE); // 07.07.2016 12:35:00 - 5MIN CLOSE
 	 * }
 	 *
-	 * WARNING! LOW PERFORMANCE AT INTERVALS > 1HOUR
+	 * WARNING! LOW PERFORMANCE AT INTERVALS >= 2HOUR
 	 */
 	inline time_t RoundTickDatetime(BarInterval barInterval, time_t datetime, DatetimeType type)
 	{
