@@ -141,7 +141,7 @@ void **SetCalcPosition**(bool calc);
 void **SetAsyncConnectionMode**(bool async);	
 *default: true*
 ####Disconnect after server response timeout in seconds (1..60 secs)
-void **SetDisconnectTimeout**(uint8_t timeout);	
+void **SetDisconnectTimeout**(uint8_t timeout);		
 *default: 2*
 ####Apply all settings above
 ErrorCode **ConfigureLibrary**();
