@@ -195,7 +195,7 @@ ErrorCode_ExchangeNotAccessible
 **2. Callbacks served from different threads - you may need data synchronization.**		
 ##ITInvest history bars
 #####ITInvest SmartCOM3 history bars date & time as result of GetBars have CLOSE date & time with some bugs.
-**Test. For all intervals GetBars(from 06.07.2016 10:04:20, 1 pcs) result:**
+**Test for all intervals GetBars(from 06.07.2016 10:04:20, 1 pcs) result:**
 ```
    1Min | 06.07.2016 10:05:00 <- rounded precisely to the end
    5Min | 06.07.2016 10:05:00
