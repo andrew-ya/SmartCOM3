@@ -454,12 +454,12 @@ namespace SmartCOM3
 
 		if (barInterval <= BarInterval_1Hour)
 		{
-			// Rounding to CLOSE
+			// Rounding to OPEN
 			time_t secondsCount = GetSecondsCount(barInterval);
-			datetime = secondsCount * (datetime / secondsCount + 1);
+			datetime = secondsCount * (datetime / secondsCount);
 
-			if (type == OPEN_DATE) return datetime - secondsCount;
-			return datetime;
+			if (type == OPEN_DATE) return datetime;
+			return datetime + secondsCount;
 		}
 
 		struct tm localtm = *localtime(&datetime);
