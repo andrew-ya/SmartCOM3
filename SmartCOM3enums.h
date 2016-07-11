@@ -1,6 +1,6 @@
 
-#ifndef SMARTCOM3ENUMS_H_
-#define SMARTCOM3ENUMS_H_
+#ifndef SMARTCOM3_SMARTCOM3ENUMS_H_
+#define SMARTCOM3_SMARTCOM3ENUMS_H_
 
 #include <string>
 #include <time.h>
@@ -578,4 +578,4 @@ namespace SmartCOM3
 	}
 }
 
-#endif
+#endif /* SMARTCOM3_SMARTCOM3ENUMS_H_ */

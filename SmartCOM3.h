@@ -1,6 +1,6 @@
 
-#ifndef SMARTCOM3_H_
-#define SMARTCOM3_H_
+#ifndef SMARTCOM3_SMARTCOM3_H_
+#define SMARTCOM3_SMARTCOM3_H_
 
 #include <ocidl.h>
 #include "SmartCOM3enums.h"
@@ -518,4 +518,4 @@ namespace SmartCOM3
 	}
 }
 
-#endif
+#endif /* SMARTCOM3_SMARTCOM3_H_ */
