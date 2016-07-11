@@ -224,22 +224,26 @@ Quarter | 30.09.2016 23:59:59
 ##Building bars  
 **WARNING! LOW PERFORMANCE AT INTERVALS >= 2HOUR**  
 ###Building bars from bars  
-E.g. building 5 min bars with OPEN date from 1 min bars with CLOSE date:
+E.g. building 5MIN bars from 1MIN bars:
 ```
 GetBars(..., BarInterval_1Min, ...);
 ...
 void AddBar(..., time_t datetime1min, ...) { // 07.07.2016 12:27:00 - 1MIN CLOSE
   time_t datetime5min =
     RoundBarDatetime(BarInterval_5Min, datetime1min, OPEN_DATE); // 07.07.2016 12:25:00 - 5MIN OPEN
+  datetime5min =
+    RoundBarDatetime(BarInterval_5Min, datetime1min, CLOSE_DATE); // 07.07.2016 12:30:00 - 5MIN CLOSE
 }
 ```
 ###Building bars from ticks
-E.g. building 5 min bars with CLOSE date:
+E.g. building 5MIN bars:
 ```
 ListenTicks(...);
 ...
 void AddTick(..., time_t datetime, ...) { // 07.07.2016 12:31:11
   time_t datetime5min =
+    RoundTickDatetime(BarInterval_5Min, datetime, OPEN_DATE); // 07.07.2016 12:30:00 - 5MIN OPEN
+  datetime5min =
     RoundTickDatetime(BarInterval_5Min, datetime, CLOSE_DATE); // 07.07.2016 12:35:00 - 5MIN CLOSE
 }
 ```
