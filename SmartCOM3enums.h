@@ -535,8 +535,7 @@ namespace SmartCOM3
 					int day = localtm.tm_wday;
 					if (day == 0) day = 7;
 					day--;
-					localtm.tm_mday -= day % 7;
-					localtm.tm_mday += 7;
+					localtm.tm_mday += 7 - day;
 					break;
 				}
 				case BarInterval_Month: {
