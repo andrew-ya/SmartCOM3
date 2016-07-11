@@ -146,7 +146,7 @@ void **SetDisconnectTimeout**(uint8_t timeout);
 *default: 2*
 ####● Apply all settings above
 ErrorCode **ConfigureLibrary**();
-##Note    
+##Error handling    
 All SmartCOM3 methods return ErrorCode for user side error handling:   
 ```
 ErrorCode er = ListenTicks(symbol);
