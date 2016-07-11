@@ -289,32 +289,13 @@ namespace SmartCOM3
 	    return buf;
 	}
 
-	/*
-	 * RoundBarFast rounds date & time result of GetBars to 1MIN frame (only seconds up to 00 secs)
-	 */
+	/* Rounding date & time */
 	inline time_t RoundBarFast(time_t datetime)
 	{
 		int mod = datetime % 60;
 		if (mod) return datetime + (60 - mod);
 		return datetime;
 	}
-
-	/*
-	 * RoundBarDatetime rounds date & time from result of GetBars
-	 *
-	 * Usable for building higher time frame bars
-	 *
-	 *
-	 * E.g. building 5 min bars with OPEN date from 1 min bars with CLOSE date:
-	 *
-	 * GetBars(..., BarInterval_1Min, ...);
-	 * ...
-	 * void AddBar(..., time_t datetime1min, ...) { // 07.07.2016 12:27:00 - 1MIN CLOSE
-	 *   time_t datetime5min = RoundBarDatetime(BarInterval_5Min, datetime1min, OPEN_DATE); // 07.07.2016 12:25:00 - 5MIN OPEN
-	 * }
-	 *
-	 * WARNING! LOW PERFORMANCE AT INTERVALS >= 2HOUR
-	 */
 	inline time_t RoundBarDatetime(BarInterval barInterval, time_t datetime, DatetimeType type)
 	{
 		if (barInterval == BarInterval_Tick) return datetime;
@@ -467,22 +448,6 @@ namespace SmartCOM3
 			printf("TEST ROUND BAR DATETIME %8s | %s | %s \n", GetBarIntervalString(BarInterval(i)), GetDatetimeString(RoundBarDatetime(BarInterval(i),datetime,CLOSE_DATE)).c_str(), GetDatetimeTypeString(CLOSE_DATE));
 		}
 	}
-
-	/*
-	 * RoundTickDatetime rounds date & time from result of ListenTicks, ListenQuotes etc.
-	 *
-	 * Usable for building bars with different time series
-	 *
-	 * E.g. building 5 min bars with CLOSE date:
-	 *
-	 * ListenTicks(...);
-	 * ...
-	 * void AddTick(..., time_t datetime, ...) { // 07.07.2016 12:31:11
-	 * 	 time_t datetime5min = RoundTickDatetime(BarInterval_5Min, datetime, CLOSE_DATE); // 07.07.2016 12:35:00 - 5MIN CLOSE
-	 * }
-	 *
-	 * WARNING! LOW PERFORMANCE AT INTERVALS >= 2HOUR
-	 */
 	inline time_t RoundTickDatetime(BarInterval barInterval, time_t datetime, DatetimeType type)
 	{
 		if (barInterval == BarInterval_Tick) return datetime;
