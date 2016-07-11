@@ -338,7 +338,7 @@ namespace SmartCOM3
 					break;
 				}
 				case BarInterval_Day: {
-					if ((mod = localtm.tm_hour % 24)) localtm.tm_hour -= mod;
+					if (localtm.tm_hour != 0) localtm.tm_hour -= localtm.tm_hour;
 					else localtm.tm_mday--;
 					break;
 				}
@@ -348,7 +348,7 @@ namespace SmartCOM3
 						int day = localtm.tm_wday;
 						if (day == 0) day = 7;
 						day--;
-						localtm.tm_mday -= (day % 7);
+						localtm.tm_mday -= day;
 					} else localtm.tm_mday -= 7;
 					break;
 				}
@@ -392,7 +392,7 @@ namespace SmartCOM3
 					break;
 				}
 				case BarInterval_Day: {
-					if (localtm.tm_hour != 0) localtm.tm_hour += 24 - (localtm.tm_hour % 24);
+					if (localtm.tm_hour != 0) localtm.tm_hour += 24 - localtm.tm_hour;
 					break;
 				}
 				case BarInterval_Week: {
@@ -401,7 +401,7 @@ namespace SmartCOM3
 						int day = localtm.tm_wday;
 						if (day == 0) day = 7;
 						day--;
-						localtm.tm_mday += 7 - (day % 7);
+						localtm.tm_mday += 7 - day;
 					}
 					break;
 				}
@@ -489,7 +489,7 @@ namespace SmartCOM3
 					int day = localtm.tm_wday;
 					if (day == 0) day = 7;
 					day--;
-					localtm.tm_mday -= day % 7;
+					localtm.tm_mday -= day;
 					break;
 				}
 				case BarInterval_Month: {
