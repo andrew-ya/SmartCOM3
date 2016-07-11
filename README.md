@@ -206,7 +206,7 @@ ErrorCode_ExchangeNotAccessible
   2Hour | 06.07.2016 12:00:00
   4Hour | 06.07.2016 12:00:00
     Day | 06.07.2016 23:59:59 <- not rounded to the end of frame
-   Week | 08.07.2016 23:59:59
+   Week | 08.07.2016 23:59:59 <- friday
   Month | 31.07.2016 23:59:59
 Quarter | 30.09.2016 23:59:59
    Year | 31.12.2016 23:59:59
