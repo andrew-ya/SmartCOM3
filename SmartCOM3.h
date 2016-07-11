@@ -32,8 +32,7 @@
 	 * 3. Rounding AddTick, AddQuote etc to some time frame:
 	 * time_t RoundTickDatetime(BarInterval, time_t, DatetimeType)
 	 *
-	 * Rounded week OPEN & CLOSE is Monday 00:00:00
-	 *
+	 * Rounding to WEEK OPEN or CLOSE rounds date & time to Monday 00:00:00
 	 */
 
 #ifndef SMARTCOM3_H_
