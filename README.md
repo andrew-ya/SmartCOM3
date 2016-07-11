@@ -9,7 +9,24 @@ SmartCOM3 lib version: 3.0.162.5805
 <br>
 Both Windows and Linux builds works well with CUDA and OpenGL native libs       
 (inc. CUDA-OpenGL interoperability - tested on nVidia GeForce GTX 680 & Tesla K20Xm)
-
+<br>
+##Table of Contents
+- [Windows](#windows)
+- [Linux](#linux)
+- [Test program output](#)
+- [Test program SmartCOM3 log output](#)
+- [Minimal example](#)
+- [Library settings](#)
+- [Error handling](#)
+- [Multithreading warning](#)
+- [ITInvest history bars](#)
+- [Date & time helper functions](#)
+- [Building bars](#)
+	- [Building bars from bars](#)
+	- [Building bars from ticks](#)
+- [Contact](#)
+   
+<br>
 ##Windows
 1. Download and install SmartCOM3 API 32 or 64 bit from http://www.itinvest.ru/software/smartcom/
 2. Launch Visual Studio and create empty WIN32 project 32 or 64 bit
