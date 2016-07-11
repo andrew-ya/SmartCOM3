@@ -6,6 +6,7 @@ It's usefull for coding C++ and linking native high performance C/C++ libraries 
 #####● Windows 7/8 (32/64) + Visual Studio 2012/2013 (MSVC 11.0/12.0)
 #####● Ubuntu 12/14/16 & Debian 7/8 (32/64) + Winelib 1.6-1.9 (gcc 4.8-5.3)	
 SmartCOM3 lib version: 3.0.162.5805     
+<br>
 Both Windows and Linux builds works well with CUDA and OpenGL native libs       
 (inc. CUDA-OpenGL interoperability - tested on nVidia GeForce GTX 680 & Tesla K20Xm)
 
@@ -128,22 +129,22 @@ delete robot;
 ```
 ##Library settings
 Before first call **Connect** method you may configure SmartCOM3 library and then **ConfigureLibrary** to apply:
-####Log files path
+####● Log files path
 void **SetLogPath**(std::string path); // e.g. "C:\\\\logs"		
 *default: "%APPDATA%\\\\IT Invest"*
-####Logging level
+####● Logging level
 void **SetLogLevel**(uint8_t level);	
 *default: 2*
-####Calculate planned position in UpdatePosition callback
+####● Calculate planned position in UpdatePosition callback
 void **SetCalcPosition**(bool calc);	
 *default: true*
-####Asynchronous mode for PlaceOrder/CancelOrder/MoveOrder methods
+####● Asynchronous mode for PlaceOrder/CancelOrder/MoveOrder methods
 void **SetAsyncConnectionMode**(bool async);	
 *default: true*
-####Disconnect after server response timeout in seconds (1..60 secs)
+####● Disconnect after server response timeout in seconds (1..60 secs)
 void **SetDisconnectTimeout**(uint8_t timeout);		
 *default: 2*
-####Apply all settings above
+####● Apply all settings above
 ErrorCode **ConfigureLibrary**();
 ##Note    
 All SmartCOM3 methods return ErrorCode for user side error handling:   
@@ -176,9 +177,59 @@ ErrorCode_ExchangeNotAccessible
 ##Multithreading warning
 **1. Native SmartCOM3 methods are thread safe.**		
 **2. Callbacks served from different threads - you may need data synchronization.**		
+##ITInvest history bars
+#####ITInvest SmartCOM3 history bars date & time as result of GetBars have CLOSE date & time with some bugs.
+**Test. For all intervals GetBars(from 06.07.2016 10:04:20, 1 pcs) result:**
+```
+   1Min | 06.07.2016 10:05:00 <- rounded precisely to the end
+   5Min | 06.07.2016 10:05:00
+  10Min | 06.07.2016 10:10:00
+  15Min | 06.07.2016 10:15:00
+  30Min | 06.07.2016 10:30:00
+  1Hour | 06.07.2016 11:00:00
+  2Hour | 06.07.2016 12:00:00
+  4Hour | 06.07.2016 12:00:00
+    Day | 06.07.2016 23:59:59 <- not rounded to the end of frame
+   Week | 08.07.2016 23:59:59
+  Month | 31.07.2016 23:59:59
+Quarter | 30.09.2016 23:59:59
+   Year | 31.12.2016 23:59:59
+```
+##Date & time helper functions (SmartCOM3enums.h)
+1. Rounding AddBar fast but dangerous to same time frame (up to 00 secs):  
+   time_t **RoundBarFast**(time_t)  
+2. Rounding AddBar to same or higher time frame:  
+   time_t **RoundBarDatetime**(BarInterval, time_t, DatetimeType)  
+3. Rounding AddTick, AddQuote etc to some time frame:  
+   time_t **RoundTickDatetime**(BarInterval, time_t, DatetimeType)  
+   
+**Rounding to WEEK OPEN/CLOSE rounds date & time to last/next Monday 00:00:00**
+   
+##Building bars  
+**WARNING! LOW PERFORMANCE AT INTERVALS >= 2HOUR**  
+###Building bars from bars  
+E.g. building 5 min bars with OPEN date from 1 min bars with CLOSE date:
+```
+GetBars(..., BarInterval_1Min, ...);
+...
+void AddBar(..., time_t datetime1min, ...) { // 07.07.2016 12:27:00 - 1MIN CLOSE
+  time_t datetime5min =
+    RoundBarDatetime(BarInterval_5Min, datetime1min, OPEN_DATE); // 07.07.2016 12:25:00 - 5MIN OPEN
+}
+```
+###Building bars from ticks
+E.g. building 5 min bars with CLOSE date:
+```
+ListenTicks(...);
+...
+void AddTick(..., time_t datetime, ...) { // 07.07.2016 12:31:11
+  time_t datetime5min =
+    RoundTickDatetime(BarInterval_5Min, datetime, CLOSE_DATE); // 07.07.2016 12:35:00 - 5MIN CLOSE
+}
+```
 <br>
-####THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND    
-####TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
+###THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND    
+###TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
 <br>
 ##Contact
 Feel free for contact        
