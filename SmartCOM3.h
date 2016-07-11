@@ -23,7 +23,7 @@
 	 *
 	 * Date & time helper functions (SmartCOM3enums.h):
 	 *
-	 * 1. Rounding fast but dangerous to same time frame (up to 00 secs):
+	 * 1. Rounding bars fast but dangerous to same time frame (up to 00 secs):
 	 * time_t RoundBarFast(time_t)
 	 *
 	 * 2. Rounding AddBar to same or higher time frame:
@@ -32,7 +32,7 @@
 	 * 3. Rounding AddTick, AddQuote etc to some time frame:
 	 * time_t RoundTickDatetime(BarInterval, time_t, DatetimeType)
 	 *
-	 * Rounding to WEEK OPEN or CLOSE rounds date & time to Monday 00:00:00
+	 * Rounding to WEEK OPEN/CLOSE rounds date & time to last/next Monday 00:00:00
 	 */
 
 #ifndef SMARTCOM3_H_
