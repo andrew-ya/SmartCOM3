@@ -173,8 +173,13 @@ ErrorCode_BadParameters
 ErrorCode_InternalError
 ErrorCode_ExchangeNotAccessible
 ```
+##Multithreading warning
+**1. Native SmartCOM3 methods are thread safe.**		
+**2. Callbacks served from different threads - you may need data synchronization.**		
+<br>
 ####THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND    
 ####TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
+<br>
 ##Contact
 Feel free for contact        
 moex@anton.red russian or english
