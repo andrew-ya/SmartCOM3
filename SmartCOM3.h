@@ -21,7 +21,7 @@
 	 *    Year | 31.12.2016 23:59:59
 	 *
 	 *
-	 * Date & time helper functions:
+	 * Date & time helper functions (SmartCOM3enums.h):
 	 *
 	 * 1. Rounding fast but dangerous to same time frame (up to 00 secs):
 	 * time_t RoundBarFast(time_t)
