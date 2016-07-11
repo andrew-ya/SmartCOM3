@@ -7,43 +7,6 @@
 
 namespace SmartCOM3
 {
-	/*
-	 * NOTE
-	 *
-	 * ITInvest SmartCOM3 history bars date & time as result of GetBars have CLOSE date & time with some bugs.
-	 *
-	 * Test. For all intervals GetBars(from 06.07.2016 10:04:20, 1 pcs) result:
-	 *
-	 *    1Min | 06.07.2016 10:05:00 <- rounded precisely to the end
-	 *    5Min | 06.07.2016 10:05:00
-	 *   10Min | 06.07.2016 10:10:00
-	 *   15Min | 06.07.2016 10:15:00
-	 *   30Min | 06.07.2016 10:30:00
-	 *   1Hour | 06.07.2016 11:00:00
-	 *   2Hour | 06.07.2016 12:00:00
-	 *   4Hour | 06.07.2016 12:00:00
-	 *     Day | 06.07.2016 23:59:59 <- not rounded to the end of frame
-	 *    Week | 08.07.2016 23:59:59
-	 *   Month | 31.07.2016 23:59:59
-	 * Quarter | 30.09.2016 23:59:59
-	 *    Year | 31.12.2016 23:59:59
-	 *
-	 *
-	 * Date & time helper functions:
-	 *
-	 * 1. Rounding fast but dangerous to same time frame (up to 00 secs):
-	 * time_t RoundBarFast(time_t)
-	 *
-	 * 2. Rounding AddBar to same or higher time frame:
-	 * time_t RoundBarDatetime(BarInterval, time_t, DatetimeType)
-	 *
-	 * 3. Rounding AddTick, AddQuote etc to some time frame:
-	 * time_t RoundTickDatetime(BarInterval, time_t, DatetimeType)
-	 *
-	 * Rounded week OPEN & CLOSE is Monday 00:00:00
-	 *
-	 */
-
 	typedef enum
 	{
 		OrderState_ContragentReject = -1,
@@ -299,16 +262,6 @@ namespace SmartCOM3
 	    return buf;
 	}
 
-	/*
-	 * RoundBarFast rounds date & time result of GetBars to 1MIN frame (only seconds up to 00 secs)
-	 */
-	inline time_t RoundBarFast(time_t datetime)
-	{
-		int mod = datetime % 60;
-		if (mod) return datetime + (60 - mod);
-		return datetime;
-	}
-
 	inline size_t GetSecondsCount(BarInterval code)
 	{
 		switch (code)
@@ -334,6 +287,16 @@ namespace SmartCOM3
 		case BarInterval_Year:  return 31536000; // rounded: 365 * 24 * 60 * 60
 		default: return 0;
 		}
+	}
+
+	/*
+	 * RoundBarFast rounds date & time result of GetBars to 1MIN frame (only seconds up to 00 secs)
+	 */
+	inline time_t RoundBarFast(time_t datetime)
+	{
+		int mod = datetime % 60;
+		if (mod) return datetime + (60 - mod);
+		return datetime;
 	}
 
 	/*
