@@ -144,7 +144,7 @@ getchar(); /* waiting 'Connected()' event on success or 'Disconnected()' event o
 delete robot;
 ```
 ##Library settings
-Before first call **Connect** method you may configure SmartCOM3 library and then **ConfigureLibrary** to apply:
+Before first call **Connect** method you may configure SmartCOM3 library and then call **ConfigureLibrary** to apply:
 ####● Log files path
 void **SetLogPath**(std::string path); // e.g. "C:\\\\logs"		
 *default: "%APPDATA%\\\\IT Invest"*
