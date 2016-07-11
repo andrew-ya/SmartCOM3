@@ -127,7 +127,7 @@ getchar(); /* waiting 'Connected()' event on success or 'Disconnected()' event o
 delete robot;
 ```
 ##Library settings
-Before first call 'Connect' method you may configure SmartCOM3 library:
+Before first call **Connect** method you may configure SmartCOM3 library and then **ConfigureLibrary** to apply:
 ####Log files path
 void **SetLogPath**(std::string path); // e.g. "C:\\\\logs"		
 *default: "%APPDATA%\\\\IT Invest"*
@@ -144,7 +144,7 @@ void **SetAsyncConnectionMode**(bool async);
 void **SetDisconnectTimeout**(uint8_t timeout);	
 *default: 2*
 ####Apply all settings above
-ErrorCode ConfigureLibrary();
+ErrorCode **ConfigureLibrary**();
 ##Note    
 All SmartCOM3 methods return ErrorCode for user side error handling:   
 ```
