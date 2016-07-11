@@ -15,18 +15,16 @@ TestRobot::TestRobot(const char *server, unsigned short port, const char *login,
 	printf("TestRobot::GetClientVersionString() %s SmartCOM3 dll version: %s\n",
 		GetErrorCodeString(ercode), version.c_str());
 
-	printf("TestRobot::ConfigureClient() %s\n", GetErrorCodeString(
-		ConfigureClient(
-		"CalcPlannedPos=no;"
-		"asyncSocketConnectionMode=yes;"
-		"logLevel=4;"
-		"logFilePath=C:\\logs;"))); // to store logs in C:\ on Windows you must have administrator permission
-
-	printf("TestRobot::ConfigureServer() %s\n", GetErrorCodeString(
-		ConfigureServer(
-		"pingTimeout=2;"
-		"logLevel=4;"
-		"logFilePath=C:\\logs;"))); // to store logs in C:\ on Windows you must have administrator permission
+	SetLogPath("C:\\logs"); // to store logs in C:\ on Windows you must have administrator permission
+	SetLogLevel(4);
+	SetAsyncConnectionMode(true);
+	SetCalcPosition(true);
+	SetDisconnectTimeout(3);
+	ercode = ConfigureLibrary();
+	if (ercode != ErrorCode_Success) {
+		printf("TestRobot::Connect() ConfigureLibrary error\n");
+		exit(1);
+	}
 
 	ercode = Connect(server, port, login, password);
 	// for demo server, if bad user name or password, lib calls Disconnected(reason) with zero length of reason string

@@ -507,6 +507,52 @@ namespace SmartCOM3
 		m_ptinfo->Release();
 	}
 
+	void IStClient::SetLogPath(std::string path)
+	{
+		assert(path.size());
+		libraryparams.first["logFilePath"] = path;
+		libraryparams.second["logFilePath"] = path;
+	}
+	void IStClient::SetLogLevel(uint8_t level)
+	{
+		assert(level >= 1 && level <= 6);
+		libraryparams.first["logLevel"] = std::to_string(level);
+		libraryparams.second["logLevel"] = std::to_string(level);
+	}
+	void IStClient::SetCalcPosition(bool calc)
+	{
+		std::string str;
+		if (calc) str = "yes"; else str = "no";
+		libraryparams.first["CalcPlannedPos"] = str;
+	}
+	void IStClient::SetAsyncConnectionMode(bool async)
+	{
+		std::string str;
+		if (async) str = "yes"; else str = "no";
+		libraryparams.first["asyncSocketConnectionMode"] = str;
+	}
+	void IStClient::SetDisconnectTimeout(uint8_t timeout)
+	{
+		assert(timeout >= 1 && timeout <= 60);
+		libraryparams.second["pingTimeout"] = std::to_string(timeout);
+	}
+	ErrorCode IStClient::ConfigureLibrary()
+	{
+		ErrorCode er;
+
+		std::string config;
+		for (auto &pair : libraryparams.first) config += pair.first + "=" + pair.second + ";";
+		er = ConfigureClient(config.c_str());
+
+		if (er != ErrorCode_Success) return er;
+
+		config.clear();
+		for (auto &pair : libraryparams.second) config += pair.first + "=" + pair.second + ";";
+		er = ConfigureServer(config.c_str());
+
+		return er;
+	}
+
 	/* SmartCOM3 METHODS */
 
 	ErrorCode IStClient::ListenQuotes(const char *symbol)

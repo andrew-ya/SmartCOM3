@@ -6,6 +6,7 @@
 #include "SmartCOM3enums.h"
 #include <assert.h>
 #include <mutex>
+#include <map>
 
 namespace SmartCOM3
 {
@@ -53,10 +54,25 @@ namespace SmartCOM3
 		HRESULT Advise();
 		void UnAdvise();
 
+	private:
+
+		std::pair<std::map<std::string,std::string>,std::map<std::string,std::string>> libraryparams;
+
 	public:
 
 		IStClient(bool autoInitializeApartments = true);
 		virtual ~IStClient();
+
+		/* Initial setup of SmartCOM3 library (before first Connect())
+		 * To apply call ConfigureLibrary()
+		 * Settings described in official SmartCOM3 documentation
+		 */
+		void SetLogPath(std::string path);
+		void SetLogLevel(uint8_t level);
+		void SetCalcPosition(bool calc);
+		void SetAsyncConnectionMode(bool async);
+		void SetDisconnectTimeout(uint8_t timeout);
+		ErrorCode ConfigureLibrary();
 
 	protected:
 
