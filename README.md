@@ -192,7 +192,7 @@ ErrorCode_ExchangeNotAccessible
 ```
 ##Multithreading warning
 **1. Native SmartCOM3 methods are thread safe.**		
-**2. Callbacks served from different threads - you may need data synchronization.**		
+**2. Callbacks served from different threads - you may need synchronization.**		
 ##ITInvest history bars
 #####ITInvest SmartCOM3 history bars date & time as result of GetBars have CLOSE date & time with some bugs.
 **Test for all intervals GetBars(from 06.07.2016 10:04:20, 1 pcs) result:**
