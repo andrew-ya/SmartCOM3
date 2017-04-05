@@ -2,15 +2,15 @@
 ITInvest SmartCOM3 API C++ connector (Windows/Linux & possibly Mac OS X)    
 Implemented in raw without using MFC or ATL		
 It's usefull for coding C++ and linking native high performance C/C++ libraries with SmartCOM3 API (e.g. CUDA or OpenCL)
-##Tested platforms
-#####● Windows 7/8 (32/64) + Visual Studio 2012/2013 (MSVC 11.0/12.0)
-#####● Ubuntu 12/14/16 & Debian 7/8 (32/64) + Winelib 1.6-1.9 (gcc 4.8-5.3)	
+## Tested platforms
+##### ● Windows 7/8 (32/64) + Visual Studio 2012/2013 (MSVC 11.0/12.0)
+##### ● Ubuntu 12/14/16 & Debian 7/8 (32/64) + Winelib 1.6-1.9 (gcc 4.8-5.3)	
 SmartCOM3 lib version: 3.0.162.5805     
-<br>
+
 Both Windows and Linux builds works well with CUDA and OpenGL native libs       
 (inc. CUDA-OpenGL interoperability - tested on nVidia GeForce GTX 680 & Tesla K20Xm)
-<br>
-##Contents
+
+## Contents
 - [Windows](#windows)
 - [Linux](#linux)
 - [Test program output](#test-program-output)
@@ -25,15 +25,15 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
 - [Building bars from ticks](#building-bars-from-ticks)
 - [Contact](#contact)
    
-##Windows
+## Windows
 1. Download and install SmartCOM3 API 32 or 64 bit from http://www.itinvest.ru/software/smartcom/
 2. Launch Visual Studio and create empty WIN32 project 32 or 64 bit
 3. Create directory C:\logs or change default path in TestRobot constructor
 4. Just add sources and build project
 
-##Linux
-#####(full description https://github.com/antonred/SmartCOM3/blob/master/README_WINE.md)
-#####Installation
+## Linux
+##### (full description https://github.com/antonred/SmartCOM3/blob/master/README_WINE.md)
+##### Installation
 1. Add cyrillic locale ru_RU.UTF-8
 2. Download 32 or 64 bit SmartCOM3 API from http://www.itinvest.ru/software/smartcom/
 3. Install it:      
@@ -42,7 +42,7 @@ Both Windows and Linux builds works well with CUDA and OpenGL native libs
     32 bit: "WINEARCH=win32 WINEPREFIX=~/prefix wine regsvr32 /i /path/to/smartcom_32.dll"		
     64 bit: "WINEARCH=win64 WINEPREFIX=~/prefix wine64 regsvr32 /i /path/to/smartcom_64.dll"	
 
-#####Building     
+##### Building     
 Notes:      
 1. Add "-D_FORCENAMELESSUNION" compiler flag (VARIANTs support)        
 2. Link with libole32, liboleaut32 and libuuid      
@@ -55,7 +55,7 @@ $ wineg++ -o "TestRobot"  ./SmartCOM3.o ./TestRobot.o    -lole32 -loleaut32 -luu
 $ ls
 $ TestRobot.exe  TestRobot.exe.so  SmartCOM3.o  TestRobot.o
 ```
-#####Launching
+##### Launching
 Notes about error "wrong binary format"      
 1. Check that you link all libs above and they are exist on LD path         
 2. WINE **prefix and** downloaded **SmartCOM3** version must be the same architecture **(32 or 64 bit)**       
@@ -69,14 +69,14 @@ $ wine64 TestRobot.exe.so
 for russian support, custom WINEPREFIX & no Wine's debug messages:
 $ LANG=ru_RU.UTF-8 WINEPREFIX=/path/to/prefix WINEDEBUG=-all ./TestRobot.exe
 ```
-##Test program output	
-#####Environment		
+## Test program output	
+##### Environment		
     Wine build: wine-1.9.5	
     Platform: x86_64	
     Version: Windows 7	
     Host system: Linux	
     Host version: 3.16.0-4-amd64	
-#####Output		
+##### Output		
 ```
 TestRobot::TestRobot()
 TestRobot::GetClientVersionString() Success SmartCOM3 dll version: 3,0,162,5805
@@ -110,7 +110,7 @@ TestRobot::~TestRobot() Disconnecting...
 TestRobot::Disconnected(Disconnected by user)
 TestRobot::~TestRobot() OK
 ```
-##Test program SmartCOM3 log output (level 4)   
+## Test program SmartCOM3 log output (level 4)   
 ```
 2016-Jun-21 16:02:01.066719 [TID=1aa] - INFO : SmartCOM3 client module (v3.0.162.5805) logging started.. 
 2016-Jun-21 16:02:01.066765 [TID=1aa] - INFO : Logging level is set to 4 value. 
@@ -135,33 +135,31 @@ TestRobot::~TestRobot() OK
 2016-Jun-21 16:02:12.450707 [TID=1aa] - jelly:  : Destroying http channel..0x462FE00 
 2016-Jun-21 16:02:12.450875 [TID=1aa] - INFO : Disconnected by user.. 
 ``` 
-##Minimal example        
+## Minimal example        
 ```
 TestRobot *robot = new TestRobot();
 robot->Connect("mxdemo.ittrade.ru", 8443, "LOGIN", "PASSWORD");
 getchar(); /* waiting 'Connected()' event on success or 'Disconnected()' event on fail */
 delete robot;
 ```
-##Library settings
+## Library settings
 Before first call **Connect** method you may configure SmartCOM3 library and then call **ConfigureLibrary** to apply:
-####● Log files path
+#### ● Log files path
 void **SetLogPath**(std::string path); // e.g. "C:\\\\logs"		
 *default: "%APPDATA%\\\\IT Invest"*
-####● Logging level
+#### ● Logging level
 void **SetLogLevel**(uint8_t level);	
 *default: 2*
-####● Calculate planned position in UpdatePosition callback
-void **SetCalcPosition**(bool calc);	
-*default: true*
-####● Asynchronous mode for PlaceOrder/CancelOrder/MoveOrder methods
+#### t: true*
+#### ● Asynchronous mode for PlaceOrder/CancelOrder/MoveOrder methods
 void **SetAsyncConnectionMode**(bool async);	
 *default: true*
-####● Disconnect after server response timeout in seconds (1..60 secs)
+#### ● Disconnect after server response timeout in seconds (1..60 secs)
 void **SetDisconnectTimeout**(uint8_t timeout);		
 *default: 2*
-####● Apply all settings above
+#### ● Apply all settings above
 ErrorCode **ConfigureLibrary**();
-##Error handling    
+## Error handling    
 All SmartCOM3 methods return ErrorCode for user side error handling:   
 ```
 ErrorCode er = ListenTicks(symbol);
@@ -189,11 +187,11 @@ ErrorCode_BadParameters
 ErrorCode_InternalError
 ErrorCode_ExchangeNotAccessible
 ```
-##Multithreading warning
+## Multithreading warning
 **1. Native SmartCOM3 methods are thread safe.**		
 **2. Callbacks served from different threads - you may need synchronization.**		
-##ITInvest history bars
-#####ITInvest SmartCOM3 history bars date & time as result of GetBars have CLOSE date & time with some bugs.
+## TInvest history bars
+##### TInvest SmartCOM3 history bars date & time as result of GetBars have CLOSE date & time with some bugs.
 **Test for all intervals GetBars(from 06.07.2016 10:04:20, 1 pcs) result:**
 ```
    1Min | 06.07.2016 10:05:00 <- rounded precisely to the end
@@ -210,7 +208,7 @@ ErrorCode_ExchangeNotAccessible
 Quarter | 30.09.2016 23:59:59
    Year | 31.12.2016 23:59:59
 ```
-##Date & time helper functions (SmartCOM3enums.h)
+## Date & time helper functions (SmartCOM3enums.h)
 1. Rounding AddBar fast but dangerous to same time frame (up to 00 secs):  
    time_t **RoundBarFast**(time_t)  
 2. Rounding AddBar to same or higher time frame:  
@@ -220,9 +218,9 @@ Quarter | 30.09.2016 23:59:59
    
 **Rounding to WEEK OPEN/CLOSE rounds date & time to last/next Monday 00:00:00**
    
-##Building bars  
+## Building bars  
 **WARNING! LOW PERFORMANCE AT INTERVALS >= 2HOUR**  
-###Building bars from bars  
+### ilding bars from bars  
 E.g. building 5MIN bars from 1MIN bars:
 ```
 GetBars(..., BarInterval_1Min, ...);
@@ -234,7 +232,7 @@ void AddBar(..., time_t datetime1min, ...) { // 07.07.2016 12:27:00 - 1MIN CLOSE
     RoundBarDatetime(BarInterval_5Min, datetime1min, CLOSE_DATE); // 07.07.2016 12:30:00 - 5MIN CLOSE
 }
 ```
-###Building bars from ticks
+### Building bars from ticks
 E.g. building 5MIN bars:
 ```
 ListenTicks(...);
@@ -247,9 +245,9 @@ void AddTick(..., time_t datetime, ...) { // 07.07.2016 12:31:11
 }
 ```
 <br>
-###THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND    
-###TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
+### THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND    
+### TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
 <br>
-##Contact
+## Contact
 Feel free for contact        
 moex@anton.red russian or english
