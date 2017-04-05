@@ -244,10 +244,10 @@ void AddTick(..., time_t datetime, ...) { // 07.07.2016 12:31:11
     RoundTickDatetime(BarInterval_5Min, datetime, CLOSE_DATE); // 07.07.2016 12:35:00 - 5MIN CLOSE
 }
 ```
-<br>
+
 ### THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND    
 ### TEST ALL FUNCTIONALITY BEFORE PRODUCTION      
-<br>
+
 ## Contact
 Feel free for contact        
 moex@anton.red russian or english
